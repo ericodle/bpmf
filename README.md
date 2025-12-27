@@ -1,4 +1,4 @@
-# BPMF Learning Game
+# Eric's BPMF Game
 
 A gamified Rails application for teaching children BPMF (Zhuyin), the phonetic alphabet used in Taiwan.
 
