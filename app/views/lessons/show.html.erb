@@ -228,10 +228,10 @@
   let keyboardInput = '';
   // Standard BPMF keyboard layout: columns from left to right, symbols top to bottom in each column
   const bpmfKeyboard = [
-    ['ㄅ', 'ㄉ', 'ㄍ', 'ㄐ', 'ㄓ', 'ㄗ', 'ㄚ', 'ㄞ', 'ㄢ', 'ㄦ'],
-    ['ㄆ', 'ㄊ', 'ㄎ', 'ㄑ', 'ㄔ', 'ㄘ', 'ㄛ', 'ㄟ', 'ㄣ', 'ㄧ'],
-    ['ㄇ', 'ㄋ', 'ㄏ', 'ㄒ', 'ㄕ', 'ㄙ', 'ㄜ', 'ㄠ', 'ㄤ', 'ㄨ'],
-    ['ㄈ', 'ㄌ', '', '', 'ㄖ', '', 'ㄝ', 'ㄡ', 'ㄥ', 'ㄩ']
+    ['ㄅ', 'ㄉ', 'ㄍ', 'ㄐ', 'ㄓ', 'ㄗ', 'ㄧ', 'ㄚ', 'ㄞ', 'ㄢ'],
+    ['ㄆ', 'ㄊ', 'ㄎ', 'ㄑ', 'ㄔ', 'ㄘ', 'ㄨ', 'ㄛ', 'ㄟ', 'ㄣ'],
+    ['ㄇ', 'ㄋ', 'ㄏ', 'ㄒ', 'ㄕ', 'ㄙ', 'ㄝ', 'ㄜ', 'ㄠ', 'ㄤ'],
+    ['ㄈ', 'ㄌ', '', '', 'ㄖ', '', '', 'ㄡ', 'ㄥ', 'ㄦ']
   ];
   
   function renderKeyboard() {
@@ -241,10 +241,13 @@
     
     // Tone marks mapping: column index => tone mark
     const toneMarks = {
-      2: 'ˊ',  // Second tone above column 3 (index 2)
-      3: 'ˇ',  // Third tone above column 4 (index 3)
-      5: 'ˋ',  // Fourth tone above column 6 (index 5)
-      6: '·'   // Fifth tone (neutral) above column 7 (index 6) - dot instead of dash
+      2: 'ˇ',  // Third tone above column 3 (index 2) - dipping tone (down then up)
+      3: 'ˋ',  // Fourth tone above column 4 (index 3) - falling tone
+      5: 'ˊ',  // Second tone above column 6 (index 5) - rising tone
+      6: '·'   // Fifth tone (neutral) above column 7 (index 6) - dot (ㄧ, ㄨ, ㄝ)
+      // Column 8 (index 7) has no tone mark - ㄚ, ㄛ, ㄜ, ㄡ
+      // Column 9 (index 8) has no tone mark - ㄞ, ㄟ, ㄠ, ㄥ
+      // Column 10 (index 9) has no tone mark - ㄢ, ㄣ, ㄤ, ㄦ
     };
     
     // Render columns (left to right)
