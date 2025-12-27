@@ -37,9 +37,11 @@
 </div>
 
 <div class="card">
-  <h3 style="margin-bottom: 20px;">Your Progress</h3>
+  <h3 style="margin-bottom: 20px;">Your Progress by Level</h3>
+  
+  <h4 style="margin-top: 30px; margin-bottom: 15px; color: #00ff88; font-size: 28px;">Level 1: Learning BPMF Symbols</h4>
   <div class="lesson-list">
-    <% @lessons.each do |lesson| %>
+    <% @level_1_lessons.each do |lesson| %>
       <% progress = @user.lesson_progresses.find_by(lesson: lesson) %>
       <% previous_lesson = lesson.previous_lesson %>
       <% is_locked = !lesson.first_lesson? && (!previous_lesson || !@user.lesson_progresses.find_by(lesson: previous_lesson)&.completed?) %>
@@ -64,5 +66,67 @@
       </div>
     <% end %>
   </div>
+  
+  <% level_1_completed = @level_1_lessons.all? { |l| @user.lesson_progresses.find_by(lesson: l)&.completed? } %>
+  <% if level_1_completed && @level_2_lessons.any? %>
+    <h4 style="margin-top: 40px; margin-bottom: 15px; color: #4ade80; font-size: 28px;">Level 2: Keyboard Practice</h4>
+    <div class="lesson-list">
+      <% @level_2_lessons.each do |lesson| %>
+        <% progress = @user.lesson_progresses.find_by(lesson: lesson) %>
+        <% previous_lesson = lesson.previous_lesson %>
+        <% is_locked = previous_lesson && !@user.lesson_progresses.find_by(lesson: previous_lesson)&.completed? %>
+        
+        <div class="lesson-card <%= 'completed' if progress&.completed? %> <%= 'locked' if is_locked %>">
+          <h4 style="margin-bottom: 10px; font-size: 24px;">
+            Lesson <%= lesson.order %>: <%= lesson.title %>
+            <% if progress&.completed? %>
+              <span style="color: #00ff88; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);">✓</span>
+            <% end %>
+          </h4>
+          <% if progress&.completed? %>
+            <p style="color: #4ade80; font-size: 20px; text-shadow: 0 0 5px rgba(74, 222, 128, 0.5);">Completed! +<%= progress.points_earned %> points</p>
+          <% elsif is_locked %>
+            <p style="color: #4ade80; font-size: 20px; opacity: 0.6;">Locked - Complete previous lessons</p>
+          <% else %>
+            <p style="color: #00ff88; font-size: 20px; text-shadow: 0 0 5px rgba(0, 255, 136, 0.5);">Ready to learn!</p>
+          <% end %>
+          <% unless is_locked %>
+            <%= link_to "View Lesson", lesson_path(lesson.order), class: "btn", style: "margin-top: 10px; width: 100%; text-align: center;" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  
+  <% level_2_completed = @level_2_lessons.all? { |l| @user.lesson_progresses.find_by(lesson: l)&.completed? } %>
+  <% if level_2_completed && @level_3_lessons.any? %>
+    <h4 style="margin-top: 40px; margin-bottom: 15px; color: #22c55e; font-size: 28px;">Level 3: Tone Marks & Words</h4>
+    <div class="lesson-list">
+      <% @level_3_lessons.each do |lesson| %>
+        <% progress = @user.lesson_progresses.find_by(lesson: lesson) %>
+        <% previous_lesson = lesson.previous_lesson %>
+        <% is_locked = previous_lesson && !@user.lesson_progresses.find_by(lesson: previous_lesson)&.completed? %>
+        
+        <div class="lesson-card <%= 'completed' if progress&.completed? %> <%= 'locked' if is_locked %>">
+          <h4 style="margin-bottom: 10px; font-size: 24px;">
+            Lesson <%= lesson.order %>: <%= lesson.title %>
+            <% if progress&.completed? %>
+              <span style="color: #00ff88; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);">✓</span>
+            <% end %>
+          </h4>
+          <% if progress&.completed? %>
+            <p style="color: #4ade80; font-size: 20px; text-shadow: 0 0 5px rgba(74, 222, 128, 0.5);">Completed! +<%= progress.points_earned %> points</p>
+          <% elsif is_locked %>
+            <p style="color: #4ade80; font-size: 20px; opacity: 0.6;">Locked - Complete previous lessons</p>
+          <% else %>
+            <p style="color: #00ff88; font-size: 20px; text-shadow: 0 0 5px rgba(0, 255, 136, 0.5);">Ready to learn!</p>
+          <% end %>
+          <% unless is_locked %>
+            <%= link_to "View Lesson", lesson_path(lesson.order), class: "btn", style: "margin-top: 10px; width: 100%; text-align: center;" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 

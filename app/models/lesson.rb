@@ -6,6 +6,7 @@ class Lesson < ApplicationRecord
   validates :order, uniqueness: true
   
   scope :ordered, -> { order('"order"') }
+  scope :by_level, ->(level) { where(level: level) }
   
   def next_lesson
     Lesson.where('"order" > ?', self.order).ordered.first
@@ -17,6 +18,18 @@ class Lesson < ApplicationRecord
   
   def first_lesson?
     self.order == 1
+  end
+  
+  def level_1?
+    level == 1
+  end
+  
+  def level_2?
+    level == 2
+  end
+  
+  def level_3?
+    level == 3
   end
 end
 

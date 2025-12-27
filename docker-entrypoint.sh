@@ -14,6 +14,8 @@ echo "PostgreSQL is ready!"
 
 # Set up database (create, migrate, seed) - idempotent operations
 echo "Setting up database..."
+# Ensure we have write permissions
+chmod -R 755 /app/db || true
 bundle exec rails db:create || true
 bundle exec rails db:migrate || true
 bundle exec rails db:seed || true

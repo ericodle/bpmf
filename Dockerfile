@@ -10,6 +10,9 @@ RUN apt-get update -qq && apt-get install -y \
 # Set working directory
 WORKDIR /app
 
+# Create a non-root user for running the app
+RUN useradd -m -u 1000 appuser || true
+
 # Install bundler
 RUN gem install bundler
 
@@ -23,9 +26,15 @@ COPY . .
 # Ensure gems are still available after copying code
 RUN bundle install
 
+# Set proper permissions for app directory
+RUN chmod -R 755 /app || true
+
 # Copy and set permissions for entrypoint
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# Switch to non-root user (optional - comment out if you need root)
+# USER appuser
 
 # Expose port
 EXPOSE 3000

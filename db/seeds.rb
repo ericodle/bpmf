@@ -477,9 +477,150 @@ lessons_data = [
   }
 ]
 
+# Create Level 1 lessons (all existing lessons)
 lessons_data.each do |lesson_data|
+  Lesson.create!(lesson_data.merge(level: 1))
+end
+
+puts "Created #{Lesson.count} Level 1 lessons!"
+
+# Level 2: Keyboard Layout Practice
+level_2_lessons = [
+  {
+    order: 52,
+    level: 2,
+    title: "Level 2: Introduction to BPMF Keyboard",
+    content: "Welcome to Level 2! Now that you know all the BPMF symbols, let's practice using them on a keyboard layout like you'd find on smartphones. You'll see a BPMF keyboard and need to type the correct symbols for given sounds.",
+    lesson_type: "introduction",
+    bpmf_symbol: nil,
+    pronunciation: nil,
+    examples: nil
+  },
+  {
+    order: 53,
+    level: 2,
+    title: "Keyboard Practice: Basic Sounds",
+    content: "Practice typing basic sounds using the BPMF keyboard. Type the BPMF symbols for the given romanization: 'ya'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄚ",
+    pronunciation: "ya",
+    examples: "Type 'ya' (ㄚ) on the keyboard"
+  },
+  {
+    order: 54,
+    level: 2,
+    title: "Keyboard Practice: Initial + Final",
+    content: "Now combine initials and finals. Type the complete BPMF for the given sound: 'ba'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄅㄚ",
+    pronunciation: "ba",
+    examples: "Type 'ba' (ㄅㄚ) on the keyboard"
+  },
+  {
+    order: 55,
+    level: 2,
+    title: "Keyboard Practice: More Combinations",
+    content: "Practice more combinations of initials and finals: 'ma'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄇㄚ",
+    pronunciation: "ma",
+    examples: "Type 'ma' (ㄇㄚ) on the keyboard"
+  },
+  {
+    order: 56,
+    level: 2,
+    title: "Keyboard Practice: Complex Sounds",
+    content: "Practice typing more complex sounds with multiple symbols: 'bai'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄅㄞ",
+    pronunciation: "bai",
+    examples: "Type 'bai' (ㄅㄞ) on the keyboard"
+  }
+]
+
+level_2_lessons.each do |lesson_data|
   Lesson.create!(lesson_data)
 end
 
-puts "Created #{Lesson.count} lessons!"
-puts "Including all 21 initials and 16 finals of the BPMF system!"
+puts "Created #{Lesson.by_level(2).count} Level 2 lessons!"
+
+# Level 3: Combining BPMF with Tone Marks
+level_3_lessons = [
+  {
+    order: 57,
+    level: 3,
+    title: "Level 3: Combining BPMF with Tone Marks",
+    content: "Welcome to Level 3! Now you'll learn to combine BPMF symbols with tone marks to create complete Mandarin words. Mandarin has 4 tones (plus neutral), and tone marks are essential for correct pronunciation.",
+    lesson_type: "introduction",
+    bpmf_symbol: nil,
+    pronunciation: nil,
+    examples: nil
+  },
+  {
+    order: 58,
+    level: 3,
+    title: "Tone Marks: First Tone (ˉ)",
+    content: "The first tone (ˉ) is high and flat. Practice combining BPMF with the first tone mark.",
+    lesson_type: "tone",
+    bpmf_symbol: "ㄇㄚ",
+    pronunciation: "mā",
+    examples: "媽媽 (māma - mother) uses first tone ˉ"
+  },
+  {
+    order: 59,
+    level: 3,
+    title: "Tone Marks: Second Tone (ˊ)",
+    content: "The second tone (ˊ) rises from middle to high. Practice combining BPMF with the second tone mark.",
+    lesson_type: "tone",
+    bpmf_symbol: "ㄇㄚ",
+    pronunciation: "má",
+    examples: "麻 (má - hemp) uses second tone ˊ"
+  },
+  {
+    order: 60,
+    level: 3,
+    title: "Tone Marks: Third Tone (ˇ)",
+    content: "The third tone (ˇ) dips down then rises. Practice combining BPMF with the third tone mark.",
+    lesson_type: "tone",
+    bpmf_symbol: "ㄇㄚ",
+    pronunciation: "mǎ",
+    examples: "馬 (mǎ - horse) uses third tone ˇ"
+  },
+  {
+    order: 61,
+    level: 3,
+    title: "Tone Marks: Fourth Tone (ˋ)",
+    content: "The fourth tone (ˋ) falls sharply from high to low. Practice combining BPMF with the fourth tone mark.",
+    lesson_type: "tone",
+    bpmf_symbol: "ㄇㄚ",
+    pronunciation: "mà",
+    examples: "罵 (mà - to scold) uses fourth tone ˋ"
+  },
+  {
+    order: 62,
+    level: 3,
+    title: "Common Words: Family",
+    content: "Practice common family words with BPMF and tone marks.",
+    lesson_type: "word",
+    bpmf_symbol: "ㄅㄚ",
+    pronunciation: "bà",
+    examples: "爸爸 (bàba - father) uses fourth tone ˋ"
+  },
+  {
+    order: 63,
+    level: 3,
+    title: "Common Words: Greetings",
+    content: "Practice greeting words with BPMF and tone marks.",
+    lesson_type: "word",
+    bpmf_symbol: "ㄋㄧ",
+    pronunciation: "ní",
+    examples: "你好 (nǐhǎo - hello) uses third tone ˇ"
+  }
+]
+
+level_3_lessons.each do |lesson_data|
+  Lesson.create!(lesson_data)
+end
+
+puts "Created #{Lesson.by_level(3).count} Level 3 lessons!"
+puts "Total: #{Lesson.count} lessons across 3 levels!"
