@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   
   resources :progress, only: [:index, :show]
   resources :achievements, only: [:index]
+  get '/history', to: 'history#index', as: 'history'
   
   # API endpoints for game mechanics
   post '/api/start_session', to: 'api#start_session'
