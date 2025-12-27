@@ -16,14 +16,11 @@ class LessonsController < ApplicationController
   def complete
     progress = @current_user.lesson_progresses.find_or_initialize_by(lesson: @lesson)
     
-    unless progress.completed?
-      points = 10
-      progress.complete!(points: points)
-      
-      # Check for achievements
-      check_achievements
-      
-      redirect_to lesson_path(@lesson.order), notice: "Great job! You earned #{points} points!"
+      unless progress.completed?
+        points = 10
+        progress.complete!(points: points)
+        
+        redirect_to lesson_path(@lesson.order), notice: "Great job! You earned #{points} points!"
     else
       redirect_to lesson_path(@lesson.order)
     end
@@ -43,7 +40,6 @@ class LessonsController < ApplicationController
       unless progress.completed?
         points = 10
         progress.complete!(points: points)
-        check_achievements
       end
       
       render json: { 
@@ -67,34 +63,5 @@ class LessonsController < ApplicationController
     @lesson = Lesson.find_by!(order: params[:order])
   end
   
-  def check_achievements
-    user = @current_user
-    user.reload
-    completed_count = user.completed_lessons_count
-    
-    # First lesson achievement
-    if completed_count == 1
-      user.achievements.find_or_create_by!(title: "First Steps") do |a|
-        a.description = "Completed your first lesson!"
-        a.badge_type = "bronze"
-      end
-    end
-    
-    # 5 lessons achievement
-    if completed_count == 5
-      user.achievements.find_or_create_by!(title: "Getting Started") do |a|
-        a.description = "Completed 5 lessons!"
-        a.badge_type = "silver"
-      end
-    end
-    
-    # 10 lessons achievement
-    if completed_count == 10
-      user.achievements.find_or_create_by!(title: "BPMF Master") do |a|
-        a.description = "Completed 10 lessons!"
-        a.badge_type = "gold"
-      end
-    end
-  end
 end
 

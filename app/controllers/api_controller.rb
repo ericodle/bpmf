@@ -33,8 +33,7 @@ class ApiController < ApplicationController
       current_level: @current_user.current_level,
       points_for_next_level: @current_user.points_for_next_level,
       completed_lessons: @current_user.completed_lessons_count,
-      progress_percentage: @current_user.progress_percentage,
-      achievements_count: @current_user.achievements.count
+      progress_percentage: @current_user.progress_percentage
     }
   end
 end

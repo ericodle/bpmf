@@ -1,7 +1,6 @@
 # Clear existing data
 User.destroy_all
 Lesson.destroy_all
-Achievement.destroy_all
 LessonProgress.destroy_all
 
 # Create BPMF lessons - Complete Zhuyin (BPMF) phonetic system

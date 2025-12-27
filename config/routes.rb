@@ -7,9 +7,8 @@ Rails.application.routes.draw do
   post 'lessons/:order/complete', to: 'lessons#complete', as: 'complete_lesson'
   post 'lessons/:order/submit_answer', to: 'lessons#submit_answer', as: 'submit_answer_lesson'
   
-  resources :progress, only: [:index, :show]
-  resources :achievements, only: [:index]
   get '/history', to: 'history#index', as: 'history'
+  get '/about', to: 'about#index', as: 'about'
   
   # API endpoints for game mechanics
   post '/api/start_session', to: 'api#start_session'
