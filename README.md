@@ -1,93 +1,41 @@
 # BPMF Learning Game
 
-A gamified Rails application for teaching children the BPMF phonetic alphabet used in Taiwan. This app provides step-by-step lessons with interactive exercises, points, levels, and achievements.
+A gamified Rails application for teaching children BPMF (Zhuyin), the phonetic alphabet used in Taiwan.
 
-## Features
+## Quick Start
 
-- 🎮 **Gamified Learning**: Earn points, level up, and unlock achievements
-- 📚 **Step-by-Step Lessons**: Progressive learning with locked lessons until prerequisites are completed
-- 🏆 **Achievement System**: Unlock badges as you progress
-- 📊 **Progress Tracking**: Monitor your learning journey with detailed statistics
-- 🎨 **Beautiful UI**: Modern, colorful interface designed for children
-- 🐳 **Docker Support**: Easy setup with Docker and Docker Compose
-
-## Prerequisites
-
-- Docker
-- Docker Compose
-
-## Setup Instructions
-
-1. **Build and start the containers:**
-   ```bash
-   docker compose build
-   docker compose up -d
-   ```
-
-   The database will be automatically created, migrated, and seeded on first startup.
-
-2. **Access the application:**
-   Open your browser and navigate to `http://localhost:3000`
-
-## Usage
-
-- **Home Page**: View your progress, stats, and start learning
-- **Lessons**: Browse all available lessons and track completion
-- **Progress**: See detailed statistics about your learning journey
-- **Achievements**: View all badges and achievements you've earned
-
-## Learning Path
-
-The app includes lessons for:
-- Introduction to BPMF
-- Basic symbols: ㄅ (B), ㄆ (P), ㄇ (M), ㄈ (F)
-- Practice exercises
-- Additional symbols: ㄉ (D), ㄊ (T), ㄋ (N), ㄌ (L)
-- More practice and advanced lessons
-
-## Development
-
-### Running Commands
-
-To run Rails commands in the container:
 ```bash
-docker compose exec web rails <command>
+# Build and start containers
+docker compose build
+docker compose up -d
+
+# The app will be available at:
+# http://localhost:3000
 ```
 
-### Viewing Logs
+## Main Commands
 
 ```bash
-docker compose logs -f web
-```
+# Start containers
+docker compose up -d
 
-### Stopping the Application
-
-```bash
+# Stop containers
 docker compose down
+
+# View logs
+docker compose logs -f web
+
+# Restart containers
+docker compose restart
+
+# Rebuild after changes
+docker compose build
+docker compose up -d
 ```
 
-### Resetting the Database
+## Access
 
-```bash
-docker compose exec web rails db:reset
-```
+- **Application**: http://localhost:3000
+- **Database**: PostgreSQL (internal)
 
-## Project Structure
-
-- `app/models/` - Data models (User, Lesson, LessonProgress, Achievement)
-- `app/controllers/` - Application controllers
-- `app/views/` - View templates
-- `db/migrate/` - Database migrations
-- `db/seeds.rb` - Seed data with initial BPMF lessons
-
-## Technologies
-
-- Ruby on Rails 7.1
-- PostgreSQL
-- Docker & Docker Compose
-- HTML/CSS/JavaScript
-
-## License
-
-This project is for educational purposes.
-
+The database is automatically set up on first run (create, migrate, seed).

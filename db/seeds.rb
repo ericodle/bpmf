@@ -23,7 +23,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄅ",
     pronunciation: "b",
-    examples: "ㄅㄚ (ba), ㄅㄛ (bo), ㄅㄞ (bai), ㄅㄟ (bei)"
+    examples: "ㄅㄚ (ba) 爸爸 (bàba - father), ㄅㄛ (bo) 波波 (bōbō - wave), ㄅㄞ (bai) 白色 (báisè - white), ㄅㄟ (bei) 杯子 (bēizi - cup)"
   },
   {
     order: 3,
@@ -32,7 +32,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄆ",
     pronunciation: "p",
-    examples: "ㄆㄚ (pa), ㄆㄛ (po), ㄆㄞ (pai), ㄆㄟ (pei)"
+    examples: "ㄆㄚ (pa) 爬爬 (pápá - to climb), ㄆㄛ (po) 婆婆 (pópo - grandmother), ㄆㄞ (pai) 排隊 (páiduì - line up), ㄆㄟ (pei) 朋友 (péngyǒu - friend)"
   },
   {
     order: 4,
@@ -41,7 +41,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄇ",
     pronunciation: "m",
-    examples: "ㄇㄚ (ma), ㄇㄛ (mo), ㄇㄞ (mai), ㄇㄟ (mei)"
+    examples: "ㄇㄚ (ma) 媽媽 (māma - mother), ㄇㄛ (mo) 摸摸 (mōmō - to touch), ㄇㄞ (mai) 買賣 (mǎimài - trade), ㄇㄟ (mei) 美麗 (měilì - beautiful)"
   },
   {
     order: 5,
@@ -50,7 +50,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄈ",
     pronunciation: "f",
-    examples: "ㄈㄚ (fa), ㄈㄛ (fo), ㄈㄞ (fai), ㄈㄟ (fei)"
+    examples: "ㄈㄚ (fa) 發發 (fāfā - to send), ㄈㄛ (fo) 佛佛 (fófó - Buddha), ㄈㄞ (fai) 非常 (fēicháng - very), ㄈㄟ (fei) 飛機 (fēijī - airplane)"
   },
   {
     order: 6,
@@ -69,7 +69,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄉ",
     pronunciation: "d",
-    examples: "ㄉㄚ (da), ㄉㄛ (do), ㄉㄞ (dai), ㄉㄟ (dei)"
+    examples: "ㄉㄚ (da) 大大 (dàdà - big), ㄉㄛ (do) 多朵 (duōduǒ - many), ㄉㄞ (dai) 帶帶 (dàidài - to bring), ㄉㄟ (dei) 得得 (děidéi - must)"
   },
   {
     order: 8,
@@ -78,7 +78,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄊ",
     pronunciation: "t",
-    examples: "ㄊㄚ (ta), ㄊㄛ (to), ㄊㄞ (tai), ㄊㄟ (tei)"
+    examples: "ㄊㄚ (ta) 他她 (tā - he/she), ㄊㄛ (to) 頭頭 (tóutóu - head), ㄊㄞ (tai) 台灣 (Táiwān - Taiwan), ㄊㄟ (tei) 特別 (tèbié - special)"
   },
   {
     order: 9,
@@ -87,7 +87,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄋ",
     pronunciation: "n",
-    examples: "ㄋㄚ (na), ㄋㄛ (no), ㄋㄞ (nai), ㄋㄟ (nei)"
+    examples: "ㄋㄚ (na) 那那 (nà - that), ㄋㄛ (no) 諾諾 (nuònuò - promise), ㄋㄞ (nai) 奶奶 (nǎinai - grandmother), ㄋㄟ (nei) 內內 (nèinèi - inside)"
   },
   {
     order: 10,
@@ -96,7 +96,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄌ",
     pronunciation: "l",
-    examples: "ㄌㄚ (la), ㄌㄛ (lo), ㄌㄞ (lai), ㄌㄟ (lei)"
+    examples: "ㄌㄚ (la) 拉拉 (lālā - pull), ㄌㄛ (lo) 落落 (luòluò - to fall), ㄌㄞ (lai) 來來 (láilái - to come), ㄌㄟ (lei) 累累 (lèilèi - tired)"
   },
   {
     order: 11,
@@ -115,7 +115,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄍ",
     pronunciation: "g",
-    examples: "ㄍㄚ (ga), ㄍㄛ (go), ㄍㄞ (gai), ㄍㄟ (gei)"
+    examples: "ㄍㄚ (ga) 嘎嘎 (gāgā - quack), ㄍㄛ (go) 哥哥 (gēge - older brother), ㄍㄞ (gai) 改變 (gǎibiàn - to change), ㄍㄟ (gei) 給給 (gěigěi - to give)"
   },
   {
     order: 13,
@@ -124,7 +124,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄎ",
     pronunciation: "k",
-    examples: "ㄎㄚ (ka), ㄎㄛ (ko), ㄎㄞ (kai), ㄎㄟ (kei)"
+    examples: "ㄎㄚ (ka) 卡卡 (kǎkǎ - card), ㄎㄛ (ko) 可可 (kěkě - cocoa), ㄎㄞ (kai) 開開 (kāikāi - to open), ㄎㄟ (kei) 看看 (kànkàn - to look)"
   },
   {
     order: 14,
@@ -133,7 +133,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄏ",
     pronunciation: "h",
-    examples: "ㄏㄚ (ha), ㄏㄛ (ho), ㄏㄞ (hai), ㄏㄟ (hei)"
+    examples: "ㄏㄚ (ha) 哈哈 (hāhā - haha), ㄏㄛ (ho) 和和 (héhé - and), ㄏㄞ (hai) 還還 (háihái - still), ㄏㄟ (hei) 黑黑 (hēihēi - black)"
   },
   {
     order: 15,
@@ -152,7 +152,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄐ",
     pronunciation: "j",
-    examples: "ㄐㄧ (ji), ㄐㄧㄚ (jia), ㄐㄧㄝ (jie), ㄐㄧㄠ (jiao)"
+    examples: "ㄐㄧ (ji) 雞雞 (jījī - chicken), ㄐㄧㄚ (jia) 家家 (jiājiā - home), ㄐㄧㄝ (jie) 姐姐 (jiějie - older sister), ㄐㄧㄠ (jiao) 教教 (jiāojiāo - to teach)"
   },
   {
     order: 17,
@@ -161,7 +161,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄑ",
     pronunciation: "q",
-    examples: "ㄑㄧ (qi), ㄑㄧㄚ (qia), ㄑㄧㄝ (qie), ㄑㄧㄠ (qiao)"
+    examples: "ㄑㄧ (qi) 七起 (qīqǐ - seven/rise), ㄑㄧㄚ (qia) 恰恰 (qiàqià - exactly), ㄑㄧㄝ (qie) 切切 (qiēqiē - to cut), ㄑㄧㄠ (qiao) 橋橋 (qiáoqiáo - bridge)"
   },
   {
     order: 18,
@@ -170,7 +170,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄒ",
     pronunciation: "x",
-    examples: "ㄒㄧ (xi), ㄒㄧㄚ (xia), ㄒㄧㄝ (xie), ㄒㄧㄠ (xiao)"
+    examples: "ㄒㄧ (xi) 西西 (xīxī - west), ㄒㄧㄚ (xia) 下下 (xiàxià - down), ㄒㄧㄝ (xie) 謝謝 (xièxie - thank you), ㄒㄧㄠ (xiao) 小小 (xiǎoxiǎo - small)"
   },
   {
     order: 19,
@@ -189,7 +189,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄓ",
     pronunciation: "zh",
-    examples: "ㄓㄚ (zha), ㄓㄜ (zhe), ㄓㄞ (zhai), ㄓㄟ (zhei)"
+    examples: "ㄓㄚ (zha) 查查 (cháchá - to check), ㄓㄜ (zhe) 這這 (zhèzhè - this), ㄓㄞ (zhai) 摘摘 (zhāizhāi - to pick), ㄓㄟ (zhei) 這這 (zhèizhèi - this)"
   },
   {
     order: 21,
@@ -198,7 +198,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄔ",
     pronunciation: "ch",
-    examples: "ㄔㄚ (cha), ㄔㄜ (che), ㄔㄞ (chai), ㄔㄟ (chei)"
+    examples: "ㄔㄚ (cha) 茶茶 (cháchá - tea), ㄔㄜ (che) 車車 (chēchē - car), ㄔㄞ (chai) 拆拆 (chāichāi - to tear), ㄔㄟ (chei) 吃吃 (chīchī - to eat)"
   },
   {
     order: 22,
@@ -207,7 +207,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄕ",
     pronunciation: "sh",
-    examples: "ㄕㄚ (sha), ㄕㄜ (she), ㄕㄞ (shai), ㄕㄟ (shei)"
+    examples: "ㄕㄚ (sha) 沙沙 (shāshā - sand), ㄕㄜ (she) 蛇蛇 (shéshé - snake), ㄕㄞ (shai) 曬曬 (shàishài - to sun), ㄕㄟ (shei) 誰誰 (shéishéi - who)"
   },
   {
     order: 23,
@@ -216,7 +216,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄖ",
     pronunciation: "r",
-    examples: "ㄖㄚ (ra), ㄖㄜ (re), ㄖㄞ (rai), ㄖㄟ (rei)"
+    examples: "ㄖㄚ (ra) 熱熱 (rèrè - hot), ㄖㄜ (re) 熱熱 (rèrè - hot), ㄖㄞ (rai) 來來 (láilái - to come), ㄖㄟ (rei) 人人 (rénrén - person)"
   },
   {
     order: 24,
@@ -235,7 +235,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄗ",
     pronunciation: "z",
-    examples: "ㄗㄚ (za), ㄗㄜ (ze), ㄗㄞ (zai), ㄗㄟ (zei)"
+    examples: "ㄗㄚ (za) 雜雜 (zázá - mixed), ㄗㄜ (ze) 則則 (zézé - then), ㄗㄞ (zai) 在在 (zàizài - at), ㄗㄟ (zei) 賊賊 (zéizéi - thief)"
   },
   {
     order: 26,
@@ -244,7 +244,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄘ",
     pronunciation: "c",
-    examples: "ㄘㄚ (ca), ㄘㄜ (ce), ㄘㄞ (cai), ㄘㄟ (cei)"
+    examples: "ㄘㄚ (ca) 擦擦 (cācā - to wipe), ㄘㄜ (ce) 測測 (cècè - to measure), ㄘㄞ (cai) 菜菜 (càicài - vegetable), ㄘㄟ (cei) 猜猜 (cāicāi - to guess)"
   },
   {
     order: 27,
@@ -253,7 +253,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄙ",
     pronunciation: "s",
-    examples: "ㄙㄚ (sa), ㄙㄜ (se), ㄙㄞ (sai), ㄙㄟ (sei)"
+    examples: "ㄙㄚ (sa) 灑灑 (sǎsǎ - to sprinkle), ㄙㄜ (se) 色色 (sèsè - color), ㄙㄞ (sai) 賽賽 (sàisài - race), ㄙㄟ (sei) 歲歲 (suìsuì - year)"
   },
   {
     order: 28,
@@ -281,7 +281,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄚ",
     pronunciation: "ya",
-    examples: "ㄅㄚ (ba), ㄇㄚ (ma), ㄈㄚ (fa), ㄉㄚ (da)"
+    examples: "ㄅㄚ (ba) 爸爸 (bàba - father), ㄇㄚ (ma) 媽媽 (māma - mother), ㄈㄚ (fa) 發發 (fāfā - to send), ㄉㄚ (da) 大大 (dàdà - big)"
   },
   {
     order: 31,
@@ -290,7 +290,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄛ",
     pronunciation: "wo",
-    examples: "ㄅㄛ (bo), ㄆㄛ (po), ㄇㄛ (mo), ㄈㄛ (fo)"
+    examples: "ㄅㄛ (bo) 波波 (bōbō - wave), ㄆㄛ (po) 婆婆 (pópo - grandmother), ㄇㄛ (mo) 摸摸 (mōmō - to touch), ㄈㄛ (fo) 佛佛 (fófó - Buddha)"
   },
   {
     order: 32,
@@ -299,7 +299,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄜ",
     pronunciation: "ye",
-    examples: "ㄅㄜ (be), ㄆㄜ (pe), ㄇㄜ (me), ㄈㄜ (fe)"
+    examples: "ㄅㄜ (be) 伯伯 (bóbo - uncle), ㄆㄜ (pe) 婆婆 (pópo - grandmother), ㄇㄜ (me) 麼麼 (meme - what), ㄈㄜ (fe) 佛佛 (fófó - Buddha)"
   },
   {
     order: 33,
@@ -308,7 +308,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄝ",
     pronunciation: "ie",
-    examples: "ㄅㄝ (bie), ㄆㄝ (pie), ㄇㄝ (mie), ㄈㄝ (fie)"
+    examples: "ㄅㄝ (bie) 別別 (biébié - don't), ㄆㄝ (pie) 撇撇 (piěpiě - to throw), ㄇㄝ (mie) 滅滅 (mièmiè - to extinguish), ㄈㄝ (fie) 非非 (fēifēi - not)"
   },
   {
     order: 34,
@@ -327,7 +327,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄞ",
     pronunciation: "yai",
-    examples: "ㄅㄞ (bai), ㄆㄞ (pai), ㄇㄞ (mai), ㄈㄞ (fai)"
+    examples: "ㄅㄞ (bai) 白色 (báisè - white), ㄆㄞ (pai) 排隊 (páiduì - line up), ㄇㄞ (mai) 買賣 (mǎimài - trade), ㄈㄞ (fai) 非常 (fēicháng - very)"
   },
   {
     order: 36,
@@ -336,7 +336,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄟ",
     pronunciation: "wei",
-    examples: "ㄅㄟ (bei), ㄆㄟ (pei), ㄇㄟ (mei), ㄈㄟ (fei)"
+    examples: "ㄅㄟ (bei) 杯子 (bēizi - cup), ㄆㄟ (pei) 朋友 (péngyǒu - friend), ㄇㄟ (mei) 美麗 (měilì - beautiful), ㄈㄟ (fei) 飛機 (fēijī - airplane)"
   },
   {
     order: 37,
@@ -345,7 +345,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄠ",
     pronunciation: "yao",
-    examples: "ㄅㄠ (bao), ㄆㄠ (pao), ㄇㄠ (mao), ㄈㄠ (fao)"
+    examples: "ㄅㄠ (bao) 包包 (bāobāo - bag), ㄆㄠ (pao) 跑跑 (pǎopǎo - to run), ㄇㄠ (mao) 貓貓 (māomāo - cat), ㄈㄠ (fao) 方法 (fāngfǎ - method)"
   },
   {
     order: 38,
@@ -354,7 +354,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄡ",
     pronunciation: "you",
-    examples: "ㄅㄡ (bou), ㄆㄡ (pou), ㄇㄡ (mou), ㄈㄡ (fou)"
+    examples: "ㄅㄡ (bou) 包包 (bāobāo - bag), ㄆㄡ (pou) 朋友 (péngyǒu - friend), ㄇㄡ (mou) 某某 (mǒumǒu - some), ㄈㄡ (fou) 否否 (fǒufǒu - no)"
   },
   {
     order: 39,
@@ -373,7 +373,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄢ",
     pronunciation: "yan",
-    examples: "ㄅㄢ (ban), ㄆㄢ (pan), ㄇㄢ (man), ㄈㄢ (fan)"
+    examples: "ㄅㄢ (ban) 班班 (bānbān - class), ㄆㄢ (pan) 盤盤 (pánpán - plate), ㄇㄢ (man) 慢慢 (mànmàn - slow), ㄈㄢ (fan) 飯飯 (fànfàn - rice)"
   },
   {
     order: 41,
@@ -382,7 +382,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄣ",
     pronunciation: "wen",
-    examples: "ㄅㄣ (ben), ㄆㄣ (pen), ㄇㄣ (men), ㄈㄣ (fen)"
+    examples: "ㄅㄣ (ben) 本本 (běnběn - book), ㄆㄣ (pen) 盆盆 (pénpén - basin), ㄇㄣ (men) 門門 (ménmén - door), ㄈㄣ (fen) 分分 (fēnfēn - to divide)"
   },
   {
     order: 42,
@@ -391,7 +391,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄤ",
     pronunciation: "yang",
-    examples: "ㄅㄤ (bang), ㄆㄤ (pang), ㄇㄤ (mang), ㄈㄤ (fang)"
+    examples: "ㄅㄤ (bang) 幫幫 (bāngbāng - to help), ㄆㄤ (pang) 胖胖 (pàngpàng - fat), ㄇㄤ (mang) 忙忙 (mángmáng - busy), ㄈㄤ (fang) 方法 (fāngfǎ - method)"
   },
   {
     order: 43,
@@ -400,7 +400,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄥ",
     pronunciation: "weng",
-    examples: "ㄅㄥ (beng), ㄆㄥ (peng), ㄇㄥ (meng), ㄈㄥ (feng)"
+    examples: "ㄅㄥ (beng) 崩崩 (bēngbēng - to collapse), ㄆㄥ (peng) 朋友 (péngyǒu - friend), ㄇㄥ (meng) 夢夢 (mèngmèng - dream), ㄈㄥ (feng) 風風 (fēngfēng - wind)"
   },
   {
     order: 44,
@@ -419,7 +419,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄦ",
     pronunciation: "er",
-    examples: "ㄦ (er) - can stand alone or combine with other sounds"
+    examples: "ㄦ (er) 兒兒 (érér - child), 耳朵 (ěrdǒu - ear), 二二 (èrèr - two)"
   },
   {
     order: 46,
@@ -428,7 +428,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄧ",
     pronunciation: "yi",
-    examples: "ㄧ (yi), ㄅㄧ (bi), ㄆㄧ (pi), ㄇㄧ (mi)"
+    examples: "ㄧ (yi) 一一 (yīyī - one), ㄅㄧ (bi) 筆筆 (bǐbǐ - pen), ㄆㄧ (pi) 皮皮 (pípí - skin), ㄇㄧ (mi) 米米 (mǐmǐ - rice)"
   },
   {
     order: 47,
@@ -437,7 +437,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄨ",
     pronunciation: "wu",
-    examples: "ㄨ (wu), ㄅㄨ (bu), ㄆㄨ (pu), ㄇㄨ (mu)"
+    examples: "ㄨ (wu) 五五 (wǔwǔ - five), ㄅㄨ (bu) 不不 (bùbù - no), ㄆㄨ (pu) 普普 (pǔpǔ - common), ㄇㄨ (mu) 木木 (mùmù - wood)"
   },
   {
     order: 48,
@@ -446,7 +446,7 @@ lessons_data = [
     lesson_type: "symbol",
     bpmf_symbol: "ㄩ",
     pronunciation: "yu",
-    examples: "ㄩ (yu), ㄐㄩ (ju), ㄑㄩ (qu), ㄒㄩ (xu)"
+    examples: "ㄩ (yu) 雨雨 (yǔyǔ - rain), ㄐㄩ (ju) 句句 (jùjù - sentence), ㄑㄩ (qu) 去去 (qùqù - to go), ㄒㄩ (xu) 學學 (xuéxué - to learn)"
   },
   {
     order: 49,
