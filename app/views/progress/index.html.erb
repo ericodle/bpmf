@@ -43,7 +43,7 @@
         <% @progresses.each do |progress| %>
           <tr style="border-bottom: 1px solid #e2e8f0;">
             <td style="padding: 12px;">
-              <%= link_to progress.lesson.title, lesson_path(progress.lesson), style: "color: #667eea; text-decoration: none;" %>
+              <%= link_to progress.lesson.title, lesson_path(progress.lesson.order), style: "color: #667eea; text-decoration: none;" %>
             </td>
             <td style="padding: 12px;">
               <% if progress.completed? %>

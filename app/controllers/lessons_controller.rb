@@ -23,9 +23,9 @@ class LessonsController < ApplicationController
       # Check for achievements
       check_achievements
       
-      redirect_to lesson_path(@lesson), notice: "Great job! You earned #{points} points!"
+      redirect_to lesson_path(@lesson.order), notice: "Great job! You earned #{points} points!"
     else
-      redirect_to lesson_path(@lesson)
+      redirect_to lesson_path(@lesson.order)
     end
   end
   
@@ -64,7 +64,7 @@ class LessonsController < ApplicationController
   private
   
   def set_lesson
-    @lesson = Lesson.find(params[:id])
+    @lesson = Lesson.find_by!(order: params[:order])
   end
   
   def check_achievements

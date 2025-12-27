@@ -31,7 +31,7 @@
   
   <% if @next_lesson %>
     <div style="margin-top: 30px; text-align: center;">
-      <%= link_to "Start Learning!", lesson_path(@next_lesson), class: "btn btn-success", style: "font-size: 20px; padding: 15px 30px;" %>
+      <%= link_to "Start Learning!", lesson_path(@next_lesson.order), class: "btn btn-success", style: "font-size: 20px; padding: 15px 30px;" %>
     </div>
   <% end %>
 </div>
@@ -59,7 +59,7 @@
           <p style="color: #667eea; font-size: 14px;">Ready to learn!</p>
         <% end %>
         <% unless is_locked %>
-          <%= link_to "View Lesson", lesson_path(lesson), class: "btn", style: "margin-top: 10px; width: 100%; text-align: center;" %>
+          <%= link_to "View Lesson", lesson_path(lesson.order), class: "btn", style: "margin-top: 10px; width: 100%; text-align: center;" %>
         <% end %>
       </div>
     <% end %>

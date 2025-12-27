@@ -26,41 +26,63 @@
     </div>
   <% end %>
   
-  <% unless @progress.completed? %>
-    <div id="practice-section" style="margin-top: 30px;">
-      <h3 style="margin-bottom: 15px; color: #667eea;">Practice Time!</h3>
-      <p style="margin-bottom: 15px;">Type the pronunciation or symbol:</p>
-      
-      <input type="text" 
-             id="answer-input" 
-             class="answer-input" 
-             placeholder="Enter your answer here..."
-             autocomplete="off">
-      
-      <div id="feedback" style="display: none;"></div>
-      
-      <div style="margin-top: 20px;">
-        <button onclick="checkAnswer()" class="btn">Check Answer</button>
-        <%= link_to "Skip to Next", lesson_path(@lesson.next_lesson || @lesson), class: "btn btn-secondary", style: "margin-left: 10px;" %>
+  <% if @lesson.lesson_type == "introduction" || @lesson.lesson_type == "practice" %>
+    <% unless @progress.completed? %>
+      <div style="margin-top: 30px; text-align: center;">
+        <% if @next_lesson %>
+          <%= link_to "Continue to Next Lesson →", lesson_path(@next_lesson.order), class: "btn btn-success", style: "font-size: 18px; padding: 15px 30px;" %>
+        <% end %>
       </div>
-    </div>
-  <% else %>
-    <div class="feedback correct" style="margin-top: 20px;">
-      <strong>Great job!</strong> You've completed this lesson and earned <%= @progress.points_earned %> points!
-    </div>
-    
-    <div style="margin-top: 30px; text-align: center;">
-      <% if @next_lesson %>
-        <%= link_to "Next Lesson →", lesson_path(@next_lesson), class: "btn btn-success", style: "font-size: 18px; padding: 15px 30px;" %>
-      <% else %>
-        <p style="color: #667eea; font-size: 18px; font-weight: 600;">🎉 Congratulations! You've completed all lessons!</p>
-      <% end %>
-    </div>
+    <% else %>
+      <div class="feedback correct" style="margin-top: 20px;">
+        <strong>Great job!</strong> You've completed this lesson and earned <%= @progress.points_earned %> points!
+      </div>
+      
+      <div style="margin-top: 30px; text-align: center;">
+        <% if @next_lesson %>
+          <%= link_to "Next Lesson →", lesson_path(@next_lesson.order), class: "btn btn-success", style: "font-size: 18px; padding: 15px 30px;" %>
+        <% else %>
+          <p style="color: #667eea; font-size: 18px; font-weight: 600;">🎉 Congratulations! You've completed all lessons!</p>
+        <% end %>
+      </div>
+    <% end %>
+  <% elsif @lesson.bpmf_symbol || @lesson.pronunciation %>
+    <% unless @progress.completed? %>
+      <div id="practice-section" style="margin-top: 30px;">
+        <h3 style="margin-bottom: 15px; color: #667eea;">Practice Time!</h3>
+        <p style="margin-bottom: 15px;">Type the pronunciation or symbol:</p>
+        
+        <input type="text" 
+               id="answer-input" 
+               class="answer-input" 
+               placeholder="Enter your answer here..."
+               autocomplete="off">
+        
+        <div id="feedback" style="display: none;"></div>
+        
+        <div style="margin-top: 20px;">
+          <button onclick="checkAnswer()" class="btn">Check Answer</button>
+          <%= link_to "Skip to Next", @lesson.next_lesson ? lesson_path(@lesson.next_lesson.order) : lesson_path(@lesson.order), class: "btn btn-secondary", style: "margin-left: 10px;" %>
+        </div>
+      </div>
+    <% else %>
+      <div class="feedback correct" style="margin-top: 20px;">
+        <strong>Great job!</strong> You've completed this lesson and earned <%= @progress.points_earned %> points!
+      </div>
+      
+      <div style="margin-top: 30px; text-align: center;">
+        <% if @next_lesson %>
+          <%= link_to "Next Lesson →", lesson_path(@next_lesson.order), class: "btn btn-success", style: "font-size: 18px; padding: 15px 30px;" %>
+        <% else %>
+          <p style="color: #667eea; font-size: 18px; font-weight: 600;">🎉 Congratulations! You've completed all lessons!</p>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
   
   <div style="margin-top: 30px; display: flex; justify-content: space-between;">
     <% if @previous_lesson %>
-      <%= link_to "← Previous Lesson", lesson_path(@previous_lesson), class: "btn btn-secondary" %>
+      <%= link_to "← Previous Lesson", lesson_path(@previous_lesson.order), class: "btn btn-secondary" %>
     <% else %>
       <div></div>
     <% end %>
@@ -68,7 +90,7 @@
     <%= link_to "Back to Lessons", lessons_path, class: "btn btn-secondary" %>
     
     <% if @next_lesson && @progress.completed? %>
-      <%= link_to "Next Lesson →", lesson_path(@next_lesson), class: "btn" %>
+      <%= link_to "Next Lesson →", lesson_path(@next_lesson.order), class: "btn" %>
     <% end %>
   </div>
 </div>
@@ -86,10 +108,10 @@
       return;
     }
     
-    const lessonId = <%= @lesson.id %>;
+    const lessonOrder = <%= @lesson.order %>;
     const correctAnswer = '<%= @lesson.pronunciation || @lesson.bpmf_symbol %>';
     
-    fetch(`/lessons/${lessonId}/submit_answer`, {
+    fetch(`/lessons/${lessonOrder}/submit_answer`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

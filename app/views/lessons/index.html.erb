@@ -22,7 +22,7 @@
           <p style="color: #667eea; font-size: 14px;">Ready to learn!</p>
         <% end %>
         <% unless is_locked %>
-          <%= link_to "Start Lesson", lesson_path(lesson), class: "btn", style: "margin-top: 10px; width: 100%; text-align: center;" %>
+          <%= link_to "Start Lesson", lesson_path(lesson.order), class: "btn", style: "margin-top: 10px; width: 100%; text-align: center;" %>
         <% end %>
       </div>
     <% end %>
