@@ -1,0 +1,39 @@
+<div class="card">
+  <h2 style="margin-bottom: 20px; color: #667eea;">Your Achievements</h2>
+  
+  <% if @achievements.any? %>
+    <div class="lesson-list">
+      <% @achievements.each do |achievement| %>
+        <div class="lesson-card" style="text-align: center;">
+          <div style="font-size: 60px; margin-bottom: 15px;">
+            <% case achievement.badge_type %>
+            <% when 'bronze' %>
+              🥉
+            <% when 'silver' %>
+              🥈
+            <% when 'gold' %>
+              🥇
+            <% else %>
+              🏆
+            <% end %>
+          </div>
+          <h3 style="margin-bottom: 10px; color: #667eea;"><%= achievement.title %></h3>
+          <p style="color: #666; margin-bottom: 10px;"><%= achievement.description %></p>
+          <span class="badge <%= achievement.badge_type %>">
+            <%= achievement.badge_type&.capitalize || 'Achievement' %>
+          </span>
+          <p style="color: #999; font-size: 12px; margin-top: 10px;">
+            Earned on <%= achievement.created_at.strftime("%B %d, %Y") %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div style="text-align: center; padding: 40px;">
+      <div style="font-size: 80px; margin-bottom: 20px;">🎯</div>
+      <p style="font-size: 18px; color: #666;">No achievements yet. Complete lessons to earn badges!</p>
+      <%= link_to "Start Learning", lessons_path, class: "btn", style: "margin-top: 20px;" %>
+    </div>
+  <% end %>
+</div>
+

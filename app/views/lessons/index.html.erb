@@ -1,0 +1,31 @@
+<div class="card">
+  <h2 style="margin-bottom: 20px; color: #667eea;">All Lessons</h2>
+  <div class="lesson-list">
+    <% @lessons.each do |lesson| %>
+      <% progress = @user.lesson_progresses.find_by(lesson: lesson) %>
+      <% previous_lesson = lesson.previous_lesson %>
+      <% is_locked = !lesson.first_lesson? && (!previous_lesson || !@user.lesson_progresses.find_by(lesson: previous_lesson)&.completed?) %>
+      
+      <div class="lesson-card <%= 'completed' if progress&.completed? %> <%= 'locked' if is_locked %>">
+        <h4 style="margin-bottom: 10px;">
+          Lesson <%= lesson.order %>: <%= lesson.title %>
+          <% if progress&.completed? %>
+            <span style="color: #48bb78;">✓</span>
+          <% end %>
+        </h4>
+        <p style="color: #666; margin-bottom: 10px;"><%= lesson.content.truncate(100) %></p>
+        <% if progress&.completed? %>
+          <p style="color: #48bb78; font-size: 14px;">Completed! +<%= progress.points_earned %> points</p>
+        <% elsif is_locked %>
+          <p style="color: #999; font-size: 14px;">🔒 Locked</p>
+        <% else %>
+          <p style="color: #667eea; font-size: 14px;">Ready to learn!</p>
+        <% end %>
+        <% unless is_locked %>
+          <%= link_to "Start Lesson", lesson_path(lesson), class: "btn", style: "margin-top: 10px; width: 100%; text-align: center;" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

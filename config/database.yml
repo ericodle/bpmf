@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch("DATABASE_HOST") { "db" } %>
+  username: <%= ENV.fetch("DATABASE_USER") { "bpmf_user" } %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") { "bpmf_password" } %>
+
+development:
+  <<: *default
+  database: bpmf_development
+
+test:
+  <<: *default
+  database: bpmf_test
+
+production:
+  <<: *default
+  database: bpmf_production
+  username: bpmf_user
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+

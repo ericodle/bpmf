@@ -1,0 +1,135 @@
+<div class="card">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2 style="color: #667eea;">Lesson <%= @lesson.order %>: <%= @lesson.title %></h2>
+    <% if @progress.completed? %>
+      <span class="badge" style="background: #48bb78; color: white; padding: 8px 16px; border-radius: 20px;">Completed!</span>
+    <% end %>
+  </div>
+  
+  <% if @lesson.bpmf_symbol %>
+    <div class="bpmf-symbol"><%= @lesson.bpmf_symbol %></div>
+  <% end %>
+  
+  <div class="lesson-content">
+    <%= simple_format(@lesson.content) %>
+  </div>
+  
+  <% if @lesson.pronunciation %>
+    <div class="examples">
+      <strong>Pronunciation:</strong> <%= @lesson.pronunciation %>
+    </div>
+  <% end %>
+  
+  <% if @lesson.examples %>
+    <div class="examples">
+      <strong>Examples:</strong> <%= @lesson.examples %>
+    </div>
+  <% end %>
+  
+  <% unless @progress.completed? %>
+    <div id="practice-section" style="margin-top: 30px;">
+      <h3 style="margin-bottom: 15px; color: #667eea;">Practice Time!</h3>
+      <p style="margin-bottom: 15px;">Type the pronunciation or symbol:</p>
+      
+      <input type="text" 
+             id="answer-input" 
+             class="answer-input" 
+             placeholder="Enter your answer here..."
+             autocomplete="off">
+      
+      <div id="feedback" style="display: none;"></div>
+      
+      <div style="margin-top: 20px;">
+        <button onclick="checkAnswer()" class="btn">Check Answer</button>
+        <%= link_to "Skip to Next", lesson_path(@lesson.next_lesson || @lesson), class: "btn btn-secondary", style: "margin-left: 10px;" %>
+      </div>
+    </div>
+  <% else %>
+    <div class="feedback correct" style="margin-top: 20px;">
+      <strong>Great job!</strong> You've completed this lesson and earned <%= @progress.points_earned %> points!
+    </div>
+    
+    <div style="margin-top: 30px; text-align: center;">
+      <% if @next_lesson %>
+        <%= link_to "Next Lesson →", lesson_path(@next_lesson), class: "btn btn-success", style: "font-size: 18px; padding: 15px 30px;" %>
+      <% else %>
+        <p style="color: #667eea; font-size: 18px; font-weight: 600;">🎉 Congratulations! You've completed all lessons!</p>
+      <% end %>
+    </div>
+  <% end %>
+  
+  <div style="margin-top: 30px; display: flex; justify-content: space-between;">
+    <% if @previous_lesson %>
+      <%= link_to "← Previous Lesson", lesson_path(@previous_lesson), class: "btn btn-secondary" %>
+    <% else %>
+      <div></div>
+    <% end %>
+    
+    <%= link_to "Back to Lessons", lessons_path, class: "btn btn-secondary" %>
+    
+    <% if @next_lesson && @progress.completed? %>
+      <%= link_to "Next Lesson →", lesson_path(@next_lesson), class: "btn" %>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  function checkAnswer() {
+    const input = document.getElementById('answer-input');
+    const feedback = document.getElementById('feedback');
+    const answer = input.value.trim();
+    
+    if (!answer) {
+      feedback.className = 'feedback incorrect';
+      feedback.style.display = 'block';
+      feedback.innerHTML = 'Please enter an answer!';
+      return;
+    }
+    
+    const lessonId = <%= @lesson.id %>;
+    const correctAnswer = '<%= @lesson.pronunciation || @lesson.bpmf_symbol %>';
+    
+    fetch(`/lessons/${lessonId}/submit_answer`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
+      body: JSON.stringify({ answer: answer })
+    })
+    .then(response => response.json())
+    .then(data => {
+      feedback.style.display = 'block';
+      
+      if (data.correct) {
+        feedback.className = 'feedback correct';
+        feedback.innerHTML = `<strong>${data.message}</strong> You earned ${data.points} points!`;
+        input.disabled = true;
+        
+        if (data.completed) {
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+      } else {
+        feedback.className = 'feedback incorrect';
+        feedback.innerHTML = `<strong>${data.message}</strong> ${data.hint ? '<br>' + data.hint : ''}`;
+        input.value = '';
+        input.focus();
+      }
+    })
+    .catch(error => {
+      feedback.className = 'feedback incorrect';
+      feedback.style.display = 'block';
+      feedback.innerHTML = 'Something went wrong. Please try again.';
+    });
+  }
+  
+  // Allow Enter key to submit
+  document.getElementById('answer-input')?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      checkAnswer();
+    }
+  });
+</script>
+
