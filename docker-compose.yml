@@ -1,5 +1,4 @@
-version: '3.8'
-
+# Development environment configuration
 services:
   db:
     image: postgres:15
@@ -12,7 +11,7 @@ services:
     ports:
       - "5432:5432"
 
-  web:
+  bpmf:
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
@@ -21,12 +20,13 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    user: root
     environment:
       DATABASE_URL: postgresql://bpmf_user:bpmf_password@db:5432/bpmf_development
       DATABASE_HOST: db
       DATABASE_USER: bpmf_user
       DATABASE_PASSWORD: bpmf_password
-      RAILS_ENV: development
+      RAILS_ENV: ${RAILS_ENV:-development}
 
 volumes:
   postgres_data:

@@ -23,7 +23,7 @@ docker compose up -d
 docker compose down
 
 # View logs
-docker compose logs -f web
+docker compose logs -f bpmf
 
 # Restart containers
 docker compose restart
@@ -39,3 +39,12 @@ docker compose up -d
 - **Database**: PostgreSQL (internal)
 
 The database is automatically set up on first run (create, migrate, seed).
+
+## Development vs Production
+
+This project has separate configurations for development and production:
+
+- **Development**: Use `docker-compose.yml` (default)
+- **Production**: Use `docker-compose.prod.yml`
+
+For production deployment, see [README.DEPLOYMENT.md](README.DEPLOYMENT.md) for detailed AWS deployment instructions.

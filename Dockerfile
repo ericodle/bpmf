@@ -10,8 +10,8 @@ RUN apt-get update -qq && apt-get install -y \
 # Set working directory
 WORKDIR /app
 
-# Create a non-root user for running the app
-RUN useradd -m -u 1000 appuser || true
+# Create a non-root user
+RUN adduser --system --group app
 
 # Install bundler
 RUN gem install bundler
@@ -27,14 +27,14 @@ COPY . .
 RUN bundle install
 
 # Set proper permissions for app directory
-RUN chmod -R 755 /app || true
+RUN chown -R app:app /app || true
 
 # Copy and set permissions for entrypoint
-COPY docker-entrypoint.sh /usr/local/bin/
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-# Switch to non-root user (optional - comment out if you need root)
-# USER appuser
+# Switch to non-root user
+USER app
 
 # Expose port
 EXPOSE 3000
@@ -42,6 +42,6 @@ EXPOSE 3000
 # Use entrypoint
 ENTRYPOINT ["docker-entrypoint.sh"]
 
-# Start server
+# Start server (development mode)
 CMD ["rails", "server", "-b", "0.0.0.0"]
 
