@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root 'home#index'
   
-  resources :lessons, only: [:index], param: :order
+  resources :levels, only: [:index, :show]
+  resources :lessons, only: [], param: :order
   get 'lessons/:order', to: 'lessons#show', as: 'lesson'
   post 'lessons/:order/complete', to: 'lessons#complete', as: 'complete_lesson'
   post 'lessons/:order/submit_answer', to: 'lessons#submit_answer', as: 'submit_answer_lesson'

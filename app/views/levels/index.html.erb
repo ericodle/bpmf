@@ -1,0 +1,53 @@
+<div class="card">
+  <h2>Choose Your Level</h2>
+  <p class="lesson-content" style="font-size: 26px; margin-bottom: 40px;">
+    Master BPMF through three progressive levels, each building on the previous one. Click on a level to see its lessons and objectives.
+  </p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px;">
+  <% @levels.each do |level| %>
+    <% progress = level[:progress] %>
+    <% unlocked = level[:unlocked] %>
+    
+    <div class="card" style="<%= 'opacity: 0.6;' unless unlocked %> cursor: <%= unlocked ? 'pointer' : 'not-allowed' %>; transition: all 0.3s; border: 3px solid <%= level[:color] %>; background: <%= level[:light_color] || 'rgba(0, 0, 0, 0.7)' %>;" 
+         <% if unlocked %>onclick="window.location.href='<%= level_path(level[:number]) %>'"<% end %>
+         onmouseover="<% if unlocked %>this.style.transform = 'translateY(-5px)'; this.style.boxShadow = '0 0 30px <%= level[:color] %>';<% end %>"
+         onmouseout="<% if unlocked %>this.style.transform = 'translateY(0)'; this.style.boxShadow = 'none';<% end %>">
+      
+      <div style="text-align: center;">
+        <h2 style="color: <%= level[:color] %>; font-size: 48px; margin-bottom: 15px; text-shadow: 0 0 20px <%= level[:color] %>;">
+          Level <%= level[:number] %>
+        </h2>
+        <h3 style="color: <%= level[:color] %>; font-size: 32px; margin-bottom: 20px;">
+          <%= level[:name] %>
+        </h3>
+        
+        <% if unlocked %>
+          <div class="progress-bar" style="margin: 20px 0;">
+            <div class="progress-fill" style="width: <%= progress[:percentage] %>%">
+              <%= progress[:percentage] %>%
+            </div>
+          </div>
+          <p style="font-size: 22px; color: <%= level[:color] %>; margin-top: 15px;">
+            <%= progress[:completed] %> / <%= progress[:total] %> lessons completed
+          </p>
+          <p style="font-size: 20px; color: #4ade80; margin-top: 20px; text-shadow: 0 0 10px rgba(74, 222, 128, 0.8);">
+            Click to view lessons →
+          </p>
+        <% else %>
+          <p style="font-size: 24px; color: #4ade80; margin-top: 30px; opacity: 0.8;">
+            🔒 Locked
+          </p>
+          <p style="font-size: 18px; color: #4ade80; margin-top: 15px; opacity: 0.7;">
+            <% if level[:number] == 2 %>
+              Complete Level 1 to unlock
+            <% elsif level[:number] == 3 %>
+              Complete Level 2 to unlock
+            <% end %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
