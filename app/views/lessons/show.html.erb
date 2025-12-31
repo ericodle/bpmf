@@ -156,7 +156,7 @@
       <div></div>
     <% end %>
     
-    <%= link_to "Back to Lessons", lessons_path, class: "btn btn-secondary" %>
+    <%= link_to "Back to Level #{@lesson.level}", level_path(@lesson.level), class: "btn btn-secondary" %>
     
     <% if @next_lesson && @progress.completed? %>
       <%= link_to "Next Lesson →", lesson_path(@next_lesson.order), class: "btn" %>

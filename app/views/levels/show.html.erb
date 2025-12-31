@@ -16,22 +16,6 @@
       <%= @progress[:percentage] %>%
     </div>
   </div>
-  
-  <div class="examples" style="background: <%= @level_info[:light_color] %>; border-left: 6px solid <%= @level_info[:color] %>; padding: 25px; margin-bottom: 25px;">
-    <h3 style="color: <%= @level_info[:color] %>; margin-bottom: 15px; font-size: 28px;">Learning Objectives</h3>
-    <ul style="font-size: 22px; line-height: 1.8; color: <%= @level_info[:color] %>;">
-      <% @level_info[:objectives].each do |objective| %>
-        <li style="margin: 10px 0;"><strong><%= objective.split(' - ').first %></strong><% if objective.include?(' - ') %> - <%= objective.split(' - ').last %><% end %></li>
-      <% end %>
-    </ul>
-    
-    <h3 style="color: <%= @level_info[:color] %>; margin-top: 25px; margin-bottom: 15px; font-size: 26px;">Language Learning Approach</h3>
-    <p style="font-size: 20px; line-height: 1.8; color: <%= @level_info[:color] %>;">
-      <%= @level_info[:approach] %>
-    </p>
-  </div>
-  
-  <h3 style="color: <%= @level_info[:color] %>; margin-bottom: 20px; font-size: 32px;">Lessons</h3>
   <div class="lesson-list">
     <% @lessons.each do |lesson| %>
       <% progress = @user.lesson_progresses.find_by(lesson: lesson) %>
