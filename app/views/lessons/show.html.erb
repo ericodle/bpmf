@@ -18,7 +18,13 @@
   </div>
   
   <% if @lesson.bpmf_symbol %>
-    <div class="bpmf-symbol"><%= @lesson.bpmf_symbol %></div>
+    <% if @lesson.bpmf_symbol == 'ㄧ' %>
+      <div style="text-align: center;">
+        <div class="bpmf-symbol" style="transform: rotate(90deg); transform-origin: center center; display: inline-block;"><%= @lesson.bpmf_symbol %></div>
+      </div>
+    <% else %>
+      <div class="bpmf-symbol"><%= @lesson.bpmf_symbol %></div>
+    <% end %>
   <% end %>
   
   <% if @lesson.content %>
@@ -229,7 +235,7 @@
     ['ㄅ', 'ㄉ', 'ㄍ', 'ㄐ', 'ㄓ', 'ㄗ', 'ㄧ', 'ㄚ', 'ㄞ', 'ㄢ'],
     ['ㄆ', 'ㄊ', 'ㄎ', 'ㄑ', 'ㄔ', 'ㄘ', 'ㄨ', 'ㄛ', 'ㄟ', 'ㄣ'],
     ['ㄇ', 'ㄋ', 'ㄏ', 'ㄒ', 'ㄕ', 'ㄙ', 'ㄝ', 'ㄜ', 'ㄠ', 'ㄤ'],
-    ['ㄈ', 'ㄌ', '', '', 'ㄖ', '', '', 'ㄡ', 'ㄥ', 'ㄦ']
+    ['ㄈ', 'ㄌ', '', '', 'ㄖ', '', 'ㄩ', 'ㄡ', 'ㄥ', 'ㄦ']
   ];
   
   function renderBpmfKeyboard() {
@@ -248,19 +254,21 @@
           const btn = document.createElement('button');
           btn.textContent = symbol;
           const isSelected = selectedBpmf === symbol;
-          btn.style.cssText = `font-size: 36px; padding: 18px 24px; min-width: 70px; background: ${isSelected ? 'rgba(0, 255, 136, 0.6)' : 'rgba(0, 255, 136, 0.2)'}; border: 2px solid #00ff88; border-radius: 10px; color: #00ff88; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8); display: block;`;
+          const isYi = symbol === 'ㄧ';
+          const baseTransform = isYi ? 'rotate(90deg)' : 'none';
+          btn.style.cssText = `font-size: 36px; padding: 18px 24px; min-width: 70px; background: ${isSelected ? 'rgba(0, 255, 136, 0.6)' : 'rgba(0, 255, 136, 0.2)'}; border: 2px solid #00ff88; border-radius: 10px; color: #00ff88; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8); display: inline-block; transform: ${baseTransform};`;
           btn.onmouseover = function() { 
             if (!isSelected) {
               this.style.background = 'rgba(0, 255, 136, 0.4)'; 
               this.style.boxShadow = '0 0 20px rgba(0, 255, 136, 0.6)'; 
-              this.style.transform = 'scale(1.1)';
+              this.style.transform = isYi ? 'rotate(90deg) scale(1.1)' : 'scale(1.1)';
             }
           };
           btn.onmouseout = function() { 
             if (!isSelected) {
               this.style.background = 'rgba(0, 255, 136, 0.2)'; 
               this.style.boxShadow = 'none';
-              this.style.transform = 'scale(1)';
+              this.style.transform = baseTransform;
             }
           };
           btn.onclick = function() { 
@@ -281,10 +289,14 @@
     const placeholder = document.getElementById('bpmf-placeholder');
     if (selectedBpmf) {
       if (placeholder) placeholder.style.display = 'none';
+      const isYi = selectedBpmf === 'ㄧ';
       bpmfDisplay.innerHTML = selectedBpmf;
+      bpmfDisplay.style.transform = isYi ? 'rotate(90deg)' : 'none';
+      bpmfDisplay.style.display = 'flex';
     } else {
       if (placeholder) placeholder.style.display = 'inline';
       bpmfDisplay.innerHTML = '<span id="bpmf-placeholder" style="color: #4ade80; opacity: 0.5; font-size: 18px;">Click a character below</span>';
+      bpmfDisplay.style.transform = 'none';
     }
     checkReadyState();
   }
@@ -481,7 +493,7 @@
     ['ㄅ', 'ㄉ', 'ㄍ', 'ㄐ', 'ㄓ', 'ㄗ', 'ㄧ', 'ㄚ', 'ㄞ', 'ㄢ'],
     ['ㄆ', 'ㄊ', 'ㄎ', 'ㄑ', 'ㄔ', 'ㄘ', 'ㄨ', 'ㄛ', 'ㄟ', 'ㄣ'],
     ['ㄇ', 'ㄋ', 'ㄏ', 'ㄒ', 'ㄕ', 'ㄙ', 'ㄝ', 'ㄜ', 'ㄠ', 'ㄤ'],
-    ['ㄈ', 'ㄌ', '', '', 'ㄖ', '', '', 'ㄡ', 'ㄥ', 'ㄦ']
+    ['ㄈ', 'ㄌ', '', '', 'ㄖ', '', 'ㄩ', 'ㄡ', 'ㄥ', 'ㄦ']
   ];
   
   function renderKeyboard() {
@@ -494,7 +506,7 @@
       2: 'ˇ',  // Third tone above column 3 (index 2) - dipping tone (down then up)
       3: 'ˋ',  // Fourth tone above column 4 (index 3) - falling tone
       5: 'ˊ',  // Second tone above column 6 (index 5) - rising tone
-      6: '·'   // Fifth tone (neutral) above column 7 (index 6) - dot (ㄧ, ㄨ, ㄝ)
+      6: '·'   // Fifth tone (neutral) above column 7 (index 6) - dot (ㄧ, ㄨ, ㄝ, ㄩ)
       // Column 8 (index 7) has no tone mark - ㄚ, ㄛ, ㄜ, ㄡ
       // Column 9 (index 8) has no tone mark - ㄞ, ㄟ, ㄠ, ㄥ
       // Column 10 (index 9) has no tone mark - ㄢ, ㄣ, ㄤ, ㄦ
@@ -534,16 +546,18 @@
         if (symbol && symbol.trim() !== '') {
           const btn = document.createElement('button');
           btn.textContent = symbol;
-          btn.style.cssText = 'font-size: 36px; padding: 18px 24px; min-width: 70px; background: rgba(0, 255, 136, 0.2); border: 2px solid #00ff88; border-radius: 10px; color: #00ff88; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8); display: block;';
+          const isYi = symbol === 'ㄧ';
+          const baseTransform = isYi ? 'rotate(90deg)' : 'none';
+          btn.style.cssText = `font-size: 36px; padding: 18px 24px; min-width: 70px; background: rgba(0, 255, 136, 0.2); border: 2px solid #00ff88; border-radius: 10px; color: #00ff88; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8); display: inline-block; transform: ${baseTransform};`;
           btn.onmouseover = function() { 
             this.style.background = 'rgba(0, 255, 136, 0.4)'; 
             this.style.boxShadow = '0 0 20px rgba(0, 255, 136, 0.6)'; 
-            this.style.transform = 'scale(1.1)';
+            this.style.transform = isYi ? 'rotate(90deg) scale(1.1)' : 'scale(1.1)';
           };
           btn.onmouseout = function() { 
             this.style.background = 'rgba(0, 255, 136, 0.2)'; 
             this.style.boxShadow = 'none';
-            this.style.transform = 'scale(1)';
+            this.style.transform = baseTransform;
           };
           btn.onclick = function() { 
             keyboardInput += symbol;
