@@ -21,13 +21,18 @@
     <div class="bpmf-symbol"><%= @lesson.bpmf_symbol %></div>
   <% end %>
   
-  <div class="lesson-content">
-    <%= simple_format(@lesson.content) %>
-  </div>
+  <% if @lesson.content %>
+    <div class="examples">
+      <strong>Pronunciation:</strong>
+      <div class="lesson-content" style="margin-top: 10px;">
+        <%= simple_format(@lesson.content) %>
+      </div>
+    </div>
+  <% end %>
   
   <% if @lesson.pronunciation %>
     <div class="examples">
-      <strong>Pronunciation:</strong> <%= @lesson.pronunciation %>
+      <strong>Pinyin Equivalent:</strong> <%= @lesson.pronunciation %>
     </div>
   <% end %>
   
@@ -116,52 +121,85 @@
       </div>
     <% end %>
   <% elsif @lesson.bpmf_symbol || @lesson.pronunciation %>
-    <% unless @progress.completed? %>
-      <div id="practice-section" style="margin-top: 30px;">
-        <h3 style="margin-bottom: 15px; color: #667eea;">Practice Time!</h3>
-        <p style="margin-bottom: 15px;">Type the pronunciation or symbol:</p>
-        
-        <input type="text" 
-               id="answer-input" 
-               class="answer-input" 
-               placeholder="Enter your answer here..."
-               autocomplete="off">
-        
-        <div id="feedback" style="display: none;"></div>
-        
-        <div style="margin-top: 20px;">
-          <button onclick="checkAnswer()" class="btn">Check Answer</button>
-          <%= link_to "Skip to Next", @lesson.next_lesson ? lesson_path(@lesson.next_lesson.order) : lesson_path(@lesson.order), class: "btn btn-secondary", style: "margin-left: 10px;" %>
+    <% if @lesson.level == 1 %>
+      <% unless @progress.completed? %>
+        <div id="practice-section" style="margin-top: 30px;">
+          <h3 style="margin-bottom: 15px; color: #667eea;">Practice Time!</h3>
+          <p style="margin-bottom: 15px;">Enter the pinyin equivalent and press Enter:</p>
+          
+          <input type="text" 
+                 id="answer-input" 
+                 class="answer-input" 
+                 placeholder="Enter your answer here..."
+                 autocomplete="off"
+                 autofocus>
+          
+          <div id="feedback" style="display: none;"></div>
         </div>
-      </div>
-    <% else %>
-      <div class="feedback correct" style="margin-top: 20px;">
-        <strong>Great job!</strong> You've completed this lesson and earned <%= @progress.points_earned %> points!
-      </div>
-      
-      <div style="margin-top: 30px; text-align: center;">
+      <% else %>
+        <div class="feedback correct" style="margin-top: 20px;">
+          <strong>Great job!</strong> You've completed this lesson and earned <%= @progress.points_earned %> points!
+        </div>
         <% if @next_lesson %>
-          <%= link_to "Next Lesson →", lesson_path(@next_lesson.order), class: "btn btn-success", style: "font-size: 18px; padding: 15px 30px;" %>
+          <script>
+            setTimeout(function() {
+              window.location.href = '<%= lesson_path(@next_lesson.order) %>';
+            }, 1500);
+          </script>
         <% else %>
-          <p style="color: #667eea; font-size: 18px; font-weight: 600;">🎉 Congratulations! You've completed all lessons!</p>
+          <p style="color: #667eea; font-size: 18px; font-weight: 600; margin-top: 20px;">🎉 Congratulations! You've completed all lessons!</p>
         <% end %>
-      </div>
+      <% end %>
+    <% else %>
+      <% unless @progress.completed? %>
+        <div id="practice-section" style="margin-top: 30px;">
+          <h3 style="margin-bottom: 15px; color: #667eea;">Practice Time!</h3>
+          <p style="margin-bottom: 15px;">Type the pronunciation or symbol:</p>
+          
+          <input type="text" 
+                 id="answer-input" 
+                 class="answer-input" 
+                 placeholder="Enter your answer here..."
+                 autocomplete="off">
+          
+          <div id="feedback" style="display: none;"></div>
+          
+          <div style="margin-top: 20px;">
+            <button onclick="checkAnswer()" class="btn">Check Answer</button>
+            <%= link_to "Skip to Next", @lesson.next_lesson ? lesson_path(@lesson.next_lesson.order) : lesson_path(@lesson.order), class: "btn btn-secondary", style: "margin-left: 10px;" %>
+          </div>
+        </div>
+      <% else %>
+        <div class="feedback correct" style="margin-top: 20px;">
+          <strong>Great job!</strong> You've completed this lesson and earned <%= @progress.points_earned %> points!
+        </div>
+        
+        <div style="margin-top: 30px; text-align: center;">
+          <% if @next_lesson %>
+            <%= link_to "Next Lesson →", lesson_path(@next_lesson.order), class: "btn btn-success", style: "font-size: 18px; padding: 15px 30px;" %>
+          <% else %>
+            <p style="color: #667eea; font-size: 18px; font-weight: 600;">🎉 Congratulations! You've completed all lessons!</p>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
   
-  <div style="margin-top: 30px; display: flex; justify-content: space-between;">
-    <% if @previous_lesson %>
-      <%= link_to "← Previous Lesson", lesson_path(@previous_lesson.order), class: "btn btn-secondary" %>
-    <% else %>
-      <div></div>
-    <% end %>
-    
-    <%= link_to "Back to Level #{@lesson.level}", level_path(@lesson.level), class: "btn btn-secondary" %>
-    
-    <% if @next_lesson && @progress.completed? %>
-      <%= link_to "Next Lesson →", lesson_path(@next_lesson.order), class: "btn" %>
-    <% end %>
-  </div>
+  <% unless @lesson.level == 1 %>
+    <div style="margin-top: 30px; display: flex; justify-content: space-between;">
+      <% if @previous_lesson %>
+        <%= link_to "← Previous Lesson", lesson_path(@previous_lesson.order), class: "btn btn-secondary" %>
+      <% else %>
+        <div></div>
+      <% end %>
+      
+      <%= link_to "Back to Level #{@lesson.level}", level_path(@lesson.level), class: "btn btn-secondary" %>
+      
+      <% if @next_lesson && @progress.completed? %>
+        <%= link_to "Next Lesson →", lesson_path(@next_lesson.order), class: "btn" %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
 <script>
@@ -178,7 +216,9 @@
     }
     
     const lessonOrder = <%= @lesson.order %>;
+    const lessonLevel = <%= @lesson.level %>;
     const correctAnswer = '<%= @lesson.pronunciation || @lesson.bpmf_symbol %>';
+    const nextLessonPath = '<%= @next_lesson ? lesson_path(@next_lesson.order) : nil %>';
     
     fetch(`/lessons/${lessonOrder}/submit_answer`, {
       method: 'POST',
@@ -198,9 +238,17 @@
         input.disabled = true;
         
         if (data.completed) {
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
+          if (lessonLevel == 1 && nextLessonPath) {
+            // Auto-advance to next lesson for Level 1
+            setTimeout(() => {
+              window.location.href = nextLessonPath;
+            }, 1000);
+          } else {
+            // Reload for other levels
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
+          }
         }
       } else {
         feedback.className = 'feedback incorrect';
@@ -222,6 +270,16 @@
       checkAnswer();
     }
   });
+  
+  // Auto-focus input for Level 1
+  <% if @lesson.level == 1 && !@progress.completed? %>
+  document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('answer-input');
+    if (input) {
+      input.focus();
+    }
+  });
+  <% end %>
   
   // BPMF Keyboard for Level 2 - Standard Taiwanese layout (top-to-bottom, left-to-right)
   <% if @lesson.lesson_type == "keyboard" && @lesson.level == 2 %>

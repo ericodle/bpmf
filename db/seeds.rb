@@ -17,8 +17,8 @@ lessons_data = [
   # Initials (Consonants) - Group 1: Labials
   {
     order: 2,
-    title: "ㄅ (B)",
-    content: "Let's start with ㄅ! This is the first character in BPMF. It sounds like 'b' in English, as in 'bat' or 'book'.",
+    title: "ㄅ",
+    content: "This symbol sounds like 'b' in English, as in 'bat' or 'book'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄅ",
     pronunciation: "b",
@@ -26,8 +26,8 @@ lessons_data = [
   },
   {
     order: 3,
-    title: "ㄆ (P)",
-    content: "Next is ㄆ! This symbol sounds like 'p' in English, as in 'pat' or 'park'. Notice it's similar to ㄅ but with an extra stroke.",
+    title: "ㄆ",
+    content: "This symbol sounds like 'p' in English, as in 'pat' or 'park'. Notice it's similar to ㄅ but with an extra stroke.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄆ",
     pronunciation: "p",
@@ -35,8 +35,8 @@ lessons_data = [
   },
   {
     order: 4,
-    title: "ㄇ (M)",
-    content: "Now let's learn ㄇ! This symbol sounds like 'm' in English, as in 'mother' or 'moon'.",
+    title: "ㄇ",
+    content: "This symbol sounds like 'm' in English, as in 'mother' or 'moon'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄇ",
     pronunciation: "m",
@@ -44,27 +44,18 @@ lessons_data = [
   },
   {
     order: 5,
-    title: "ㄈ (F)",
-    content: "Here's ㄈ! This symbol sounds like 'f' in English, as in 'father' or 'fish'.",
+    title: "ㄈ",
+    content: "This symbol sounds like 'f' in English, as in 'father' or 'fish'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄈ",
     pronunciation: "f",
     examples: "ㄈㄚ (fa) 發發 (fāfā - to send), ㄈㄛ (fo) 佛佛 (fófó - Buddha), ㄈㄞ (fai) 非常 (fēicháng - very), ㄈㄟ (fei) 飛機 (fēijī - airplane)"
   },
-  {
-    order: 6,
-    title: "Practice: ㄅ, ㄆ, ㄇ, ㄈ",
-    content: "Great job! Let's practice the first group of initials. Try to identify these symbols: ㄅ, ㄆ, ㄇ, ㄈ",
-    lesson_type: "practice",
-    bpmf_symbol: nil,
-    pronunciation: nil,
-    examples: "Match the symbols: ㄅ (b), ㄆ (p), ㄇ (m), ㄈ (f)"
-  },
   # Group 2: Alveolars
   {
     order: 7,
-    title: "ㄉ (D)",
-    content: "Moving on to ㄉ! This symbol sounds like 'd' in English, as in 'dog' or 'day'.",
+    title: "ㄉ",
+    content: "This symbol sounds like 'd' in English, as in 'dog' or 'day'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄉ",
     pronunciation: "d",
@@ -72,8 +63,8 @@ lessons_data = [
   },
   {
     order: 8,
-    title: "ㄊ (T)",
-    content: "Next is ㄊ! This symbol sounds like 't' in English, as in 'top' or 'tea'.",
+    title: "ㄊ",
+    content: "This symbol sounds like 't' in English, as in 'top' or 'tea'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄊ",
     pronunciation: "t",
@@ -81,8 +72,8 @@ lessons_data = [
   },
   {
     order: 9,
-    title: "ㄋ (N)",
-    content: "Let's learn ㄋ! This symbol sounds like 'n' in English, as in 'no' or 'now'.",
+    title: "ㄋ",
+    content: "This symbol sounds like 'n' in English, as in 'no' or 'now'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄋ",
     pronunciation: "n",
@@ -90,27 +81,18 @@ lessons_data = [
   },
   {
     order: 10,
-    title: "ㄌ (L)",
-    content: "Here's ㄌ! This symbol sounds like 'l' in English, as in 'love' or 'light'.",
+    title: "ㄌ",
+    content: "This symbol sounds like 'l' in English, as in 'love' or 'light'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄌ",
     pronunciation: "l",
     examples: "ㄌㄚ (la) 拉拉 (lālā - pull), ㄌㄛ (lo) 落落 (luòluò - to fall), ㄌㄞ (lai) 來來 (láilái - to come), ㄌㄟ (lei) 累累 (lèilèi - tired)"
   },
-  {
-    order: 11,
-    title: "Practice: ㄉ, ㄊ, ㄋ, ㄌ",
-    content: "Excellent progress! Practice these alveolar sounds: ㄉ, ㄊ, ㄋ, ㄌ",
-    lesson_type: "practice",
-    bpmf_symbol: nil,
-    pronunciation: nil,
-    examples: "Match the symbols: ㄉ (d), ㄊ (t), ㄋ (n), ㄌ (l)"
-  },
   # Group 3: Velars
   {
     order: 12,
-    title: "ㄍ (G)",
-    content: "Now let's learn ㄍ! This symbol sounds like 'g' in English, as in 'go' or 'good'.",
+    title: "ㄍ",
+    content: "This symbol sounds like 'g' in English, as in 'go' or 'good'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄍ",
     pronunciation: "g",
@@ -118,8 +100,8 @@ lessons_data = [
   },
   {
     order: 13,
-    title: "ㄎ (K)",
-    content: "Next is ㄎ! This symbol sounds like 'k' in English, as in 'key' or 'cat'.",
+    title: "ㄎ",
+    content: "This symbol sounds like 'k' in English, as in 'key' or 'cat'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄎ",
     pronunciation: "k",
@@ -127,64 +109,46 @@ lessons_data = [
   },
   {
     order: 14,
-    title: "ㄏ (H)",
-    content: "Here's ㄏ! This symbol sounds like 'h' in English, as in 'hello' or 'house'.",
+    title: "ㄏ",
+    content: "This symbol sounds like 'h' in English, as in 'hello' or 'house'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄏ",
     pronunciation: "h",
     examples: "ㄏㄚ (ha) 哈哈 (hāhā - haha), ㄏㄛ (ho) 和和 (héhé - and), ㄏㄞ (hai) 還還 (háihái - still), ㄏㄟ (hei) 黑黑 (hēihēi - black)"
   },
-  {
-    order: 15,
-    title: "Practice: ㄍ, ㄎ, ㄏ",
-    content: "Good work! Practice these velar sounds: ㄍ, ㄎ, ㄏ",
-    lesson_type: "practice",
-    bpmf_symbol: nil,
-    pronunciation: nil,
-    examples: "Match the symbols: ㄍ (g), ㄎ (k), ㄏ (h)"
-  },
   # Group 4: Palatals
   {
     order: 16,
-    title: "ㄐ (J)",
-    content: "Let's learn ㄐ! This symbol sounds like 'j' in English, as in 'jeep'. It's similar to the 'j' sound but softer.",
+    title: "ㄐ",
+    content: "This symbol sounds like 'j' in English, as in 'jeep'. It's similar to the 'j' sound but softer.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄐ",
-    pronunciation: "j",
+    pronunciation: "ji",
     examples: "ㄐㄧ (ji) 雞雞 (jījī - chicken), ㄐㄧㄚ (jia) 家家 (jiājiā - home), ㄐㄧㄝ (jie) 姐姐 (jiějie - older sister), ㄐㄧㄠ (jiao) 教教 (jiāojiāo - to teach)"
   },
   {
     order: 17,
-    title: "ㄑ (Q)",
-    content: "Next is ㄑ! This symbol sounds like 'ch' in English, as in 'cheese'. It's an aspirated version of ㄐ.",
+    title: "ㄑ",
+    content: "This symbol sounds like 'ch' in English, as in 'cheese'. It's an aspirated version of ㄐ.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄑ",
-    pronunciation: "q",
+    pronunciation: "qi",
     examples: "ㄑㄧ (qi) 七起 (qīqǐ - seven/rise), ㄑㄧㄚ (qia) 恰恰 (qiàqià - exactly), ㄑㄧㄝ (qie) 切切 (qiēqiē - to cut), ㄑㄧㄠ (qiao) 橋橋 (qiáoqiáo - bridge)"
   },
   {
     order: 18,
-    title: "ㄒ (X)",
-    content: "Here's ㄒ! This symbol sounds like 'sh' in English, as in 'sheep'. It's a fricative sound.",
+    title: "ㄒ",
+    content: "This symbol sounds like 'sh' in English, as in 'sheep'. It's a fricative sound.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄒ",
-    pronunciation: "x",
+    pronunciation: "xi",
     examples: "ㄒㄧ (xi) 西西 (xīxī - west), ㄒㄧㄚ (xia) 下下 (xiàxià - down), ㄒㄧㄝ (xie) 謝謝 (xièxie - thank you), ㄒㄧㄠ (xiao) 小小 (xiǎoxiǎo - small)"
-  },
-  {
-    order: 19,
-    title: "Practice: ㄐ, ㄑ, ㄒ",
-    content: "Great! Practice these palatal sounds: ㄐ, ㄑ, ㄒ",
-    lesson_type: "practice",
-    bpmf_symbol: nil,
-    pronunciation: nil,
-    examples: "Match the symbols: ㄐ (j), ㄑ (q), ㄒ (x)"
   },
   # Group 5: Retroflexes
   {
     order: 20,
-    title: "ㄓ (ZH)",
-    content: "Now let's learn ㄓ! This symbol sounds like 'zh' in English, as in 'measure'. It's a retroflex sound.",
+    title: "ㄓ",
+    content: "This symbol sounds like 'zh' in English, as in 'measure'. It's a retroflex sound.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄓ",
     pronunciation: "zh",
@@ -192,8 +156,8 @@ lessons_data = [
   },
   {
     order: 21,
-    title: "ㄔ (CH)",
-    content: "Next is ㄔ! This symbol sounds like 'ch' in English, as in 'chair'. It's an aspirated retroflex.",
+    title: "ㄔ",
+    content: "This symbol sounds like 'ch' in English, as in 'chair'. It's an aspirated retroflex.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄔ",
     pronunciation: "ch",
@@ -201,8 +165,8 @@ lessons_data = [
   },
   {
     order: 22,
-    title: "ㄕ (SH)",
-    content: "Here's ㄕ! This symbol sounds like 'sh' in English, as in 'shoe'. It's a retroflex fricative.",
+    title: "ㄕ",
+    content: "This symbol sounds like 'sh' in English, as in 'shoe'. It's a retroflex fricative.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄕ",
     pronunciation: "sh",
@@ -210,211 +174,157 @@ lessons_data = [
   },
   {
     order: 23,
-    title: "ㄖ (R)",
-    content: "Let's learn ㄖ! This symbol sounds like 'r' in English, as in 'red'. It's a retroflex approximant.",
+    title: "ㄖ",
+    content: "This symbol sounds like 'r' in English, as in 'red'. It's a retroflex approximant.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄖ",
     pronunciation: "r",
     examples: "ㄖㄚ (ra) 熱熱 (rèrè - hot), ㄖㄜ (re) 熱熱 (rèrè - hot), ㄖㄞ (rai) 來來 (láilái - to come), ㄖㄟ (rei) 人人 (rénrén - person)"
   },
-  {
-    order: 24,
-    title: "Practice: ㄓ, ㄔ, ㄕ, ㄖ",
-    content: "Excellent! Practice these retroflex sounds: ㄓ, ㄔ, ㄕ, ㄖ",
-    lesson_type: "practice",
-    bpmf_symbol: nil,
-    pronunciation: nil,
-    examples: "Match the symbols: ㄓ (zh), ㄔ (ch), ㄕ (sh), ㄖ (r)"
-  },
   # Group 6: Sibilants
   {
     order: 25,
-    title: "ㄗ (Z)",
-    content: "Now let's learn ㄗ! This symbol sounds like 'z' in English, as in 'zoo' or 'zero'.",
+    title: "ㄗ",
+    content: "This symbol sounds like 'z' in English, as in 'zoo' or 'zero'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄗ",
-    pronunciation: "z",
+    pronunciation: "zi",
     examples: "ㄗㄚ (za) 雜雜 (zázá - mixed), ㄗㄜ (ze) 則則 (zézé - then), ㄗㄞ (zai) 在在 (zàizài - at), ㄗㄟ (zei) 賊賊 (zéizéi - thief)"
   },
   {
     order: 26,
-    title: "ㄘ (C)",
-    content: "Next is ㄘ! This symbol sounds like 'ts' in English, as in 'cats'. It's an aspirated version of ㄗ.",
+    title: "ㄘ",
+    content: "This symbol sounds like 'ts' in English, as in 'cats'. It's an aspirated version of ㄗ.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄘ",
-    pronunciation: "c",
+    pronunciation: "ci",
     examples: "ㄘㄚ (ca) 擦擦 (cācā - to wipe), ㄘㄜ (ce) 測測 (cècè - to measure), ㄘㄞ (cai) 菜菜 (càicài - vegetable), ㄘㄟ (cei) 猜猜 (cāicāi - to guess)"
   },
   {
     order: 27,
-    title: "ㄙ (S)",
-    content: "Here's ㄙ! This symbol sounds like 's' in English, as in 'sun' or 'see'.",
+    title: "ㄙ",
+    content: "This symbol sounds like 's' in English, as in 'sun' or 'see'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄙ",
-    pronunciation: "s",
+    pronunciation: "si",
     examples: "ㄙㄚ (sa) 灑灑 (sǎsǎ - to sprinkle), ㄙㄜ (se) 色色 (sèsè - color), ㄙㄞ (sai) 賽賽 (sàisài - race), ㄙㄟ (sei) 歲歲 (suìsuì - year)"
-  },
-  {
-    order: 28,
-    title: "Practice: ㄗ, ㄘ, ㄙ",
-    content: "Great work! Practice these sibilant sounds: ㄗ, ㄘ, ㄙ",
-    lesson_type: "practice",
-    bpmf_symbol: nil,
-    pronunciation: nil,
-    examples: "Match the symbols: ㄗ (z), ㄘ (c), ㄙ (s)"
-  },
-  {
-    order: 29,
-    title: "Review: All Initials",
-    content: "Congratulations! You've learned all 21 initials! Let's review: ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙ",
-    lesson_type: "practice",
-    bpmf_symbol: nil,
-    pronunciation: nil,
-    examples: "All initials: b, p, m, f, d, t, n, l, g, k, h, j, q, x, zh, ch, sh, r, z, c, s"
   },
   # Finals (Vowels) - Group 1: Simple vowels
   {
     order: 30,
-    title: "ㄚ (A)",
-    content: "Now let's learn the finals (vowels)! Starting with ㄚ! This sounds like 'a' in English, as in 'father' or 'car'.",
+    title: "ㄚ",
+    content: "This sounds like 'a' in English, as in 'father' or 'car'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄚ",
-    pronunciation: "ya",
+    pronunciation: "a",
     examples: "ㄅㄚ (ba) 爸爸 (bàba - father), ㄇㄚ (ma) 媽媽 (māma - mother), ㄈㄚ (fa) 發發 (fāfā - to send), ㄉㄚ (da) 大大 (dàdà - big)"
   },
   {
     order: 31,
-    title: "ㄛ (O)",
-    content: "Next is ㄛ! This sounds like 'o' in English, as in 'go' or 'so'.",
+    title: "ㄛ",
+    content: "This sounds like 'o' in English, as in 'go' or 'so'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄛ",
-    pronunciation: "wo",
+    pronunciation: "o",
     examples: "ㄅㄛ (bo) 波波 (bōbō - wave), ㄆㄛ (po) 婆婆 (pópo - grandmother), ㄇㄛ (mo) 摸摸 (mōmō - to touch), ㄈㄛ (fo) 佛佛 (fófó - Buddha)"
   },
   {
     order: 32,
-    title: "ㄜ (E)",
-    content: "Here's ㄜ! This sounds like 'e' in English, as in 'her' or 'bird'.",
+    title: "ㄜ",
+    content: "This sounds like 'e' in English, as in 'her' or 'bird'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄜ",
-    pronunciation: "ye",
+    pronunciation: "e",
     examples: "ㄅㄜ (be) 伯伯 (bóbo - uncle), ㄆㄜ (pe) 婆婆 (pópo - grandmother), ㄇㄜ (me) 麼麼 (meme - what), ㄈㄜ (fe) 佛佛 (fófó - Buddha)"
   },
   {
     order: 33,
-    title: "ㄝ (Ê)",
-    content: "Let's learn ㄝ! This sounds like 'e' in English, as in 'bed'. It's a different 'e' sound from ㄜ.",
+    title: "ㄝ",
+    content: "This sounds like 'e' in English, as in 'bed'. It's a different 'e' sound from ㄜ.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄝ",
-    pronunciation: "ie",
+    pronunciation: "e",
     examples: "ㄅㄝ (bie) 別別 (biébié - don't), ㄆㄝ (pie) 撇撇 (piěpiě - to throw), ㄇㄝ (mie) 滅滅 (mièmiè - to extinguish), ㄈㄝ (fie) 非非 (fēifēi - not)"
-  },
-  {
-    order: 34,
-    title: "Practice: ㄚ, ㄛ, ㄜ, ㄝ",
-    content: "Good job! Practice these simple vowels: ㄚ, ㄛ, ㄜ, ㄝ",
-    lesson_type: "practice",
-    bpmf_symbol: nil,
-    pronunciation: nil,
-    examples: "Match the symbols: ㄚ (ya), ㄛ (wo), ㄜ (ye), ㄝ (ie)"
   },
   # Group 2: Diphthongs
   {
     order: 35,
-    title: "ㄞ (AI)",
-    content: "Now let's learn ㄞ! This sounds like 'ai' in English, as in 'eye' or 'buy'.",
+    title: "ㄞ",
+    content: "This sounds like 'ai' in English, as in 'eye' or 'buy'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄞ",
-    pronunciation: "yai",
+    pronunciation: "ai",
     examples: "ㄅㄞ (bai) 白色 (báisè - white), ㄆㄞ (pai) 排隊 (páiduì - line up), ㄇㄞ (mai) 買賣 (mǎimài - trade), ㄈㄞ (fai) 非常 (fēicháng - very)"
   },
   {
     order: 36,
-    title: "ㄟ (EI)",
-    content: "Next is ㄟ! This sounds like 'ei' in English, as in 'way' or 'say'.",
+    title: "ㄟ",
+    content: "This sounds like 'ei' in English, as in 'way' or 'say'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄟ",
-    pronunciation: "wei",
+    pronunciation: "ei",
     examples: "ㄅㄟ (bei) 杯子 (bēizi - cup), ㄆㄟ (pei) 朋友 (péngyǒu - friend), ㄇㄟ (mei) 美麗 (měilì - beautiful), ㄈㄟ (fei) 飛機 (fēijī - airplane)"
   },
   {
     order: 37,
-    title: "ㄠ (AO)",
-    content: "Here's ㄠ! This sounds like 'ao' in English, as in 'cow' or 'how'.",
+    title: "ㄠ",
+    content: "This sounds like 'ao' in English, as in 'cow' or 'how'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄠ",
-    pronunciation: "yao",
+    pronunciation: "ao",
     examples: "ㄅㄠ (bao) 包包 (bāobāo - bag), ㄆㄠ (pao) 跑跑 (pǎopǎo - to run), ㄇㄠ (mao) 貓貓 (māomāo - cat), ㄈㄠ (fao) 方法 (fāngfǎ - method)"
   },
   {
     order: 38,
-    title: "ㄡ (OU)",
-    content: "Let's learn ㄡ! This sounds like 'ou' in English, as in 'go' or 'show'.",
+    title: "ㄡ",
+    content: "This sounds like 'ou' in English, as in 'go' or 'show'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄡ",
-    pronunciation: "you",
+    pronunciation: "ou",
     examples: "ㄅㄡ (bou) 包包 (bāobāo - bag), ㄆㄡ (pou) 朋友 (péngyǒu - friend), ㄇㄡ (mou) 某某 (mǒumǒu - some), ㄈㄡ (fou) 否否 (fǒufǒu - no)"
-  },
-  {
-    order: 39,
-    title: "Practice: ㄞ, ㄟ, ㄠ, ㄡ",
-    content: "Excellent! Practice these diphthongs: ㄞ, ㄟ, ㄠ, ㄡ",
-    lesson_type: "practice",
-    bpmf_symbol: nil,
-    pronunciation: nil,
-    examples: "Match the symbols: ㄞ (yai), ㄟ (wei), ㄠ (yao), ㄡ (you)"
   },
   # Group 3: Nasal endings
   {
     order: 40,
-    title: "ㄢ (AN)",
-    content: "Now let's learn ㄢ! This sounds like 'an' in English, as in 'can' or 'man'.",
+    title: "ㄢ",
+    content: "This sounds like 'an' in English, as in 'can' or 'man'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄢ",
-    pronunciation: "yan",
+    pronunciation: "an",
     examples: "ㄅㄢ (ban) 班班 (bānbān - class), ㄆㄢ (pan) 盤盤 (pánpán - plate), ㄇㄢ (man) 慢慢 (mànmàn - slow), ㄈㄢ (fan) 飯飯 (fànfàn - rice)"
   },
   {
     order: 41,
-    title: "ㄣ (EN)",
-    content: "Next is ㄣ! This sounds like 'en' in English, as in 'pen' or 'ten'.",
+    title: "ㄣ",
+    content: "This sounds like 'en' in English, as in 'pen' or 'ten'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄣ",
-    pronunciation: "wen",
+    pronunciation: "en",
     examples: "ㄅㄣ (ben) 本本 (běnběn - book), ㄆㄣ (pen) 盆盆 (pénpén - basin), ㄇㄣ (men) 門門 (ménmén - door), ㄈㄣ (fen) 分分 (fēnfēn - to divide)"
   },
   {
     order: 42,
-    title: "ㄤ (ANG)",
-    content: "Here's ㄤ! This sounds like 'ang' in English, as in 'song' or 'long'.",
+    title: "ㄤ",
+    content: "This sounds like 'ang' in English, as in 'song' or 'long'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄤ",
-    pronunciation: "yang",
+    pronunciation: "ang",
     examples: "ㄅㄤ (bang) 幫幫 (bāngbāng - to help), ㄆㄤ (pang) 胖胖 (pàngpàng - fat), ㄇㄤ (mang) 忙忙 (mángmáng - busy), ㄈㄤ (fang) 方法 (fāngfǎ - method)"
   },
   {
     order: 43,
-    title: "ㄥ (ENG)",
-    content: "Let's learn ㄥ! This sounds like 'eng' in English, as in 'sing' or 'ring'.",
+    title: "ㄥ",
+    content: "This sounds like 'eng' in English, as in 'sing' or 'ring'.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄥ",
-    pronunciation: "weng",
+    pronunciation: "eng",
     examples: "ㄅㄥ (beng) 崩崩 (bēngbēng - to collapse), ㄆㄥ (peng) 朋友 (péngyǒu - friend), ㄇㄥ (meng) 夢夢 (mèngmèng - dream), ㄈㄥ (feng) 風風 (fēngfēng - wind)"
-  },
-  {
-    order: 44,
-    title: "Practice: ㄢ, ㄣ, ㄤ, ㄥ",
-    content: "Great work! Practice these nasal endings: ㄢ, ㄣ, ㄤ, ㄥ",
-    lesson_type: "practice",
-    bpmf_symbol: nil,
-    pronunciation: nil,
-    examples: "Match the symbols: ㄢ (yan), ㄣ (wen), ㄤ (yang), ㄥ (weng)"
   },
   # Group 4: Special finals
   {
     order: 45,
-    title: "ㄦ (ER)",
-    content: "Now let's learn ㄦ! This sounds like 'er' in English, as in 'her' or 'teacher'. It's a retroflex vowel.",
+    title: "ㄦ",
+    content: "This sounds like 'er' in English, as in 'her' or 'teacher'. It's a retroflex vowel.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄦ",
     pronunciation: "er",
@@ -422,8 +332,8 @@ lessons_data = [
   },
   {
     order: 46,
-    title: "ㄧ (I)",
-    content: "Here's ㄧ! This sounds like 'i' in English, as in 'see' or 'me'. It can also be used as a medial.",
+    title: "ㄧ",
+    content: "This sounds like 'i' in English, as in 'see' or 'me'. It can also be used as a medial.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄧ",
     pronunciation: "yi",
@@ -431,8 +341,8 @@ lessons_data = [
   },
   {
     order: 47,
-    title: "ㄨ (U)",
-    content: "Let's learn ㄨ! This sounds like 'u' in English, as in 'you' or 'blue'. It can also be used as a medial.",
+    title: "ㄨ",
+    content: "This sounds like 'u' in English, as in 'you' or 'blue'. It can also be used as a medial.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄨ",
     pronunciation: "wu",
@@ -440,33 +350,15 @@ lessons_data = [
   },
   {
     order: 48,
-    title: "ㄩ (Ü)",
-    content: "Finally, let's learn ㄩ! This sounds like 'ü' (a rounded 'i' sound), as in the German 'ü'. It can also be used as a medial.",
+    title: "ㄩ",
+    content: "This sounds like 'ü' (a rounded 'i' sound), as in the German 'ü'. It can also be used as a medial.",
     lesson_type: "symbol",
     bpmf_symbol: "ㄩ",
     pronunciation: "yu",
     examples: "ㄩ (yu) 雨雨 (yǔyǔ - rain), ㄐㄩ (ju) 句句 (jùjù - sentence), ㄑㄩ (qu) 去去 (qùqù - to go), ㄒㄩ (xu) 學學 (xuéxué - to learn)"
   },
   {
-    order: 49,
-    title: "Practice: ㄦ, ㄧ, ㄨ, ㄩ",
-    content: "Excellent! Practice these special finals: ㄦ, ㄧ, ㄨ, ㄩ",
-    lesson_type: "practice",
-    bpmf_symbol: nil,
-    pronunciation: nil,
-    examples: "Match the symbols: ㄦ (er), ㄧ (yi), ㄨ (wu), ㄩ (yu)"
-  },
-  {
-    order: 50,
-    title: "Review: All Finals",
-    content: "Amazing! You've learned all 16 finals! Let's review: ㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦㄧㄨㄩ",
-    lesson_type: "practice",
-    bpmf_symbol: nil,
-    pronunciation: nil,
-    examples: "All finals: ya, wo, ye, ie, yai, wei, yao, you, yan, wen, yang, weng, er, yi, wu, yu"
-  },
-  {
-    order: 51,
+    order: 39,
     title: "🎉 Complete BPMF System!",
     content: "Congratulations! You've learned the complete BPMF (Zhuyin) phonetic system! You now know all 37 characters: 21 initials and 16 finals. You can now read and pronounce any Chinese character using BPMF!",
     lesson_type: "introduction",
@@ -558,7 +450,7 @@ level_3_lessons = [
   {
     order: 58,
     level: 3,
-    title: "Tone Marks: First Tone (ˉ)",
+    title: "Tone Marks: First Tone",
     content: "The first tone (ˉ) is high and flat. Practice combining BPMF with the first tone mark.",
     lesson_type: "tone",
     bpmf_symbol: "ㄇㄚ",
@@ -568,7 +460,7 @@ level_3_lessons = [
   {
     order: 59,
     level: 3,
-    title: "Tone Marks: Second Tone (ˊ)",
+    title: "Tone Marks: Second Tone",
     content: "The second tone (ˊ) rises from middle to high. Practice combining BPMF with the second tone mark.",
     lesson_type: "tone",
     bpmf_symbol: "ㄇㄚ",
@@ -578,7 +470,7 @@ level_3_lessons = [
   {
     order: 60,
     level: 3,
-    title: "Tone Marks: Third Tone (ˇ)",
+    title: "Tone Marks: Third Tone",
     content: "The third tone (ˇ) dips down then rises. Practice combining BPMF with the third tone mark.",
     lesson_type: "tone",
     bpmf_symbol: "ㄇㄚ",
@@ -588,7 +480,7 @@ level_3_lessons = [
   {
     order: 61,
     level: 3,
-    title: "Tone Marks: Fourth Tone (ˋ)",
+    title: "Tone Marks: Fourth Tone",
     content: "The fourth tone (ˋ) falls sharply from high to low. Practice combining BPMF with the fourth tone mark.",
     lesson_type: "tone",
     bpmf_symbol: "ㄇㄚ",
