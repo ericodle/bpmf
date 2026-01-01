@@ -125,16 +125,32 @@
       <% unless @progress.completed? %>
         <div id="practice-section" style="margin-top: 30px;">
           <h3 style="margin-bottom: 15px; color: #667eea;">Practice Time!</h3>
-          <p style="margin-bottom: 15px;">Enter the pinyin equivalent and press Enter:</p>
+          <p style="margin-bottom: 20px;">Enter the pinyin equivalent and select the BPMF character. Press Enter when both are correct:</p>
           
-          <input type="text" 
-                 id="answer-input" 
-                 class="answer-input" 
-                 placeholder="Enter your answer here..."
-                 autocomplete="off"
-                 autofocus>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+            <div>
+              <label style="display: block; margin-bottom: 10px; font-size: 18px; color: #667eea;">Pinyin Equivalent:</label>
+              <input type="text" 
+                     id="answer-input" 
+                     class="answer-input" 
+                     placeholder="Enter pinyin..."
+                     autocomplete="off"
+                     autofocus
+                     style="margin: 0;">
+            </div>
+            <div>
+              <label style="display: block; margin-bottom: 10px; font-size: 18px; color: #667eea;">BPMF Character:</label>
+              <div id="bpmf-selected" style="width: 100%; padding: 20px; font-size: 48px; text-align: center; min-height: 68px; line-height: 68px; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.5); border: 3px solid #00ff88; border-radius: 12px; color: #00ff88; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8); box-shadow: 0 0 10px rgba(0, 255, 136, 0.3), inset 0 0 10px rgba(0, 255, 136, 0.1);"><span id="bpmf-placeholder" style="color: #4ade80; opacity: 0.5; font-size: 18px;">Click a character below</span></div>
+            </div>
+          </div>
           
-          <div id="feedback" style="display: none;"></div>
+          <div id="ready-indicator" style="display: none; text-align: center; margin: 20px 0; padding: 15px; background: rgba(0, 255, 136, 0.2); border: 2px solid #00ff88; border-radius: 10px;">
+            <span style="color: #00ff88; font-size: 24px; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);">✓ Both answers correct! Press Enter to continue →</span>
+          </div>
+          
+          <div id="bpmf-keyboard" style="margin: 30px 0;"></div>
+          
+          <div id="feedback" style="display: none; margin-top: 20px;"></div>
         </div>
       <% else %>
         <div class="feedback correct" style="margin-top: 20px;">
@@ -203,6 +219,193 @@
 </div>
 
 <script>
+  <% if @lesson.level == 1 && !@progress.completed? %>
+  let selectedBpmf = '';
+  const correctPinyin = '<%= @lesson.pronunciation %>';
+  const correctBpmf = '<%= @lesson.bpmf_symbol %>';
+  
+  // BPMF Keyboard for Level 1 - Standard Taiwanese layout
+  const bpmfKeyboard = [
+    ['ㄅ', 'ㄉ', 'ㄍ', 'ㄐ', 'ㄓ', 'ㄗ', 'ㄧ', 'ㄚ', 'ㄞ', 'ㄢ'],
+    ['ㄆ', 'ㄊ', 'ㄎ', 'ㄑ', 'ㄔ', 'ㄘ', 'ㄨ', 'ㄛ', 'ㄟ', 'ㄣ'],
+    ['ㄇ', 'ㄋ', 'ㄏ', 'ㄒ', 'ㄕ', 'ㄙ', 'ㄝ', 'ㄜ', 'ㄠ', 'ㄤ'],
+    ['ㄈ', 'ㄌ', '', '', 'ㄖ', '', '', 'ㄡ', 'ㄥ', 'ㄦ']
+  ];
+  
+  function renderBpmfKeyboard() {
+    const keyboardEl = document.getElementById('bpmf-keyboard');
+    keyboardEl.innerHTML = '';
+    keyboardEl.style.cssText = 'display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin: 30px 0;';
+    
+    const numColumns = bpmfKeyboard[0].length;
+    for (let col = 0; col < numColumns; col++) {
+      const colDiv = document.createElement('div');
+      colDiv.style.cssText = 'display: flex; flex-direction: column; gap: 10px;';
+      
+      bpmfKeyboard.forEach((row, rowIndex) => {
+        const symbol = row[col];
+        if (symbol && symbol.trim() !== '') {
+          const btn = document.createElement('button');
+          btn.textContent = symbol;
+          const isSelected = selectedBpmf === symbol;
+          btn.style.cssText = `font-size: 36px; padding: 18px 24px; min-width: 70px; background: ${isSelected ? 'rgba(0, 255, 136, 0.6)' : 'rgba(0, 255, 136, 0.2)'}; border: 2px solid #00ff88; border-radius: 10px; color: #00ff88; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8); display: block;`;
+          btn.onmouseover = function() { 
+            if (!isSelected) {
+              this.style.background = 'rgba(0, 255, 136, 0.4)'; 
+              this.style.boxShadow = '0 0 20px rgba(0, 255, 136, 0.6)'; 
+              this.style.transform = 'scale(1.1)';
+            }
+          };
+          btn.onmouseout = function() { 
+            if (!isSelected) {
+              this.style.background = 'rgba(0, 255, 136, 0.2)'; 
+              this.style.boxShadow = 'none';
+              this.style.transform = 'scale(1)';
+            }
+          };
+          btn.onclick = function() { 
+            selectedBpmf = symbol;
+            updateBpmfDisplay();
+            renderBpmfKeyboard();
+          };
+          colDiv.appendChild(btn);
+        }
+      });
+      
+      keyboardEl.appendChild(colDiv);
+    }
+  }
+  
+  function updateBpmfDisplay() {
+    const bpmfDisplay = document.getElementById('bpmf-selected');
+    const placeholder = document.getElementById('bpmf-placeholder');
+    if (selectedBpmf) {
+      if (placeholder) placeholder.style.display = 'none';
+      bpmfDisplay.innerHTML = selectedBpmf;
+    } else {
+      if (placeholder) placeholder.style.display = 'inline';
+      bpmfDisplay.innerHTML = '<span id="bpmf-placeholder" style="color: #4ade80; opacity: 0.5; font-size: 18px;">Click a character below</span>';
+    }
+    checkReadyState();
+  }
+  
+  function checkReadyState() {
+    const input = document.getElementById('answer-input');
+    const readyIndicator = document.getElementById('ready-indicator');
+    const pinyinAnswer = input.value.trim().toLowerCase();
+    const bpmfAnswer = selectedBpmf;
+    
+    const pinyinCorrect = pinyinAnswer && pinyinAnswer === correctPinyin.toLowerCase();
+    const bpmfCorrect = bpmfAnswer && bpmfAnswer === correctBpmf;
+    
+    if (pinyinCorrect && bpmfCorrect) {
+      readyIndicator.style.display = 'block';
+    } else {
+      readyIndicator.style.display = 'none';
+    }
+  }
+  
+  function checkAnswer() {
+    const input = document.getElementById('answer-input');
+    const feedback = document.getElementById('feedback');
+    const pinyinAnswer = input.value.trim().toLowerCase();
+    const bpmfAnswer = selectedBpmf;
+    
+    if (!pinyinAnswer) {
+      feedback.className = 'feedback incorrect';
+      feedback.style.display = 'block';
+      feedback.innerHTML = 'Please enter the pinyin equivalent!';
+      return;
+    }
+    
+    if (!bpmfAnswer) {
+      feedback.className = 'feedback incorrect';
+      feedback.style.display = 'block';
+      feedback.innerHTML = 'Please select the BPMF character!';
+      return;
+    }
+    
+    const pinyinCorrect = pinyinAnswer === correctPinyin.toLowerCase();
+    const bpmfCorrect = bpmfAnswer === correctBpmf;
+    
+    if (pinyinCorrect && bpmfCorrect) {
+      // Both correct - submit to server
+      const lessonOrder = <%= @lesson.order %>;
+      const nextLessonPath = '<%= @next_lesson ? lesson_path(@next_lesson.order) : nil %>';
+      const readyIndicator = document.getElementById('ready-indicator');
+      
+      fetch(`/lessons/${lessonOrder}/submit_answer`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify({ answer: pinyinAnswer })
+      })
+      .then(response => response.json())
+      .then(data => {
+        feedback.style.display = 'block';
+        feedback.className = 'feedback correct';
+        feedback.innerHTML = `<strong>Perfect! Both answers are correct!</strong> You earned ${data.points} points!`;
+        input.disabled = true;
+        readyIndicator.style.display = 'none';
+        
+        if (data.completed && nextLessonPath) {
+          setTimeout(() => {
+            window.location.href = nextLessonPath;
+          }, 1000);
+        }
+      })
+      .catch(error => {
+        feedback.className = 'feedback incorrect';
+        feedback.style.display = 'block';
+        feedback.innerHTML = 'Something went wrong. Please try again.';
+        readyIndicator.style.display = 'none';
+      });
+    } else {
+      // One or both incorrect
+      const readyIndicator = document.getElementById('ready-indicator');
+      readyIndicator.style.display = 'none';
+      feedback.className = 'feedback incorrect';
+      feedback.style.display = 'block';
+      let message = '<strong>Not quite right:</strong><br>';
+      if (!pinyinCorrect) {
+        message += `Pinyin: "${pinyinAnswer}" is incorrect. Correct answer: "${correctPinyin}"<br>`;
+        input.value = '';
+      }
+      if (!bpmfCorrect) {
+        message += `BPMF: "${bpmfAnswer}" is incorrect. Correct answer: "${correctBpmf}"<br>`;
+        selectedBpmf = '';
+        updateBpmfDisplay();
+        renderBpmfKeyboard();
+      }
+      feedback.innerHTML = message;
+      input.focus();
+    }
+  }
+  
+  // Allow Enter key to submit
+  document.getElementById('answer-input')?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      checkAnswer();
+    }
+  });
+  
+  // Check ready state when pinyin input changes
+  document.getElementById('answer-input')?.addEventListener('input', function() {
+    checkReadyState();
+  });
+  
+  // Initialize keyboard and display
+  document.addEventListener('DOMContentLoaded', function() {
+    renderBpmfKeyboard();
+    updateBpmfDisplay();
+    const input = document.getElementById('answer-input');
+    if (input) {
+      input.focus();
+    }
+  });
+  <% else %>
   function checkAnswer() {
     const input = document.getElementById('answer-input');
     const feedback = document.getElementById('feedback');
@@ -239,12 +442,10 @@
         
         if (data.completed) {
           if (lessonLevel == 1 && nextLessonPath) {
-            // Auto-advance to next lesson for Level 1
             setTimeout(() => {
               window.location.href = nextLessonPath;
             }, 1000);
           } else {
-            // Reload for other levels
             setTimeout(() => {
               window.location.reload();
             }, 2000);
@@ -264,19 +465,9 @@
     });
   }
   
-  // Allow Enter key to submit
   document.getElementById('answer-input')?.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
       checkAnswer();
-    }
-  });
-  
-  // Auto-focus input for Level 1
-  <% if @lesson.level == 1 && !@progress.completed? %>
-  document.addEventListener('DOMContentLoaded', function() {
-    const input = document.getElementById('answer-input');
-    if (input) {
-      input.focus();
     }
   });
   <% end %>
