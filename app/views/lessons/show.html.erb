@@ -54,25 +54,24 @@
         <h3 style="margin-bottom: 20px;">Type the BPMF symbols for: <strong style="color: #00ff88; font-size: 32px;"><%= @lesson.pronunciation %></strong></h3>
         <div id="bpmf-keyboard" style="margin: 30px 0;"></div>
         <div id="keyboard-input" style="font-size: 48px; text-align: center; min-height: 60px; padding: 20px; background: rgba(0, 0, 0, 0.5); border: 2px solid #00ff88; border-radius: 12px; margin: 20px 0; color: #00ff88; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);"></div>
-        <div id="keyboard-feedback" style="display: none;"></div>
-        <div style="margin-top: 20px; text-align: center;">
-          <button onclick="checkKeyboardAnswer()" class="btn">Check Answer</button>
-          <button onclick="clearKeyboardInput()" class="btn btn-secondary" style="margin-left: 10px;">Clear</button>
-          <%= link_to "Skip to Next", @lesson.next_lesson ? lesson_path(@lesson.next_lesson.order) : lesson_path(@lesson.order), class: "btn btn-secondary", style: "margin-left: 10px;" %>
+        <div id="ready-indicator-keyboard" style="display: none; text-align: center; margin: 20px 0; padding: 15px; background: rgba(0, 255, 136, 0.2); border: 2px solid #00ff88; border-radius: 10px;">
+          <span style="color: #00ff88; font-size: 24px; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);">✓ Answer correct! Press Enter to continue →</span>
         </div>
+        <div id="keyboard-feedback" style="display: none;"></div>
       </div>
     <% else %>
       <div class="feedback correct" style="margin-top: 20px;">
         <strong>Great job!</strong> You've completed this lesson and earned <%= @progress.points_earned %> points!
       </div>
-      
-      <div style="margin-top: 30px; text-align: center;">
-        <% if @next_lesson %>
-          <%= link_to "Next Lesson →", lesson_path(@next_lesson.order), class: "btn btn-success", style: "font-size: 18px; padding: 15px 30px;" %>
-        <% else %>
-          <p style="color: #00ff88; font-size: 18px; font-weight: 600;">🎉 Congratulations! You've completed all lessons!</p>
-        <% end %>
-      </div>
+      <% if @next_lesson %>
+        <script>
+          setTimeout(function() {
+            window.location.href = '<%= lesson_path(@next_lesson.order) %>';
+          }, 1500);
+        </script>
+      <% else %>
+        <p style="color: #00ff88; font-size: 18px; font-weight: 600; margin-top: 20px;">🎉 Congratulations! You've completed all lessons!</p>
+      <% end %>
     <% end %>
   <% elsif (@lesson.lesson_type == "tone" || @lesson.lesson_type == "word") && @lesson.level == 3 %>
     <% unless @progress.completed? %>
@@ -571,23 +570,32 @@
     }
   }
   
+  const correctAnswer = '<%= @lesson.bpmf_symbol %>';
+  const nextLessonPath = '<%= @lesson.next_lesson ? lesson_path(@lesson.next_lesson.order) : nil %>';
+  
   function updateKeyboardDisplay() {
     document.getElementById('keyboard-input').textContent = keyboardInput || ' ';
+    checkKeyboardReadyState();
   }
   
-  function clearKeyboardInput() {
-    keyboardInput = '';
-    updateKeyboardDisplay();
+  function checkKeyboardReadyState() {
+    const readyIndicator = document.getElementById('ready-indicator-keyboard');
+    if (keyboardInput === correctAnswer) {
+      readyIndicator.style.display = 'block';
+    } else {
+      readyIndicator.style.display = 'none';
+    }
   }
   
   function checkKeyboardAnswer() {
     const feedback = document.getElementById('keyboard-feedback');
-    const correctAnswer = '<%= @lesson.bpmf_symbol %>';
+    const readyIndicator = document.getElementById('ready-indicator-keyboard');
     
     if (keyboardInput === correctAnswer) {
       feedback.className = 'feedback correct';
       feedback.style.display = 'block';
       feedback.innerHTML = '<strong>Correct!</strong> Great job!';
+      readyIndicator.style.display = 'none';
       
       const lessonOrder = <%= @lesson.order %>;
       fetch(`/lessons/${lessonOrder}/submit_answer`, {
@@ -600,22 +608,35 @@
       })
       .then(response => response.json())
       .then(data => {
-        if (data.completed) {
+        if (data.completed && nextLessonPath) {
           setTimeout(() => {
-            window.location.reload();
-          }, 2000);
+            window.location.href = nextLessonPath;
+          }, 1000);
         }
       });
     } else {
+      readyIndicator.style.display = 'none';
       feedback.className = 'feedback incorrect';
       feedback.style.display = 'block';
       feedback.innerHTML = '<strong>Not quite.</strong> Try again! The correct answer is: ' + correctAnswer;
-      clearKeyboardInput();
+      keyboardInput = '';
+      updateKeyboardDisplay();
     }
   }
+  
+  // Allow Enter key to submit from anywhere
+  document.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (keyboardInput) {
+        checkKeyboardAnswer();
+      }
+    }
+  });
   
   renderKeyboard();
   updateKeyboardDisplay();
   <% end %>
 </script>
+
 
