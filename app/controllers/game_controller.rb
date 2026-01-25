@@ -1,14 +1,11 @@
 class GameController < ApplicationController
   def index
-    @user = @current_user
-    
     # Determine current level based on progress
     level_1_lessons = Lesson.by_level(1)
     level_2_lessons = Lesson.by_level(2)
-    level_3_lessons = Lesson.by_level(3)
     
-    level_1_completed = level_1_lessons.all? { |l| @user.lesson_progresses.find_by(lesson: l)&.completed? }
-    level_2_completed = level_2_lessons.all? { |l| @user.lesson_progresses.find_by(lesson: l)&.completed? }
+    level_1_completed = level_1_lessons.all? { |l| @current_user.lesson_progresses.find_by(lesson: l)&.completed? }
+    level_2_completed = level_2_lessons.all? { |l| @current_user.lesson_progresses.find_by(lesson: l)&.completed? }
     
     @current_level = if level_2_completed
       3
@@ -18,10 +15,7 @@ class GameController < ApplicationController
       1
     end
     
-    # Load lessons for current level
     @bpmf_lessons = Lesson.by_level(@current_level).where.not(bpmf_symbol: nil).limit(20)
-    @lessons_completed = @user.lesson_progresses.where(completed: true).count
-    @total_lessons = Lesson.count
     @level_1_completed = level_1_completed
     @level_2_completed = level_2_completed
   end
