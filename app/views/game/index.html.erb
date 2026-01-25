@@ -254,6 +254,92 @@
     scene.add.text(10, gameHeight - 40, 'Touch enemies to battle!', { fontSize: '14px', fill: '#00ff88' });
   }
 
+  function showDeathScreen() {
+    const scene = player.scene;
+    const gameWidth = scene.scale.width;
+    const gameHeight = scene.scale.height;
+    
+    // Stop combat immediately
+    combatActive = false;
+    
+    // Remove combat UI and keyboard immediately (always remove, regardless of combat state)
+    if (combatUI) {
+      combatUI.bg.destroy();
+      combatUI.bpmfText.destroy();
+      combatUI.step1Label.destroy();
+      combatUI.pinyinDisplay.destroy();
+      combatUI.step2Label.destroy();
+      combatUI.bpmfDisplay.destroy();
+      combatUI.keyboardContainer.destroy();
+      combatUI.feedback.destroy();
+      combatUI = null;
+    }
+    
+    // Remove HTML keyboard - force removal from DOM completely
+    const gameContainer = document.getElementById('game-container');
+    if (gameContainer) {
+      // Remove by ID
+      const keyboardDiv = document.getElementById('combat-bpmf-keyboard');
+      if (keyboardDiv) {
+        keyboardDiv.parentNode?.removeChild(keyboardDiv);
+      }
+      
+      // Remove any keyboard elements by querying the container directly
+      const allKeyboards = gameContainer.querySelectorAll('#combat-bpmf-keyboard, [id*="bpmf"], [id*="keyboard"]');
+      allKeyboards.forEach(kb => {
+        kb.parentNode?.removeChild(kb);
+      });
+      
+      // Also check for any divs that might contain the keyboard
+      const allDivs = gameContainer.querySelectorAll('div');
+      allDivs.forEach(div => {
+        if (div.id && (div.id.includes('bpmf') || div.id.includes('keyboard'))) {
+          div.parentNode?.removeChild(div);
+        }
+      });
+    }
+    
+    // Also try removing from document body in case it's there
+    const bodyKeyboard = document.body.querySelector('#combat-bpmf-keyboard');
+    if (bodyKeyboard) {
+      bodyKeyboard.parentNode?.removeChild(bodyKeyboard);
+    }
+    
+    // Hide player sprite during death screen
+    if (player) {
+      player.setVisible(false);
+      player.setActive(false);
+    }
+    
+    // Hide all enemies during death screen
+    enemies.forEach(enemy => {
+      if (enemy && enemy.active) {
+        enemy.setVisible(false);
+      }
+    });
+    
+    if (combatActive) {
+      endCombat(false);
+    }
+    
+    // Death screen background - higher depth to cover everything
+    const deathBg = scene.add.rectangle(gameWidth / 2, gameHeight / 2, gameWidth * 2, gameHeight * 2, 0x000000, 1.0);
+    deathBg.setDepth(10000);
+    
+    // Death message
+    const deathText = scene.add.text(gameWidth / 2, gameHeight / 2 - 50, "You've been BPMF'd!", {
+      fontSize: '48px',
+      fill: '#ff4444',
+      fontStyle: 'bold'
+    }).setOrigin(0.5).setDepth(10001);
+    
+    // Reset after 2 seconds - reload page to restart at level 1
+    setTimeout(() => {
+      // Reload the page to restart at level 1
+      window.location.reload();
+    }, 2000);
+  }
+
   function update() {
     if (combatActive) return;
 
@@ -474,6 +560,15 @@
   }
   
   function renderBpmfKeyboardHTML() {
+    // Don't render keyboard if player is dead or combat is not active
+    if (playerHits <= 0 || !combatActive) {
+      const keyboardDiv = document.getElementById('combat-bpmf-keyboard');
+      if (keyboardDiv) {
+        keyboardDiv.remove();
+      }
+      return;
+    }
+    
     const keyboardDiv = document.getElementById('combat-bpmf-keyboard');
     if (!keyboardDiv) return;
     
@@ -489,7 +584,14 @@
   }
 
   function updateCombatUI() {
-    if (!combatUI) return;
+    if (!combatUI || playerHits <= 0 || !combatActive) {
+      // Remove keyboard if player is dead or combat not active
+      const keyboardDiv = document.getElementById('combat-bpmf-keyboard');
+      if (keyboardDiv) {
+        keyboardDiv.remove();
+      }
+      return;
+    }
     combatUI.pinyinDisplay.setText(pinyinInput || '_');
     
     if (selectedBpmf) {
@@ -584,9 +686,8 @@
       }
       
       if (playerHits <= 0) {
-        setTimeout(() => {
-          endCombat(false);
-        }, 1000);
+        // Player died - show death screen
+        showDeathScreen();
       } else {
         // Reset inputs
         pinyinInput = '';
@@ -647,40 +748,6 @@
       }
       
       // Victory - no message needed, just end combat
-    } else {
-      // Game over
-      const gameOverText = scene.add.text(gameWidth / 2, gameHeight / 2, 'Game Over!', {
-        fontSize: '48px',
-        fill: '#ff4444',
-        fontStyle: 'bold'
-      }).setOrigin(0.5);
-      
-      setTimeout(() => {
-        gameOverText.destroy();
-        // Reset player
-        playerHits = playerMaxHits;
-        playerLevel = 1;
-        
-        // Recreate life icons
-        lifeIcons.forEach(icon => icon.destroy());
-        lifeIcons = [];
-        const scene = player.scene;
-        for (let i = 0; i < playerMaxHits; i++) {
-          const x = 15 + (i * 35);
-          const y = 15;
-          
-          const icon = scene.add.graphics();
-          icon.fillStyle(0x00ff88);
-          icon.fillCircle(0, 0, 12);
-          icon.lineStyle(2, 0x4ade80);
-          icon.strokeCircle(0, 0, 12);
-          icon.fillStyle(0x0a1f0a);
-          icon.fillRect(-4, -4, 8, 8);
-          icon.setPosition(x, y);
-          
-          lifeIcons.push(icon);
-        }
-      }, 3000);
     }
     
     currentEnemy = null;
