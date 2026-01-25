@@ -1,0 +1,752 @@
+<div id="game-container" style="width: 100%; height: 750px; background: #0a1f0a; border: 3px solid #00ff88; border-radius: 15px; overflow: hidden; position: relative; outline: none;" tabindex="0">
+  <div id="game-loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #00ff88; font-size: 24px; z-index: 10;">Loading Phaser.js...</div>
+  <div id="combat-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1000;"></div>
+</div>
+
+<script>
+  // Load Phaser if not already loaded
+  function loadPhaser() {
+    return new Promise((resolve, reject) => {
+      if (typeof Phaser !== 'undefined') {
+        console.log('Phaser already loaded');
+        resolve();
+        return;
+      }
+      
+      const loadingDiv = document.getElementById('game-loading');
+      let attemptCount = 0;
+      const maxAttempts = 3;
+      const cdnUrls = [
+        'https://unpkg.com/phaser@3.80.1/dist/phaser.min.js',
+        'https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/phaser/3.80.1/phaser.min.js'
+      ];
+      
+      function tryLoad(index) {
+        if (index >= cdnUrls.length) {
+          console.error('All CDN attempts failed');
+          if (loadingDiv) loadingDiv.textContent = 'Failed to load Phaser.js. Please check your internet connection.';
+          reject(new Error('Failed to load Phaser.js from all CDN sources'));
+          return;
+        }
+        
+        attemptCount++;
+        const url = cdnUrls[index];
+        console.log(`Attempt ${attemptCount}: Loading Phaser from ${url}`);
+        if (loadingDiv) loadingDiv.textContent = `Loading Phaser.js... (attempt ${attemptCount}/${maxAttempts})`;
+        
+        const script = document.createElement('script');
+        script.src = url;
+        script.async = true;
+        
+        const timeout = setTimeout(() => {
+          console.error(`Timeout loading from ${url}`);
+          script.remove();
+          tryLoad(index + 1);
+        }, 10000);
+        
+        script.onload = () => {
+          console.log(`Phaser loaded successfully from ${url}`);
+          clearTimeout(timeout);
+          resolve();
+        };
+        
+        script.onerror = () => {
+          console.error(`Failed to load from ${url}`);
+          clearTimeout(timeout);
+          script.remove();
+          tryLoad(index + 1);
+        };
+        
+        document.head.appendChild(script);
+      }
+      
+      tryLoad(0);
+    });
+  }
+  
+  // Check if Phaser is already loaded
+  console.log('Checking for Phaser...', typeof Phaser);
+  
+  // Game config - will be created after Phaser loads
+  let config;
+
+  let player;
+  let cursors;
+  let enemies = [];
+  let combatActive = false;
+  let currentEnemy = null;
+  let pinyinInput = '';
+  let selectedBpmf = '';
+  let combatUI = null;
+  let playerHealth = 100;
+  let playerMaxHealth = 100;
+  let playerLevel = <%= @current_level %>;
+  let playerExp = 0;
+  let expToNext = 100;
+  const currentGameLevel = <%= @current_level %>;
+  const level1Completed = <%= @level_1_completed ? 'true' : 'false' %>;
+  const level2Completed = <%= @level_2_completed ? 'true' : 'false' %>;
+  
+  // BPMF Keyboard - Standard Taiwanese layout
+  const bpmfKeyboard = [
+    ['ㄅ', 'ㄉ', 'ㄍ', 'ㄐ', 'ㄓ', 'ㄗ', 'ㄧ', 'ㄚ', 'ㄞ', 'ㄢ'],
+    ['ㄆ', 'ㄊ', 'ㄎ', 'ㄑ', 'ㄔ', 'ㄘ', 'ㄨ', 'ㄛ', 'ㄟ', 'ㄣ'],
+    ['ㄇ', 'ㄋ', 'ㄏ', 'ㄒ', 'ㄕ', 'ㄙ', 'ㄝ', 'ㄜ', 'ㄠ', 'ㄤ'],
+    ['ㄈ', 'ㄌ', '', '', 'ㄖ', '', 'ㄩ', 'ㄡ', 'ㄥ', 'ㄦ']
+  ];
+
+  // BPMF lessons data - loaded from server for current level
+  let bpmfLessons = <%= @bpmf_lessons.map { |l| { order: l.order, bpmf: l.bpmf_symbol, pinyin: l.pronunciation } }.to_json.html_safe %>;
+  
+  // Fallback if no lessons loaded
+  if (!bpmfLessons || bpmfLessons.length === 0) {
+    console.warn('No BPMF lessons loaded, using fallback');
+    bpmfLessons = [
+      { order: 2, bpmf: 'ㄅ', pinyin: 'b' },
+      { order: 3, bpmf: 'ㄆ', pinyin: 'p' },
+      { order: 4, bpmf: 'ㄇ', pinyin: 'm' }
+    ];
+  }
+  
+  console.log('BPMF lessons loaded:', bpmfLessons.length);
+
+  function preload() {
+    // Create hero icon (simple character shape)
+    const playerGraphics = this.add.graphics();
+    playerGraphics.fillStyle(0x00ff88);
+    // Body (circle)
+    playerGraphics.fillCircle(16, 16, 12);
+    // Head (smaller circle on top)
+    playerGraphics.fillStyle(0x4ade80);
+    playerGraphics.fillCircle(16, 8, 6);
+    // Simple face (two dots for eyes)
+    playerGraphics.fillStyle(0x0a1f0a);
+    playerGraphics.fillCircle(13, 7, 1.5);
+    playerGraphics.fillCircle(19, 7, 1.5);
+    playerGraphics.generateTexture('player', 32, 32);
+    playerGraphics.destroy();
+    
+    // Create enemy icon (spiky/angry shape)
+    const enemyGraphics = this.add.graphics();
+    enemyGraphics.fillStyle(0xff4444);
+    // Body (diamond/square shape)
+    enemyGraphics.fillRect(8, 8, 16, 16);
+    // Spikes on top
+    enemyGraphics.fillStyle(0xcc0000);
+    enemyGraphics.fillTriangle(8, 8, 16, 4, 24, 8);
+    // Angry eyes
+    enemyGraphics.fillStyle(0x0a1f0a);
+    enemyGraphics.fillRect(11, 12, 3, 3);
+    enemyGraphics.fillRect(18, 12, 3, 3);
+    // Angry mouth
+    enemyGraphics.fillRect(12, 18, 8, 2);
+    enemyGraphics.generateTexture('enemy', 32, 32);
+    enemyGraphics.destroy();
+    
+    // Background tiles
+    this.add.graphics()
+      .fillStyle(0x444444)
+      .fillRect(0, 0, 16, 16)
+      .generateTexture('tile', 16, 16);
+  }
+
+  function create() {
+    // Create tilemap background
+    const gameWidth = this.scale.width;
+    const gameHeight = this.scale.height;
+    for (let x = 0; x < gameWidth; x += 16) {
+      for (let y = 0; y < gameHeight; y += 16) {
+        this.add.image(x, y, 'tile').setAlpha(0.3);
+      }
+    }
+
+    // Create player
+    player = this.physics.add.sprite(100, 100, 'player');
+    player.setCollideWorldBounds(true);
+    player.setScale(1.5);
+
+    // Create enemies
+    if (bpmfLessons && bpmfLessons.length > 0) {
+      for (let i = 0; i < 5; i++) {
+        const x = Phaser.Math.Between(200, gameWidth - 200);
+        const y = Phaser.Math.Between(200, gameHeight - 200);
+        const enemy = this.physics.add.sprite(x, y, 'enemy');
+        enemy.setScale(1.5);
+        enemy.setData('health', 50);
+        const randomLesson = bpmfLessons[Math.floor(Math.random() * bpmfLessons.length)];
+        enemy.setData('bpmf', randomLesson);
+        enemies.push(enemy);
+      }
+    } else {
+      console.error('No BPMF lessons available for enemies');
+    }
+
+
+    // Input
+    cursors = this.input.keyboard.createCursorKeys();
+    this.input.keyboard.on('keydown', handleKeyDown, this);
+    
+    // Make sure keyboard events work globally (for when combat is active)
+    const gameContainer = document.getElementById('game-container');
+    if (gameContainer) {
+      gameContainer.setAttribute('tabindex', '0');
+    }
+
+    // Collision detection
+    this.physics.add.overlap(player, enemies, startCombat, null, this);
+
+    // UI
+    createUI(this);
+  }
+
+  function createUI(scene) {
+    // Health bar
+    const healthBarBg = scene.add.rectangle(50, 30, 200, 20, 0x333333);
+    const healthBar = scene.add.rectangle(50, 30, 200, 20, 0xff4444);
+    healthBar.setData('maxWidth', 200);
+    healthBar.setData('value', playerHealth);
+    healthBar.setData('max', playerMaxHealth);
+    scene.add.text(10, 10, 'HP:', { fontSize: '16px', fill: '#00ff88' });
+    
+    // Level/Exp
+    const levelName = currentGameLevel === 1 ? 'Learning BPMF' : currentGameLevel === 2 ? 'Keyboard Practice' : 'Tone Marks';
+    scene.add.text(10, 50, `Level ${currentGameLevel}: ${levelName}`, { fontSize: '16px', fill: '#00ff88' });
+    scene.add.text(10, 70, `Exp: ${playerExp}/${expToNext}`, { fontSize: '16px', fill: '#4ade80' });
+    
+    // Show level progression status
+    if (currentGameLevel === 1 && level1Completed) {
+      scene.add.text(10, 90, 'Level 1 Complete! Refresh to advance.', { fontSize: '14px', fill: '#4ade80' });
+    } else if (currentGameLevel === 2 && level2Completed) {
+      scene.add.text(10, 90, 'Level 2 Complete! Refresh to advance.', { fontSize: '14px', fill: '#4ade80' });
+    }
+
+    // Instructions
+    const gameHeight = scene.scale.height;
+    scene.add.text(10, gameHeight - 60, 'Arrow keys to move', { fontSize: '14px', fill: '#00ff88' });
+    scene.add.text(10, gameHeight - 40, 'Touch enemies to battle!', { fontSize: '14px', fill: '#00ff88' });
+  }
+
+  function update() {
+    if (combatActive) return;
+
+    // Player movement
+    player.setVelocity(0);
+
+    if (cursors.left.isDown) {
+      player.setVelocityX(-200);
+    } else if (cursors.right.isDown) {
+      player.setVelocityX(200);
+    }
+
+    if (cursors.up.isDown) {
+      player.setVelocityY(-200);
+    } else if (cursors.down.isDown) {
+      player.setVelocityY(200);
+    }
+  }
+
+  function handleKeyDown(event) {
+    if (!combatActive) return;
+
+    // Handle pinyin input during combat
+    if (event.key === 'Enter') {
+      submitCombatAnswer();
+    } else if (event.key === 'Backspace') {
+      pinyinInput = pinyinInput.slice(0, -1);
+      updateCombatUI();
+    } else if (event.key.length === 1 && /[a-z]/.test(event.key)) {
+      pinyinInput += event.key;
+      updateCombatUI();
+    }
+  }
+
+  function startCombat(player, enemy) {
+    if (combatActive) return;
+    
+    combatActive = true;
+    currentEnemy = enemy;
+    pinyinInput = '';
+    selectedBpmf = '';
+    
+    // Stop player movement
+    player.setVelocity(0);
+    
+    // Show combat UI
+    showCombatUI();
+    
+    // Focus on the game container to receive keyboard input
+    setTimeout(() => {
+      const gameContainer = document.getElementById('game-container');
+      if (gameContainer) {
+        gameContainer.focus();
+        gameContainer.setAttribute('tabindex', '0');
+      }
+    }, 100);
+  }
+
+  function showCombatUI() {
+    const scene = player.scene;
+    const gameWidth = scene.scale.width;
+    const gameHeight = scene.scale.height;
+    
+    // Combat background - fit within screen
+    const combatBg = scene.add.rectangle(gameWidth / 2, gameHeight / 2, gameWidth * 0.9, gameHeight * 0.95, 0x000000, 0.95);
+    combatBg.setStrokeStyle(3, 0x00ff88);
+    
+    // Enemy BPMF symbol (what they need to type) - top, reduced margin
+    const enemyBpmf = currentEnemy.getData('bpmf');
+    const bpmfText = scene.add.text(gameWidth / 2, gameHeight * 0.15, enemyBpmf.bpmf || '?', {
+      fontSize: '100px',
+      fill: '#ff4444',
+      fontStyle: 'bold'
+    }).setOrigin(0.5);
+    
+    // Step 1: Pinyin input - reduced spacing
+    const step1Label = scene.add.text(gameWidth / 2, gameHeight * 0.30, 'Step 1: Type the pinyin:', {
+      fontSize: '18px',
+      fill: '#00ff88'
+    }).setOrigin(0.5);
+    
+    const pinyinDisplay = scene.add.text(gameWidth / 2, gameHeight * 0.35, '', {
+      fontSize: '28px',
+      fill: '#4ade80',
+      fontStyle: 'bold'
+    }).setOrigin(0.5);
+    
+    // Step 2: BPMF selection - reduced spacing
+    const step2Label = scene.add.text(gameWidth / 2, gameHeight * 0.42, 'Step 2: Select the BPMF character:', {
+      fontSize: '18px',
+      fill: '#00ff88'
+    }).setOrigin(0.5);
+    
+    const bpmfDisplay = scene.add.text(gameWidth / 2, gameHeight * 0.47, '', {
+      fontSize: '40px',
+      fill: '#4ade80',
+      fontStyle: 'bold'
+    }).setOrigin(0.5);
+    
+    // BPMF Keyboard container (we'll render it in HTML overlay) - positioned lower
+    const keyboardContainer = scene.add.rectangle(gameWidth / 2, gameHeight * 0.70, gameWidth * 0.75, gameHeight * 0.25, 0x111111, 0.8);
+    keyboardContainer.setStrokeStyle(2, 0x00ff88);
+    
+    // Feedback - at bottom
+    const feedback = scene.add.text(gameWidth / 2, gameHeight * 0.92, '', {
+      fontSize: '16px',
+      fill: '#00ff88',
+      wordWrap: { width: gameWidth * 0.8 }
+    }).setOrigin(0.5);
+    
+    combatUI = {
+      bg: combatBg,
+      bpmfText: bpmfText,
+      step1Label: step1Label,
+      pinyinDisplay: pinyinDisplay,
+      step2Label: step2Label,
+      bpmfDisplay: bpmfDisplay,
+      keyboardContainer: keyboardContainer,
+      feedback: feedback
+    };
+    
+    // Create HTML overlay for BPMF keyboard
+    createBpmfKeyboardHTML();
+    updateCombatUI();
+  }
+  
+  function createBpmfKeyboardHTML() {
+    // Remove existing keyboard if any
+    const existing = document.getElementById('combat-bpmf-keyboard');
+    if (existing) existing.remove();
+    
+    const gameContainer = document.getElementById('game-container');
+    if (!gameContainer) return;
+    
+    const containerRect = gameContainer.getBoundingClientRect();
+    const keyboardDiv = document.createElement('div');
+    keyboardDiv.id = 'combat-bpmf-keyboard';
+    const containerHeight = gameContainer.clientHeight;
+    keyboardDiv.style.cssText = `
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      margin-top: ${containerHeight * 0.20}px;
+      width: 75%;
+      max-width: 900px;
+      min-height: ${containerHeight * 0.25}px;
+      max-height: ${containerHeight * 0.25}px;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      pointer-events: auto;
+      z-index: 1001;
+      background: rgba(17, 17, 17, 0.9);
+      padding: 8px;
+      border-radius: 10px;
+      border: 2px solid #00ff88;
+      overflow-y: auto;
+    `;
+    
+    const numColumns = bpmfKeyboard[0].length;
+    for (let col = 0; col < numColumns; col++) {
+      const colDiv = document.createElement('div');
+      colDiv.style.cssText = 'display: flex; flex-direction: column; gap: 4px;';
+      
+      bpmfKeyboard.forEach((row) => {
+        const symbol = row[col];
+        if (symbol && symbol.trim() !== '') {
+          const btn = document.createElement('button');
+          btn.textContent = symbol;
+          const isSelected = selectedBpmf === symbol;
+          const isYi = symbol === 'ㄧ';
+          const baseTransform = isYi ? 'rotate(90deg)' : 'none';
+          btn.style.cssText = `
+            font-size: 20px;
+            padding: 6px 10px;
+            min-width: 38px;
+            height: 38px;
+            background: ${isSelected ? 'rgba(0, 255, 136, 0.6)' : 'rgba(0, 255, 136, 0.2)'};
+            border: 2px solid #00ff88;
+            border-radius: 5px;
+            color: #00ff88;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-shadow: 0 0 8px rgba(0, 255, 136, 0.8);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transform: ${baseTransform};
+          `;
+          btn.onmouseover = function() {
+            if (!isSelected) {
+              this.style.background = 'rgba(0, 255, 136, 0.4)';
+              this.style.boxShadow = '0 0 20px rgba(0, 255, 136, 0.6)';
+            }
+          };
+          btn.onmouseout = function() {
+            if (!isSelected) {
+              this.style.background = 'rgba(0, 255, 136, 0.2)';
+              this.style.boxShadow = 'none';
+            }
+          };
+          btn.onclick = function() {
+            selectedBpmf = symbol;
+            updateCombatUI();
+            renderBpmfKeyboardHTML();
+          };
+          colDiv.appendChild(btn);
+        }
+      });
+      
+      keyboardDiv.appendChild(colDiv);
+    }
+    
+    // Append keyboard to container (already checked at start of function)
+    gameContainer.appendChild(keyboardDiv);
+  }
+  
+  function renderBpmfKeyboardHTML() {
+    const keyboardDiv = document.getElementById('combat-bpmf-keyboard');
+    if (!keyboardDiv) return;
+    
+    const buttons = keyboardDiv.querySelectorAll('button');
+    buttons.forEach(btn => {
+      const symbol = btn.textContent;
+      const isSelected = selectedBpmf === symbol;
+      const isYi = symbol === 'ㄧ';
+      const baseTransform = isYi ? 'rotate(90deg)' : 'none';
+      btn.style.background = isSelected ? 'rgba(0, 255, 136, 0.6)' : 'rgba(0, 255, 136, 0.2)';
+      btn.style.transform = baseTransform;
+    });
+  }
+
+  function updateCombatUI() {
+    if (!combatUI) return;
+    combatUI.pinyinDisplay.setText(pinyinInput || '_');
+    
+    if (selectedBpmf) {
+      const isYi = selectedBpmf === 'ㄧ';
+      combatUI.bpmfDisplay.setText(selectedBpmf);
+      combatUI.bpmfDisplay.setRotation(isYi ? Math.PI / 2 : 0);
+    } else {
+      combatUI.bpmfDisplay.setText('_');
+      combatUI.bpmfDisplay.setRotation(0);
+    }
+    
+    renderBpmfKeyboardHTML();
+    
+    // Check if both are ready
+    const enemyBpmf = currentEnemy.getData('bpmf');
+    const correctPinyin = enemyBpmf.pinyin?.toLowerCase().trim();
+    const correctBpmf = enemyBpmf.bpmf;
+    
+    const pinyinReady = pinyinInput.toLowerCase().trim() === correctPinyin;
+    const bpmfReady = selectedBpmf === correctBpmf;
+    
+    if (pinyinReady && bpmfReady) {
+      combatUI.feedback.setText('Ready! Press Enter to attack!');
+      combatUI.feedback.setColor('#00ff88');
+    } else if (pinyinReady) {
+      combatUI.feedback.setText('Pinyin correct! Now select the BPMF character.');
+      combatUI.feedback.setColor('#4ade80');
+    } else {
+      combatUI.feedback.setText('Type the pinyin for the symbol above.');
+      combatUI.feedback.setColor('#00ff88');
+    }
+  }
+
+  function submitCombatAnswer() {
+    if (!currentEnemy || !combatUI) return;
+    
+    const enemyBpmf = currentEnemy.getData('bpmf');
+    const correctPinyin = enemyBpmf.pinyin?.toLowerCase().trim();
+    const correctBpmf = enemyBpmf.bpmf;
+    const userPinyin = pinyinInput.toLowerCase().trim();
+    const userBpmf = selectedBpmf;
+    
+    const pinyinCorrect = userPinyin === correctPinyin;
+    const bpmfCorrect = userBpmf === correctBpmf;
+    
+    if (pinyinCorrect && bpmfCorrect) {
+      // Both correct! Enemy defeated immediately
+      combatUI.feedback.setText('Perfect! Enemy defeated!');
+      combatUI.feedback.setColor('#00ff88');
+      
+      // Enemy defeated - save lesson progress
+      const lessonOrder = enemyBpmf.order;
+      if (lessonOrder) {
+        fetch(`/lessons/${lessonOrder}/complete`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+          }
+        }).then(response => response.json())
+          .then(data => {
+            console.log('Lesson progress saved:', data);
+          })
+          .catch(error => console.error('Error saving progress:', error));
+      }
+      
+      setTimeout(() => {
+        endCombat(true);
+      }, 1000);
+    } else {
+      // Wrong answer
+      let errorMsg = '';
+      if (!pinyinCorrect && !bpmfCorrect) {
+        errorMsg = `Both wrong! Pinyin: ${correctPinyin}, BPMF: ${correctBpmf}`;
+      } else if (!pinyinCorrect) {
+        errorMsg = `Pinyin wrong! Correct: ${correctPinyin}`;
+      } else {
+        errorMsg = `BPMF wrong! Correct: ${correctBpmf}`;
+      }
+      
+      combatUI.feedback.setText(errorMsg);
+      combatUI.feedback.setColor('#ff4444');
+      
+      // Player takes damage
+      playerHealth = Math.max(0, playerHealth - 10);
+      
+      if (playerHealth <= 0) {
+        setTimeout(() => {
+          endCombat(false);
+        }, 1000);
+      } else {
+        // Reset inputs
+        pinyinInput = '';
+        selectedBpmf = '';
+        setTimeout(() => {
+          updateCombatUI();
+        }, 2000);
+      }
+    }
+  }
+
+  function endCombat(victory) {
+    const scene = player.scene;
+    const gameWidth = scene.scale.width;
+    const gameHeight = scene.scale.height;
+    
+    // Remove combat UI
+    if (combatUI) {
+      combatUI.bg.destroy();
+      combatUI.bpmfText.destroy();
+      combatUI.step1Label.destroy();
+      combatUI.pinyinDisplay.destroy();
+      combatUI.step2Label.destroy();
+      combatUI.bpmfDisplay.destroy();
+      combatUI.keyboardContainer.destroy();
+      combatUI.feedback.destroy();
+      combatUI = null;
+    }
+    
+    // Remove HTML keyboard
+    const keyboardDiv = document.getElementById('combat-bpmf-keyboard');
+    if (keyboardDiv) keyboardDiv.remove();
+    
+    if (victory) {
+      // Remove enemy
+      currentEnemy.destroy();
+      enemies = enemies.filter(e => e !== currentEnemy);
+      
+      // Gain experience (for display only - actual progression is based on lesson completion)
+      playerExp += 20;
+      if (playerExp >= expToNext) {
+        playerExp = 0;
+        expToNext = Math.floor(expToNext * 1.5);
+        playerMaxHealth += 20;
+        playerHealth = playerMaxHealth;
+      }
+      
+      // Check if level is complete and show message
+      // Note: Level progression happens when page refreshes after completing all lessons
+      
+      // Show victory message
+      const victoryText = scene.add.text(gameWidth / 2, gameHeight / 2, 'Victory! +20 EXP', {
+        fontSize: '32px',
+        fill: '#00ff88',
+        fontStyle: 'bold'
+      }).setOrigin(0.5);
+      
+      setTimeout(() => {
+        victoryText.destroy();
+      }, 2000);
+    } else {
+      // Game over
+      const gameOverText = scene.add.text(gameWidth / 2, gameHeight / 2, 'Game Over!', {
+        fontSize: '48px',
+        fill: '#ff4444',
+        fontStyle: 'bold'
+      }).setOrigin(0.5);
+      
+      setTimeout(() => {
+        gameOverText.destroy();
+        // Reset player
+        playerHealth = playerMaxHealth;
+        playerExp = 0;
+        playerLevel = 1;
+      }, 3000);
+    }
+    
+    currentEnemy = null;
+    combatActive = false;
+    pinyinInput = '';
+    selectedBpmf = '';
+  }
+
+  // Initialize game only after Phaser is loaded
+  function initGame() {
+    const loadingDiv = document.getElementById('game-loading');
+    if (loadingDiv) loadingDiv.style.display = 'none';
+    
+    if (typeof Phaser === 'undefined') {
+      console.error('Phaser.js not loaded!');
+      const container = document.getElementById('game-container');
+      if (container) {
+        container.innerHTML = '<p style="color: #ff4444; padding: 20px; text-align: center;">Error: Phaser.js failed to load. Please refresh the page.</p>';
+      }
+      return;
+    }
+    
+    console.log('Phaser loaded, version:', Phaser.VERSION);
+    
+    // Create config now that Phaser is loaded
+    const container = document.getElementById('game-container');
+    const containerWidth = container ? container.clientWidth : 1200;
+    const containerHeight = container ? container.clientHeight : 750;
+    
+    config = {
+      type: Phaser.AUTO,
+      width: containerWidth,
+      height: containerHeight,
+      parent: 'game-container',
+      backgroundColor: '#0a1f0a',
+      physics: {
+        default: 'arcade',
+        arcade: {
+          gravity: { y: 0 },
+          debug: false
+        }
+      },
+      scene: {
+        preload: preload,
+        create: create,
+        update: update
+      }
+    };
+    
+    // After game is created, ensure canvas fills container
+    setTimeout(() => {
+      const gameCanvas = container.querySelector('canvas');
+      if (gameCanvas) {
+        gameCanvas.style.width = '100%';
+        gameCanvas.style.height = '100%';
+        gameCanvas.style.display = 'block';
+      }
+    }, 100);
+    
+    try {
+      const game = new Phaser.Game(config);
+      console.log('Game initialized successfully');
+      
+      // Ensure canvas fills container after game starts
+      setTimeout(() => {
+        const gameContainer = document.getElementById('game-container');
+        if (gameContainer) {
+          const canvas = gameContainer.querySelector('canvas');
+          if (canvas) {
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            canvas.style.display = 'block';
+          }
+        }
+      }, 200);
+    } catch (error) {
+      console.error('Error initializing game:', error);
+      const container = document.getElementById('game-container');
+      if (container) {
+        container.innerHTML = '<p style="color: #ff4444; padding: 20px; text-align: center;">Error initializing game: ' + error.message + '<br>Check console for details.</p>';
+      }
+    }
+  }
+  
+  // Wait for page to be ready, then load Phaser
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM loaded, starting Phaser load...');
+      loadPhaser()
+        .then(() => {
+          console.log('Phaser loaded, initializing game...');
+          const loadingDiv = document.getElementById('game-loading');
+          if (loadingDiv) loadingDiv.textContent = 'Initializing game...';
+          setTimeout(initGame, 100); // Small delay to ensure everything is ready
+        })
+        .catch((error) => {
+          console.error('Failed to load Phaser:', error);
+          const container = document.getElementById('game-container');
+          if (container) {
+            container.innerHTML = '<p style="color: #ff4444; padding: 20px; text-align: center;">Error: Failed to load Phaser.js.<br>Please check your internet connection and refresh the page.<br><small>' + error.message + '</small><br><br><button onclick="location.reload()" style="padding: 10px 20px; background: #00ff88; color: #000; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">Retry</button></p>';
+          }
+        });
+    });
+  } else {
+    console.log('DOM already ready, starting Phaser load...');
+    loadPhaser()
+      .then(() => {
+        console.log('Phaser loaded, initializing game...');
+        const loadingDiv = document.getElementById('game-loading');
+        if (loadingDiv) loadingDiv.textContent = 'Initializing game...';
+        setTimeout(initGame, 100);
+      })
+      .catch((error) => {
+        console.error('Failed to load Phaser:', error);
+        const container = document.getElementById('game-container');
+        if (container) {
+          container.innerHTML = '<p style="color: #ff4444; padding: 20px; text-align: center;">Error: Failed to load Phaser.js.<br>Please check your internet connection and refresh the page.<br><small>' + error.message + '</small><br><br><button onclick="location.reload()" style="padding: 10px 20px; background: #00ff88; color: #000; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">Retry</button></p>';
+        }
+      });
+  }
+</script>

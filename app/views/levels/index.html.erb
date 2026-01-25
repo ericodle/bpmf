@@ -10,8 +10,16 @@
     <% progress = level[:progress] %>
     <% unlocked = level[:unlocked] %>
     
+    <% if unlocked && level[:first_uncompleted_lesson] %>
+      <% target_url = lesson_path(level[:first_uncompleted_lesson].order) %>
+    <% elsif unlocked %>
+      <% target_url = level_path(level[:number]) %>
+    <% else %>
+      <% target_url = '#' %>
+    <% end %>
+    
     <div class="card" style="<%= 'opacity: 0.6;' unless unlocked %> cursor: <%= unlocked ? 'pointer' : 'not-allowed' %>; transition: all 0.3s; border: 3px solid <%= level[:color] %>; background: <%= level[:light_color] || 'rgba(0, 0, 0, 0.7)' %>;" 
-         <% if unlocked %>onclick="window.location.href='<%= level_path(level[:number]) %>'"<% end %>
+         <% if unlocked %>onclick="window.location.href='<%= target_url %>'"<% end %>
          onmouseover="<% if unlocked %>this.style.transform = 'translateY(-5px)'; this.style.boxShadow = '0 0 30px <%= level[:color] %>';<% end %>"
          onmouseout="<% if unlocked %>this.style.transform = 'translateY(0)'; this.style.boxShadow = 'none';<% end %>">
       

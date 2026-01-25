@@ -375,7 +375,7 @@ end
 
 puts "Created #{Lesson.count} Level 1 lessons!"
 
-# Level 2: Keyboard Layout Practice
+# Level 2: Keyboard Layout Practice - Common Combinations
 level_2_lessons = [
   {
     order: 52,
@@ -387,308 +387,102 @@ level_2_lessons = [
     pronunciation: nil,
     examples: nil
   },
+  # Common combinations - frequently used syllables in Mandarin
   {
     order: 53,
     level: 2,
-    title: "Keyboard Practice: Initial + Final",
-    content: "Now combine initials and finals. Type the complete BPMF for the given sound: 'ba'",
+    title: "Keyboard Practice: ba",
+    content: "Practice typing: 'ba'",
     lesson_type: "keyboard",
     bpmf_symbol: "ㄅㄚ",
     pronunciation: "ba",
     examples: "Type 'ba' (ㄅㄚ) on the keyboard"
   },
+  # Common combinations - frequently used syllables in Mandarin
   {
     order: 54,
     level: 2,
-    title: "Keyboard Practice: More Combinations",
-    content: "Practice more combinations of initials and finals: 'ma'",
+    title: "Keyboard Practice: ma",
+    content: "Practice typing: 'ma'",
     lesson_type: "keyboard",
     bpmf_symbol: "ㄇㄚ",
     pronunciation: "ma",
     examples: "Type 'ma' (ㄇㄚ) on the keyboard"
   },
+  # Curated list of common, meaningful combinations
   {
     order: 55,
     level: 2,
-    title: "Keyboard Practice: pa",
-    content: "Practice typing: 'pa'",
+    title: "Keyboard Practice: zhi",
+    content: "Practice typing: 'zhi'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄆㄚ",
-    pronunciation: "pa",
-    examples: "Type 'pa' (ㄆㄚ) on the keyboard"
+    bpmf_symbol: "ㄓ",
+    pronunciation: "zhi",
+    examples: "Type 'zhi' (ㄓ) on the keyboard"
   },
+  # Curated list of common, meaningful combinations (100 total)
   {
     order: 56,
     level: 2,
-    title: "Keyboard Practice: fa",
-    content: "Practice typing: 'fa'",
+    title: "Keyboard Practice: chi",
+    content: "Practice typing: 'chi'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄈㄚ",
-    pronunciation: "fa",
-    examples: "Type 'fa' (ㄈㄚ) on the keyboard"
+    bpmf_symbol: "ㄔ",
+    pronunciation: "chi",
+    examples: "Type 'chi' (ㄔ) on the keyboard"
   },
   {
     order: 57,
     level: 2,
-    title: "Keyboard Practice: da",
-    content: "Practice typing: 'da'",
+    title: "Keyboard Practice: shi",
+    content: "Practice typing: 'shi'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄉㄚ",
-    pronunciation: "da",
-    examples: "Type 'da' (ㄉㄚ) on the keyboard"
+    bpmf_symbol: "ㄕ",
+    pronunciation: "shi",
+    examples: "Type 'shi' (ㄕ) on the keyboard"
   },
   {
     order: 58,
     level: 2,
-    title: "Keyboard Practice: ta",
-    content: "Practice typing: 'ta'",
+    title: "Keyboard Practice: ri",
+    content: "Practice typing: 'ri'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄊㄚ",
-    pronunciation: "ta",
-    examples: "Type 'ta' (ㄊㄚ) on the keyboard"
+    bpmf_symbol: "ㄖ",
+    pronunciation: "ri",
+    examples: "Type 'ri' (ㄖ) on the keyboard"
   },
   {
     order: 59,
     level: 2,
-    title: "Keyboard Practice: na",
-    content: "Practice typing: 'na'",
+    title: "Keyboard Practice: zi",
+    content: "Practice typing: 'zi'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄋㄚ",
-    pronunciation: "na",
-    examples: "Type 'na' (ㄋㄚ) on the keyboard"
+    bpmf_symbol: "ㄗ",
+    pronunciation: "zi",
+    examples: "Type 'zi' (ㄗ) on the keyboard"
   },
   {
     order: 60,
     level: 2,
-    title: "Keyboard Practice: la",
-    content: "Practice typing: 'la'",
+    title: "Keyboard Practice: ci",
+    content: "Practice typing: 'ci'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄌㄚ",
-    pronunciation: "la",
-    examples: "Type 'la' (ㄌㄚ) on the keyboard"
+    bpmf_symbol: "ㄘ",
+    pronunciation: "ci",
+    examples: "Type 'ci' (ㄘ) on the keyboard"
   },
   {
     order: 61,
     level: 2,
-    title: "Keyboard Practice: ga",
-    content: "Practice typing: 'ga'",
+    title: "Keyboard Practice: si",
+    content: "Practice typing: 'si'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄍㄚ",
-    pronunciation: "ga",
-    examples: "Type 'ga' (ㄍㄚ) on the keyboard"
+    bpmf_symbol: "ㄙ",
+    pronunciation: "si",
+    examples: "Type 'si' (ㄙ) on the keyboard"
   },
   {
     order: 62,
-    level: 2,
-    title: "Keyboard Practice: ka",
-    content: "Practice typing: 'ka'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄎㄚ",
-    pronunciation: "ka",
-    examples: "Type 'ka' (ㄎㄚ) on the keyboard"
-  },
-  {
-    order: 63,
-    level: 2,
-    title: "Keyboard Practice: ha",
-    content: "Practice typing: 'ha'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄏㄚ",
-    pronunciation: "ha",
-    examples: "Type 'ha' (ㄏㄚ) on the keyboard"
-  },
-  {
-    order: 64,
-    level: 2,
-    title: "Keyboard Practice: ji",
-    content: "Practice typing: 'ji'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄐㄧ",
-    pronunciation: "ji",
-    examples: "Type 'ji' (ㄐㄧ) on the keyboard"
-  },
-  {
-    order: 65,
-    level: 2,
-    title: "Keyboard Practice: qi",
-    content: "Practice typing: 'qi'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄑㄧ",
-    pronunciation: "qi",
-    examples: "Type 'qi' (ㄑㄧ) on the keyboard"
-  },
-  {
-    order: 66,
-    level: 2,
-    title: "Keyboard Practice: xi",
-    content: "Practice typing: 'xi'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄒㄧ",
-    pronunciation: "xi",
-    examples: "Type 'xi' (ㄒㄧ) on the keyboard"
-  },
-  {
-    order: 67,
-    level: 2,
-    title: "Keyboard Practice: zha",
-    content: "Practice typing: 'zha'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄓㄚ",
-    pronunciation: "zha",
-    examples: "Type 'zha' (ㄓㄚ) on the keyboard"
-  },
-  {
-    order: 68,
-    level: 2,
-    title: "Keyboard Practice: cha",
-    content: "Practice typing: 'cha'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄔㄚ",
-    pronunciation: "cha",
-    examples: "Type 'cha' (ㄔㄚ) on the keyboard"
-  },
-  {
-    order: 69,
-    level: 2,
-    title: "Keyboard Practice: sha",
-    content: "Practice typing: 'sha'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄕㄚ",
-    pronunciation: "sha",
-    examples: "Type 'sha' (ㄕㄚ) on the keyboard"
-  },
-  {
-    order: 70,
-    level: 2,
-    title: "Keyboard Practice: za",
-    content: "Practice typing: 'za'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄗㄚ",
-    pronunciation: "za",
-    examples: "Type 'za' (ㄗㄚ) on the keyboard"
-  },
-  {
-    order: 71,
-    level: 2,
-    title: "Keyboard Practice: ca",
-    content: "Practice typing: 'ca'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄘㄚ",
-    pronunciation: "ca",
-    examples: "Type 'ca' (ㄘㄚ) on the keyboard"
-  },
-  {
-    order: 72,
-    level: 2,
-    title: "Keyboard Practice: sa",
-    content: "Practice typing: 'sa'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄙㄚ",
-    pronunciation: "sa",
-    examples: "Type 'sa' (ㄙㄚ) on the keyboard"
-  },
-  {
-    order: 73,
-    level: 2,
-    title: "Keyboard Practice: bo",
-    content: "Practice typing: 'bo'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄅㄛ",
-    pronunciation: "bo",
-    examples: "Type 'bo' (ㄅㄛ) on the keyboard"
-  },
-  {
-    order: 74,
-    level: 2,
-    title: "Keyboard Practice: po",
-    content: "Practice typing: 'po'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄆㄛ",
-    pronunciation: "po",
-    examples: "Type 'po' (ㄆㄛ) on the keyboard"
-  },
-  {
-    order: 75,
-    level: 2,
-    title: "Keyboard Practice: mo",
-    content: "Practice typing: 'mo'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄇㄛ",
-    pronunciation: "mo",
-    examples: "Type 'mo' (ㄇㄛ) on the keyboard"
-  },
-  {
-    order: 76,
-    level: 2,
-    title: "Keyboard Practice: de",
-    content: "Practice typing: 'de'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄉㄜ",
-    pronunciation: "de",
-    examples: "Type 'de' (ㄉㄜ) on the keyboard"
-  },
-  {
-    order: 77,
-    level: 2,
-    title: "Keyboard Practice: te",
-    content: "Practice typing: 'te'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄊㄜ",
-    pronunciation: "te",
-    examples: "Type 'te' (ㄊㄜ) on the keyboard"
-  },
-  {
-    order: 78,
-    level: 2,
-    title: "Keyboard Practice: ne",
-    content: "Practice typing: 'ne'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄋㄜ",
-    pronunciation: "ne",
-    examples: "Type 'ne' (ㄋㄜ) on the keyboard"
-  },
-  {
-    order: 79,
-    level: 2,
-    title: "Keyboard Practice: le",
-    content: "Practice typing: 'le'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄌㄜ",
-    pronunciation: "le",
-    examples: "Type 'le' (ㄌㄜ) on the keyboard"
-  },
-  {
-    order: 80,
-    level: 2,
-    title: "Keyboard Practice: ge",
-    content: "Practice typing: 'ge'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄍㄜ",
-    pronunciation: "ge",
-    examples: "Type 'ge' (ㄍㄜ) on the keyboard"
-  },
-  {
-    order: 81,
-    level: 2,
-    title: "Keyboard Practice: ke",
-    content: "Practice typing: 'ke'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄎㄜ",
-    pronunciation: "ke",
-    examples: "Type 'ke' (ㄎㄜ) on the keyboard"
-  },
-  {
-    order: 82,
-    level: 2,
-    title: "Keyboard Practice: he",
-    content: "Practice typing: 'he'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄏㄜ",
-    pronunciation: "he",
-    examples: "Type 'he' (ㄏㄜ) on the keyboard"
-  },
-  {
-    order: 83,
     level: 2,
     title: "Keyboard Practice: zhe",
     content: "Practice typing: 'zhe'",
@@ -698,7 +492,7 @@ level_2_lessons = [
     examples: "Type 'zhe' (ㄓㄜ) on the keyboard"
   },
   {
-    order: 84,
+    order: 63,
     level: 2,
     title: "Keyboard Practice: che",
     content: "Practice typing: 'che'",
@@ -708,7 +502,7 @@ level_2_lessons = [
     examples: "Type 'che' (ㄔㄜ) on the keyboard"
   },
   {
-    order: 85,
+    order: 64,
     level: 2,
     title: "Keyboard Practice: she",
     content: "Practice typing: 'she'",
@@ -718,7 +512,7 @@ level_2_lessons = [
     examples: "Type 'she' (ㄕㄜ) on the keyboard"
   },
   {
-    order: 86,
+    order: 65,
     level: 2,
     title: "Keyboard Practice: re",
     content: "Practice typing: 're'",
@@ -728,167 +522,7 @@ level_2_lessons = [
     examples: "Type 're' (ㄖㄜ) on the keyboard"
   },
   {
-    order: 87,
-    level: 2,
-    title: "Keyboard Practice: ze",
-    content: "Practice typing: 'ze'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄗㄜ",
-    pronunciation: "ze",
-    examples: "Type 'ze' (ㄗㄜ) on the keyboard"
-  },
-  {
-    order: 88,
-    level: 2,
-    title: "Keyboard Practice: ce",
-    content: "Practice typing: 'ce'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄘㄜ",
-    pronunciation: "ce",
-    examples: "Type 'ce' (ㄘㄜ) on the keyboard"
-  },
-  {
-    order: 89,
-    level: 2,
-    title: "Keyboard Practice: se",
-    content: "Practice typing: 'se'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄙㄜ",
-    pronunciation: "se",
-    examples: "Type 'se' (ㄙㄜ) on the keyboard"
-  },
-  {
-    order: 90,
-    level: 2,
-    title: "Keyboard Practice: bai",
-    content: "Practice typing: 'bai'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄅㄞ",
-    pronunciation: "bai",
-    examples: "Type 'bai' (ㄅㄞ) on the keyboard"
-  },
-  {
-    order: 91,
-    level: 2,
-    title: "Keyboard Practice: pai",
-    content: "Practice typing: 'pai'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄆㄞ",
-    pronunciation: "pai",
-    examples: "Type 'pai' (ㄆㄞ) on the keyboard"
-  },
-  {
-    order: 92,
-    level: 2,
-    title: "Keyboard Practice: mai",
-    content: "Practice typing: 'mai'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄇㄞ",
-    pronunciation: "mai",
-    examples: "Type 'mai' (ㄇㄞ) on the keyboard"
-  },
-  {
-    order: 93,
-    level: 2,
-    title: "Keyboard Practice: dai",
-    content: "Practice typing: 'dai'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄉㄞ",
-    pronunciation: "dai",
-    examples: "Type 'dai' (ㄉㄞ) on the keyboard"
-  },
-  {
-    order: 94,
-    level: 2,
-    title: "Keyboard Practice: tai",
-    content: "Practice typing: 'tai'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄊㄞ",
-    pronunciation: "tai",
-    examples: "Type 'tai' (ㄊㄞ) on the keyboard"
-  },
-  {
-    order: 95,
-    level: 2,
-    title: "Keyboard Practice: nai",
-    content: "Practice typing: 'nai'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄋㄞ",
-    pronunciation: "nai",
-    examples: "Type 'nai' (ㄋㄞ) on the keyboard"
-  },
-  {
-    order: 96,
-    level: 2,
-    title: "Keyboard Practice: lai",
-    content: "Practice typing: 'lai'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄌㄞ",
-    pronunciation: "lai",
-    examples: "Type 'lai' (ㄌㄞ) on the keyboard"
-  },
-  {
-    order: 97,
-    level: 2,
-    title: "Keyboard Practice: gai",
-    content: "Practice typing: 'gai'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄍㄞ",
-    pronunciation: "gai",
-    examples: "Type 'gai' (ㄍㄞ) on the keyboard"
-  },
-  {
-    order: 98,
-    level: 2,
-    title: "Keyboard Practice: kai",
-    content: "Practice typing: 'kai'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄎㄞ",
-    pronunciation: "kai",
-    examples: "Type 'kai' (ㄎㄞ) on the keyboard"
-  },
-  {
-    order: 99,
-    level: 2,
-    title: "Keyboard Practice: hai",
-    content: "Practice typing: 'hai'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄏㄞ",
-    pronunciation: "hai",
-    examples: "Type 'hai' (ㄏㄞ) on the keyboard"
-  },
-  {
-    order: 100,
-    level: 2,
-    title: "Keyboard Practice: zhai",
-    content: "Practice typing: 'zhai'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄓㄞ",
-    pronunciation: "zhai",
-    examples: "Type 'zhai' (ㄓㄞ) on the keyboard"
-  },
-  {
-    order: 101,
-    level: 2,
-    title: "Keyboard Practice: chai",
-    content: "Practice typing: 'chai'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄔㄞ",
-    pronunciation: "chai",
-    examples: "Type 'chai' (ㄔㄞ) on the keyboard"
-  },
-  {
-    order: 102,
-    level: 2,
-    title: "Keyboard Practice: shai",
-    content: "Practice typing: 'shai'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄕㄞ",
-    pronunciation: "shai",
-    examples: "Type 'shai' (ㄕㄞ) on the keyboard"
-  },
-  {
-    order: 103,
+    order: 66,
     level: 2,
     title: "Keyboard Practice: zai",
     content: "Practice typing: 'zai'",
@@ -898,44 +532,414 @@ level_2_lessons = [
     examples: "Type 'zai' (ㄗㄞ) on the keyboard"
   },
   {
+    order: 67,
+    level: 2,
+    title: "Keyboard Practice: lai",
+    content: "Practice typing: 'lai'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄌㄞ",
+    pronunciation: "lai",
+    examples: "Type 'lai' (ㄌㄞ) on the keyboard"
+  },
+  {
+    order: 68,
+    level: 2,
+    title: "Keyboard Practice: hai",
+    content: "Practice typing: 'hai'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄏㄞ",
+    pronunciation: "hai",
+    examples: "Type 'hai' (ㄏㄞ) on the keyboard"
+  },
+  {
+    order: 69,
+    level: 2,
+    title: "Keyboard Practice: zhao",
+    content: "Practice typing: 'zhao'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄓㄠ",
+    pronunciation: "zhao",
+    examples: "Type 'zhao' (ㄓㄠ) on the keyboard"
+  },
+  {
+    order: 70,
+    level: 2,
+    title: "Keyboard Practice: chao",
+    content: "Practice typing: 'chao'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄔㄠ",
+    pronunciation: "chao",
+    examples: "Type 'chao' (ㄔㄠ) on the keyboard"
+  },
+  {
+    order: 71,
+    level: 2,
+    title: "Keyboard Practice: shao",
+    content: "Practice typing: 'shao'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄕㄠ",
+    pronunciation: "shao",
+    examples: "Type 'shao' (ㄕㄠ) on the keyboard"
+  },
+  {
+    order: 72,
+    level: 2,
+    title: "Keyboard Practice: zhang",
+    content: "Practice typing: 'zhang'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄓㄤ",
+    pronunciation: "zhang",
+    examples: "Type 'zhang' (ㄓㄤ) on the keyboard"
+  },
+  {
+    order: 73,
+    level: 2,
+    title: "Keyboard Practice: chang",
+    content: "Practice typing: 'chang'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄔㄤ",
+    pronunciation: "chang",
+    examples: "Type 'chang' (ㄔㄤ) on the keyboard"
+  },
+  {
+    order: 74,
+    level: 2,
+    title: "Keyboard Practice: shang",
+    content: "Practice typing: 'shang'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄕㄤ",
+    pronunciation: "shang",
+    examples: "Type 'shang' (ㄕㄤ) on the keyboard"
+  },
+  {
+    order: 75,
+    level: 2,
+    title: "Keyboard Practice: zhen",
+    content: "Practice typing: 'zhen'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄓㄣ",
+    pronunciation: "zhen",
+    examples: "Type 'zhen' (ㄓㄣ) on the keyboard"
+  },
+  {
+    order: 76,
+    level: 2,
+    title: "Keyboard Practice: chen",
+    content: "Practice typing: 'chen'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄔㄣ",
+    pronunciation: "chen",
+    examples: "Type 'chen' (ㄔㄣ) on the keyboard"
+  },
+  {
+    order: 77,
+    level: 2,
+    title: "Keyboard Practice: shen",
+    content: "Practice typing: 'shen'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄕㄣ",
+    pronunciation: "shen",
+    examples: "Type 'shen' (ㄕㄣ) on the keyboard"
+  },
+  {
+    order: 78,
+    level: 2,
+    title: "Keyboard Practice: ren",
+    content: "Practice typing: 'ren'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄖㄣ",
+    pronunciation: "ren",
+    examples: "Type 'ren' (ㄖㄣ) on the keyboard"
+  },
+  {
+    order: 79,
+    level: 2,
+    title: "Keyboard Practice: zheng",
+    content: "Practice typing: 'zheng'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄓㄥ",
+    pronunciation: "zheng",
+    examples: "Type 'zheng' (ㄓㄥ) on the keyboard"
+  },
+  {
+    order: 80,
+    level: 2,
+    title: "Keyboard Practice: cheng",
+    content: "Practice typing: 'cheng'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄔㄥ",
+    pronunciation: "cheng",
+    examples: "Type 'cheng' (ㄔㄥ) on the keyboard"
+  },
+  {
+    order: 81,
+    level: 2,
+    title: "Keyboard Practice: sheng",
+    content: "Practice typing: 'sheng'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄕㄥ",
+    pronunciation: "sheng",
+    examples: "Type 'sheng' (ㄕㄥ) on the keyboard"
+  },
+  {
+    order: 82,
+    level: 2,
+    title: "Keyboard Practice: bu",
+    content: "Practice typing: 'bu'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄅㄨ",
+    pronunciation: "bu",
+    examples: "Type 'bu' (ㄅㄨ) on the keyboard"
+  },
+  {
+    order: 83,
+    level: 2,
+    title: "Keyboard Practice: du",
+    content: "Practice typing: 'du'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄉㄨ",
+    pronunciation: "du",
+    examples: "Type 'du' (ㄉㄨ) on the keyboard"
+  },
+  {
+    order: 84,
+    level: 2,
+    title: "Keyboard Practice: tu",
+    content: "Practice typing: 'tu'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄊㄨ",
+    pronunciation: "tu",
+    examples: "Type 'tu' (ㄊㄨ) on the keyboard"
+  },
+  {
+    order: 85,
+    level: 2,
+    title: "Keyboard Practice: nu",
+    content: "Practice typing: 'nu'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄋㄨ",
+    pronunciation: "nu",
+    examples: "Type 'nu' (ㄋㄨ) on the keyboard"
+  },
+  {
+    order: 86,
+    level: 2,
+    title: "Keyboard Practice: lu",
+    content: "Practice typing: 'lu'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄌㄨ",
+    pronunciation: "lu",
+    examples: "Type 'lu' (ㄌㄨ) on the keyboard"
+  },
+  {
+    order: 87,
+    level: 2,
+    title: "Keyboard Practice: gu",
+    content: "Practice typing: 'gu'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄍㄨ",
+    pronunciation: "gu",
+    examples: "Type 'gu' (ㄍㄨ) on the keyboard"
+  },
+  {
+    order: 88,
+    level: 2,
+    title: "Keyboard Practice: ku",
+    content: "Practice typing: 'ku'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄎㄨ",
+    pronunciation: "ku",
+    examples: "Type 'ku' (ㄎㄨ) on the keyboard"
+  },
+  {
+    order: 89,
+    level: 2,
+    title: "Keyboard Practice: hu",
+    content: "Practice typing: 'hu'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄏㄨ",
+    pronunciation: "hu",
+    examples: "Type 'hu' (ㄏㄨ) on the keyboard"
+  },
+  {
+    order: 90,
+    level: 2,
+    title: "Keyboard Practice: zhu",
+    content: "Practice typing: 'zhu'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄓㄨ",
+    pronunciation: "zhu",
+    examples: "Type 'zhu' (ㄓㄨ) on the keyboard"
+  },
+  {
+    order: 91,
+    level: 2,
+    title: "Keyboard Practice: chu",
+    content: "Practice typing: 'chu'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄔㄨ",
+    pronunciation: "chu",
+    examples: "Type 'chu' (ㄔㄨ) on the keyboard"
+  },
+  {
+    order: 92,
+    level: 2,
+    title: "Keyboard Practice: shu",
+    content: "Practice typing: 'shu'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄕㄨ",
+    pronunciation: "shu",
+    examples: "Type 'shu' (ㄕㄨ) on the keyboard"
+  },
+  {
+    order: 93,
+    level: 2,
+    title: "Keyboard Practice: ru",
+    content: "Practice typing: 'ru'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄖㄨ",
+    pronunciation: "ru",
+    examples: "Type 'ru' (ㄖㄨ) on the keyboard"
+  },
+  {
+    order: 94,
+    level: 2,
+    title: "Keyboard Practice: zu",
+    content: "Practice typing: 'zu'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄗㄨ",
+    pronunciation: "zu",
+    examples: "Type 'zu' (ㄗㄨ) on the keyboard"
+  },
+  {
+    order: 95,
+    level: 2,
+    title: "Keyboard Practice: cu",
+    content: "Practice typing: 'cu'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄘㄨ",
+    pronunciation: "cu",
+    examples: "Type 'cu' (ㄘㄨ) on the keyboard"
+  },
+  {
+    order: 96,
+    level: 2,
+    title: "Keyboard Practice: su",
+    content: "Practice typing: 'su'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄙㄨ",
+    pronunciation: "su",
+    examples: "Type 'su' (ㄙㄨ) on the keyboard"
+  },
+  {
+    order: 97,
+    level: 2,
+    title: "Keyboard Practice: ju",
+    content: "Practice typing: 'ju'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄐㄩ",
+    pronunciation: "ju",
+    examples: "Type 'ju' (ㄐㄩ) on the keyboard"
+  },
+  {
+    order: 98,
+    level: 2,
+    title: "Keyboard Practice: qu",
+    content: "Practice typing: 'qu'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄑㄩ",
+    pronunciation: "qu",
+    examples: "Type 'qu' (ㄑㄩ) on the keyboard"
+  },
+  {
+    order: 99,
+    level: 2,
+    title: "Keyboard Practice: xu",
+    content: "Practice typing: 'xu'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄒㄩ",
+    pronunciation: "xu",
+    examples: "Type 'xu' (ㄒㄩ) on the keyboard"
+  },
+  {
+    order: 100,
+    level: 2,
+    title: "Keyboard Practice: ji",
+    content: "Practice typing: 'ji'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄐㄧ",
+    pronunciation: "ji",
+    examples: "Type 'ji' (ㄐㄧ) on the keyboard"
+  },
+  {
+    order: 101,
+    level: 2,
+    title: "Keyboard Practice: qi",
+    content: "Practice typing: 'qi'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄑㄧ",
+    pronunciation: "qi",
+    examples: "Type 'qi' (ㄑㄧ) on the keyboard"
+  },
+  {
+    order: 102,
+    level: 2,
+    title: "Keyboard Practice: xi",
+    content: "Practice typing: 'xi'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄒㄧ",
+    pronunciation: "xi",
+    examples: "Type 'xi' (ㄒㄧ) on the keyboard"
+  },
+  {
+    order: 103,
+    level: 2,
+    title: "Keyboard Practice: de",
+    content: "Practice typing: 'de'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄉㄜ",
+    pronunciation: "de",
+    examples: "Type 'de' (ㄉㄜ) on the keyboard"
+  },
+  {
     order: 104,
     level: 2,
-    title: "Keyboard Practice: cai",
-    content: "Practice typing: 'cai'",
+    title: "Keyboard Practice: le",
+    content: "Practice typing: 'le'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄘㄞ",
-    pronunciation: "cai",
-    examples: "Type 'cai' (ㄘㄞ) on the keyboard"
+    bpmf_symbol: "ㄌㄜ",
+    pronunciation: "le",
+    examples: "Type 'le' (ㄌㄜ) on the keyboard"
   },
   {
     order: 105,
     level: 2,
-    title: "Keyboard Practice: sai",
-    content: "Practice typing: 'sai'",
+    title: "Keyboard Practice: ge",
+    content: "Practice typing: 'ge'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄙㄞ",
-    pronunciation: "sai",
-    examples: "Type 'sai' (ㄙㄞ) on the keyboard"
+    bpmf_symbol: "ㄍㄜ",
+    pronunciation: "ge",
+    examples: "Type 'ge' (ㄍㄜ) on the keyboard"
   },
   {
     order: 106,
     level: 2,
-    title: "Keyboard Practice: bei",
-    content: "Practice typing: 'bei'",
+    title: "Keyboard Practice: ke",
+    content: "Practice typing: 'ke'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄅㄟ",
-    pronunciation: "bei",
-    examples: "Type 'bei' (ㄅㄟ) on the keyboard"
+    bpmf_symbol: "ㄎㄜ",
+    pronunciation: "ke",
+    examples: "Type 'ke' (ㄎㄜ) on the keyboard"
   },
   {
     order: 107,
     level: 2,
-    title: "Keyboard Practice: pei",
-    content: "Practice typing: 'pei'",
+    title: "Keyboard Practice: he",
+    content: "Practice typing: 'he'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄆㄟ",
-    pronunciation: "pei",
-    examples: "Type 'pei' (ㄆㄟ) on the keyboard"
+    bpmf_symbol: "ㄏㄜ",
+    pronunciation: "he",
+    examples: "Type 'he' (ㄏㄜ) on the keyboard"
   },
   {
     order: 108,
@@ -960,115 +964,25 @@ level_2_lessons = [
   {
     order: 110,
     level: 2,
-    title: "Keyboard Practice: dei",
-    content: "Practice typing: 'dei'",
+    title: "Keyboard Practice: bei",
+    content: "Practice typing: 'bei'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄉㄟ",
-    pronunciation: "dei",
-    examples: "Type 'dei' (ㄉㄟ) on the keyboard"
+    bpmf_symbol: "ㄅㄟ",
+    pronunciation: "bei",
+    examples: "Type 'bei' (ㄅㄟ) on the keyboard"
   },
   {
     order: 111,
     level: 2,
-    title: "Keyboard Practice: nei",
-    content: "Practice typing: 'nei'",
+    title: "Keyboard Practice: pei",
+    content: "Practice typing: 'pei'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄋㄟ",
-    pronunciation: "nei",
-    examples: "Type 'nei' (ㄋㄟ) on the keyboard"
+    bpmf_symbol: "ㄆㄟ",
+    pronunciation: "pei",
+    examples: "Type 'pei' (ㄆㄟ) on the keyboard"
   },
   {
     order: 112,
-    level: 2,
-    title: "Keyboard Practice: lei",
-    content: "Practice typing: 'lei'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄌㄟ",
-    pronunciation: "lei",
-    examples: "Type 'lei' (ㄌㄟ) on the keyboard"
-  },
-  {
-    order: 113,
-    level: 2,
-    title: "Keyboard Practice: gei",
-    content: "Practice typing: 'gei'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄍㄟ",
-    pronunciation: "gei",
-    examples: "Type 'gei' (ㄍㄟ) on the keyboard"
-  },
-  {
-    order: 114,
-    level: 2,
-    title: "Keyboard Practice: hei",
-    content: "Practice typing: 'hei'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄏㄟ",
-    pronunciation: "hei",
-    examples: "Type 'hei' (ㄏㄟ) on the keyboard"
-  },
-  {
-    order: 115,
-    level: 2,
-    title: "Keyboard Practice: zhei",
-    content: "Practice typing: 'zhei'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄓㄟ",
-    pronunciation: "zhei",
-    examples: "Type 'zhei' (ㄓㄟ) on the keyboard"
-  },
-  {
-    order: 116,
-    level: 2,
-    title: "Keyboard Practice: shei",
-    content: "Practice typing: 'shei'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄕㄟ",
-    pronunciation: "shei",
-    examples: "Type 'shei' (ㄕㄟ) on the keyboard"
-  },
-  {
-    order: 117,
-    level: 2,
-    title: "Keyboard Practice: zei",
-    content: "Practice typing: 'zei'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄗㄟ",
-    pronunciation: "zei",
-    examples: "Type 'zei' (ㄗㄟ) on the keyboard"
-  },
-  {
-    order: 118,
-    level: 2,
-    title: "Keyboard Practice: bao",
-    content: "Practice typing: 'bao'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄅㄠ",
-    pronunciation: "bao",
-    examples: "Type 'bao' (ㄅㄠ) on the keyboard"
-  },
-  {
-    order: 119,
-    level: 2,
-    title: "Keyboard Practice: pao",
-    content: "Practice typing: 'pao'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄆㄠ",
-    pronunciation: "pao",
-    examples: "Type 'pao' (ㄆㄠ) on the keyboard"
-  },
-  {
-    order: 120,
-    level: 2,
-    title: "Keyboard Practice: mao",
-    content: "Practice typing: 'mao'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄇㄠ",
-    pronunciation: "mao",
-    examples: "Type 'mao' (ㄇㄠ) on the keyboard"
-  },
-  {
-    order: 121,
     level: 2,
     title: "Keyboard Practice: dao",
     content: "Practice typing: 'dao'",
@@ -1078,7 +992,7 @@ level_2_lessons = [
     examples: "Type 'dao' (ㄉㄠ) on the keyboard"
   },
   {
-    order: 122,
+    order: 113,
     level: 2,
     title: "Keyboard Practice: tao",
     content: "Practice typing: 'tao'",
@@ -1088,7 +1002,7 @@ level_2_lessons = [
     examples: "Type 'tao' (ㄊㄠ) on the keyboard"
   },
   {
-    order: 123,
+    order: 114,
     level: 2,
     title: "Keyboard Practice: nao",
     content: "Practice typing: 'nao'",
@@ -1098,7 +1012,7 @@ level_2_lessons = [
     examples: "Type 'nao' (ㄋㄠ) on the keyboard"
   },
   {
-    order: 124,
+    order: 115,
     level: 2,
     title: "Keyboard Practice: lao",
     content: "Practice typing: 'lao'",
@@ -1108,7 +1022,7 @@ level_2_lessons = [
     examples: "Type 'lao' (ㄌㄠ) on the keyboard"
   },
   {
-    order: 125,
+    order: 116,
     level: 2,
     title: "Keyboard Practice: gao",
     content: "Practice typing: 'gao'",
@@ -1118,17 +1032,7 @@ level_2_lessons = [
     examples: "Type 'gao' (ㄍㄠ) on the keyboard"
   },
   {
-    order: 126,
-    level: 2,
-    title: "Keyboard Practice: kao",
-    content: "Practice typing: 'kao'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄎㄠ",
-    pronunciation: "kao",
-    examples: "Type 'kao' (ㄎㄠ) on the keyboard"
-  },
-  {
-    order: 127,
+    order: 117,
     level: 2,
     title: "Keyboard Practice: hao",
     content: "Practice typing: 'hao'",
@@ -1138,77 +1042,7 @@ level_2_lessons = [
     examples: "Type 'hao' (ㄏㄠ) on the keyboard"
   },
   {
-    order: 128,
-    level: 2,
-    title: "Keyboard Practice: zhao",
-    content: "Practice typing: 'zhao'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄓㄠ",
-    pronunciation: "zhao",
-    examples: "Type 'zhao' (ㄓㄠ) on the keyboard"
-  },
-  {
-    order: 129,
-    level: 2,
-    title: "Keyboard Practice: chao",
-    content: "Practice typing: 'chao'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄔㄠ",
-    pronunciation: "chao",
-    examples: "Type 'chao' (ㄔㄠ) on the keyboard"
-  },
-  {
-    order: 130,
-    level: 2,
-    title: "Keyboard Practice: shao",
-    content: "Practice typing: 'shao'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄕㄠ",
-    pronunciation: "shao",
-    examples: "Type 'shao' (ㄕㄠ) on the keyboard"
-  },
-  {
-    order: 131,
-    level: 2,
-    title: "Keyboard Practice: rao",
-    content: "Practice typing: 'rao'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄖㄠ",
-    pronunciation: "rao",
-    examples: "Type 'rao' (ㄖㄠ) on the keyboard"
-  },
-  {
-    order: 132,
-    level: 2,
-    title: "Keyboard Practice: zao",
-    content: "Practice typing: 'zao'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄗㄠ",
-    pronunciation: "zao",
-    examples: "Type 'zao' (ㄗㄠ) on the keyboard"
-  },
-  {
-    order: 133,
-    level: 2,
-    title: "Keyboard Practice: cao",
-    content: "Practice typing: 'cao'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄘㄠ",
-    pronunciation: "cao",
-    examples: "Type 'cao' (ㄘㄠ) on the keyboard"
-  },
-  {
-    order: 134,
-    level: 2,
-    title: "Keyboard Practice: sao",
-    content: "Practice typing: 'sao'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄙㄠ",
-    pronunciation: "sao",
-    examples: "Type 'sao' (ㄙㄠ) on the keyboard"
-  },
-  {
-    order: 135,
+    order: 118,
     level: 2,
     title: "Keyboard Practice: ban",
     content: "Practice typing: 'ban'",
@@ -1218,7 +1052,7 @@ level_2_lessons = [
     examples: "Type 'ban' (ㄅㄢ) on the keyboard"
   },
   {
-    order: 136,
+    order: 119,
     level: 2,
     title: "Keyboard Practice: pan",
     content: "Practice typing: 'pan'",
@@ -1228,7 +1062,7 @@ level_2_lessons = [
     examples: "Type 'pan' (ㄆㄢ) on the keyboard"
   },
   {
-    order: 137,
+    order: 120,
     level: 2,
     title: "Keyboard Practice: man",
     content: "Practice typing: 'man'",
@@ -1238,7 +1072,7 @@ level_2_lessons = [
     examples: "Type 'man' (ㄇㄢ) on the keyboard"
   },
   {
-    order: 138,
+    order: 121,
     level: 2,
     title: "Keyboard Practice: fan",
     content: "Practice typing: 'fan'",
@@ -1248,7 +1082,7 @@ level_2_lessons = [
     examples: "Type 'fan' (ㄈㄢ) on the keyboard"
   },
   {
-    order: 139,
+    order: 122,
     level: 2,
     title: "Keyboard Practice: dan",
     content: "Practice typing: 'dan'",
@@ -1258,7 +1092,7 @@ level_2_lessons = [
     examples: "Type 'dan' (ㄉㄢ) on the keyboard"
   },
   {
-    order: 140,
+    order: 123,
     level: 2,
     title: "Keyboard Practice: tan",
     content: "Practice typing: 'tan'",
@@ -1268,7 +1102,7 @@ level_2_lessons = [
     examples: "Type 'tan' (ㄊㄢ) on the keyboard"
   },
   {
-    order: 141,
+    order: 124,
     level: 2,
     title: "Keyboard Practice: nan",
     content: "Practice typing: 'nan'",
@@ -1278,7 +1112,7 @@ level_2_lessons = [
     examples: "Type 'nan' (ㄋㄢ) on the keyboard"
   },
   {
-    order: 142,
+    order: 125,
     level: 2,
     title: "Keyboard Practice: lan",
     content: "Practice typing: 'lan'",
@@ -1288,7 +1122,7 @@ level_2_lessons = [
     examples: "Type 'lan' (ㄌㄢ) on the keyboard"
   },
   {
-    order: 143,
+    order: 126,
     level: 2,
     title: "Keyboard Practice: gan",
     content: "Practice typing: 'gan'",
@@ -1298,17 +1132,7 @@ level_2_lessons = [
     examples: "Type 'gan' (ㄍㄢ) on the keyboard"
   },
   {
-    order: 144,
-    level: 2,
-    title: "Keyboard Practice: kan",
-    content: "Practice typing: 'kan'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄎㄢ",
-    pronunciation: "kan",
-    examples: "Type 'kan' (ㄎㄢ) on the keyboard"
-  },
-  {
-    order: 145,
+    order: 127,
     level: 2,
     title: "Keyboard Practice: han",
     content: "Practice typing: 'han'",
@@ -1318,257 +1142,7 @@ level_2_lessons = [
     examples: "Type 'han' (ㄏㄢ) on the keyboard"
   },
   {
-    order: 146,
-    level: 2,
-    title: "Keyboard Practice: zhan",
-    content: "Practice typing: 'zhan'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄓㄢ",
-    pronunciation: "zhan",
-    examples: "Type 'zhan' (ㄓㄢ) on the keyboard"
-  },
-  {
-    order: 147,
-    level: 2,
-    title: "Keyboard Practice: chan",
-    content: "Practice typing: 'chan'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄔㄢ",
-    pronunciation: "chan",
-    examples: "Type 'chan' (ㄔㄢ) on the keyboard"
-  },
-  {
-    order: 148,
-    level: 2,
-    title: "Keyboard Practice: shan",
-    content: "Practice typing: 'shan'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄕㄢ",
-    pronunciation: "shan",
-    examples: "Type 'shan' (ㄕㄢ) on the keyboard"
-  },
-  {
-    order: 149,
-    level: 2,
-    title: "Keyboard Practice: ran",
-    content: "Practice typing: 'ran'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄖㄢ",
-    pronunciation: "ran",
-    examples: "Type 'ran' (ㄖㄢ) on the keyboard"
-  },
-  {
-    order: 150,
-    level: 2,
-    title: "Keyboard Practice: zan",
-    content: "Practice typing: 'zan'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄗㄢ",
-    pronunciation: "zan",
-    examples: "Type 'zan' (ㄗㄢ) on the keyboard"
-  },
-  {
-    order: 151,
-    level: 2,
-    title: "Keyboard Practice: can",
-    content: "Practice typing: 'can'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄘㄢ",
-    pronunciation: "can",
-    examples: "Type 'can' (ㄘㄢ) on the keyboard"
-  },
-  {
-    order: 152,
-    level: 2,
-    title: "Keyboard Practice: san",
-    content: "Practice typing: 'san'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄙㄢ",
-    pronunciation: "san",
-    examples: "Type 'san' (ㄙㄢ) on the keyboard"
-  },
-  {
-    order: 153,
-    level: 2,
-    title: "Keyboard Practice: bang",
-    content: "Practice typing: 'bang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄅㄤ",
-    pronunciation: "bang",
-    examples: "Type 'bang' (ㄅㄤ) on the keyboard"
-  },
-  {
-    order: 154,
-    level: 2,
-    title: "Keyboard Practice: pang",
-    content: "Practice typing: 'pang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄆㄤ",
-    pronunciation: "pang",
-    examples: "Type 'pang' (ㄆㄤ) on the keyboard"
-  },
-  {
-    order: 155,
-    level: 2,
-    title: "Keyboard Practice: mang",
-    content: "Practice typing: 'mang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄇㄤ",
-    pronunciation: "mang",
-    examples: "Type 'mang' (ㄇㄤ) on the keyboard"
-  },
-  {
-    order: 156,
-    level: 2,
-    title: "Keyboard Practice: fang",
-    content: "Practice typing: 'fang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄈㄤ",
-    pronunciation: "fang",
-    examples: "Type 'fang' (ㄈㄤ) on the keyboard"
-  },
-  {
-    order: 157,
-    level: 2,
-    title: "Keyboard Practice: dang",
-    content: "Practice typing: 'dang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄉㄤ",
-    pronunciation: "dang",
-    examples: "Type 'dang' (ㄉㄤ) on the keyboard"
-  },
-  {
-    order: 158,
-    level: 2,
-    title: "Keyboard Practice: tang",
-    content: "Practice typing: 'tang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄊㄤ",
-    pronunciation: "tang",
-    examples: "Type 'tang' (ㄊㄤ) on the keyboard"
-  },
-  {
-    order: 159,
-    level: 2,
-    title: "Keyboard Practice: nang",
-    content: "Practice typing: 'nang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄋㄤ",
-    pronunciation: "nang",
-    examples: "Type 'nang' (ㄋㄤ) on the keyboard"
-  },
-  {
-    order: 160,
-    level: 2,
-    title: "Keyboard Practice: lang",
-    content: "Practice typing: 'lang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄌㄤ",
-    pronunciation: "lang",
-    examples: "Type 'lang' (ㄌㄤ) on the keyboard"
-  },
-  {
-    order: 161,
-    level: 2,
-    title: "Keyboard Practice: gang",
-    content: "Practice typing: 'gang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄍㄤ",
-    pronunciation: "gang",
-    examples: "Type 'gang' (ㄍㄤ) on the keyboard"
-  },
-  {
-    order: 162,
-    level: 2,
-    title: "Keyboard Practice: kang",
-    content: "Practice typing: 'kang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄎㄤ",
-    pronunciation: "kang",
-    examples: "Type 'kang' (ㄎㄤ) on the keyboard"
-  },
-  {
-    order: 163,
-    level: 2,
-    title: "Keyboard Practice: hang",
-    content: "Practice typing: 'hang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄏㄤ",
-    pronunciation: "hang",
-    examples: "Type 'hang' (ㄏㄤ) on the keyboard"
-  },
-  {
-    order: 164,
-    level: 2,
-    title: "Keyboard Practice: zhang",
-    content: "Practice typing: 'zhang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄓㄤ",
-    pronunciation: "zhang",
-    examples: "Type 'zhang' (ㄓㄤ) on the keyboard"
-  },
-  {
-    order: 165,
-    level: 2,
-    title: "Keyboard Practice: chang",
-    content: "Practice typing: 'chang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄔㄤ",
-    pronunciation: "chang",
-    examples: "Type 'chang' (ㄔㄤ) on the keyboard"
-  },
-  {
-    order: 166,
-    level: 2,
-    title: "Keyboard Practice: shang",
-    content: "Practice typing: 'shang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄕㄤ",
-    pronunciation: "shang",
-    examples: "Type 'shang' (ㄕㄤ) on the keyboard"
-  },
-  {
-    order: 167,
-    level: 2,
-    title: "Keyboard Practice: rang",
-    content: "Practice typing: 'rang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄖㄤ",
-    pronunciation: "rang",
-    examples: "Type 'rang' (ㄖㄤ) on the keyboard"
-  },
-  {
-    order: 168,
-    level: 2,
-    title: "Keyboard Practice: zang",
-    content: "Practice typing: 'zang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄗㄤ",
-    pronunciation: "zang",
-    examples: "Type 'zang' (ㄗㄤ) on the keyboard"
-  },
-  {
-    order: 169,
-    level: 2,
-    title: "Keyboard Practice: cang",
-    content: "Practice typing: 'cang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄘㄤ",
-    pronunciation: "cang",
-    examples: "Type 'cang' (ㄘㄤ) on the keyboard"
-  },
-  {
-    order: 170,
-    level: 2,
-    title: "Keyboard Practice: sang",
-    content: "Practice typing: 'sang'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄙㄤ",
-    pronunciation: "sang",
-    examples: "Type 'sang' (ㄙㄤ) on the keyboard"
-  },
-  {
-    order: 171,
+    order: 128,
     level: 2,
     title: "Keyboard Practice: ben",
     content: "Practice typing: 'ben'",
@@ -1578,7 +1152,7 @@ level_2_lessons = [
     examples: "Type 'ben' (ㄅㄣ) on the keyboard"
   },
   {
-    order: 172,
+    order: 129,
     level: 2,
     title: "Keyboard Practice: pen",
     content: "Practice typing: 'pen'",
@@ -1588,7 +1162,7 @@ level_2_lessons = [
     examples: "Type 'pen' (ㄆㄣ) on the keyboard"
   },
   {
-    order: 173,
+    order: 130,
     level: 2,
     title: "Keyboard Practice: men",
     content: "Practice typing: 'men'",
@@ -1598,7 +1172,7 @@ level_2_lessons = [
     examples: "Type 'men' (ㄇㄣ) on the keyboard"
   },
   {
-    order: 174,
+    order: 131,
     level: 2,
     title: "Keyboard Practice: fen",
     content: "Practice typing: 'fen'",
@@ -1608,17 +1182,7 @@ level_2_lessons = [
     examples: "Type 'fen' (ㄈㄣ) on the keyboard"
   },
   {
-    order: 175,
-    level: 2,
-    title: "Keyboard Practice: den",
-    content: "Practice typing: 'den'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄉㄣ",
-    pronunciation: "den",
-    examples: "Type 'den' (ㄉㄣ) on the keyboard"
-  },
-  {
-    order: 176,
+    order: 132,
     level: 2,
     title: "Keyboard Practice: gen",
     content: "Practice typing: 'gen'",
@@ -1628,17 +1192,7 @@ level_2_lessons = [
     examples: "Type 'gen' (ㄍㄣ) on the keyboard"
   },
   {
-    order: 177,
-    level: 2,
-    title: "Keyboard Practice: ken",
-    content: "Practice typing: 'ken'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄎㄣ",
-    pronunciation: "ken",
-    examples: "Type 'ken' (ㄎㄣ) on the keyboard"
-  },
-  {
-    order: 178,
+    order: 133,
     level: 2,
     title: "Keyboard Practice: hen",
     content: "Practice typing: 'hen'",
@@ -1648,77 +1202,104 @@ level_2_lessons = [
     examples: "Type 'hen' (ㄏㄣ) on the keyboard"
   },
   {
-    order: 179,
+    order: 134,
     level: 2,
-    title: "Keyboard Practice: zhen",
-    content: "Practice typing: 'zhen'",
+    title: "Keyboard Practice: bang",
+    content: "Practice typing: 'bang'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄓㄣ",
-    pronunciation: "zhen",
-    examples: "Type 'zhen' (ㄓㄣ) on the keyboard"
+    bpmf_symbol: "ㄅㄤ",
+    pronunciation: "bang",
+    examples: "Type 'bang' (ㄅㄤ) on the keyboard"
   },
   {
-    order: 180,
+    order: 135,
     level: 2,
-    title: "Keyboard Practice: chen",
-    content: "Practice typing: 'chen'",
+    title: "Keyboard Practice: pang",
+    content: "Practice typing: 'pang'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄔㄣ",
-    pronunciation: "chen",
-    examples: "Type 'chen' (ㄔㄣ) on the keyboard"
+    bpmf_symbol: "ㄆㄤ",
+    pronunciation: "pang",
+    examples: "Type 'pang' (ㄆㄤ) on the keyboard"
   },
   {
-    order: 181,
+    order: 136,
     level: 2,
-    title: "Keyboard Practice: shen",
-    content: "Practice typing: 'shen'",
+    title: "Keyboard Practice: mang",
+    content: "Practice typing: 'mang'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄕㄣ",
-    pronunciation: "shen",
-    examples: "Type 'shen' (ㄕㄣ) on the keyboard"
+    bpmf_symbol: "ㄇㄤ",
+    pronunciation: "mang",
+    examples: "Type 'mang' (ㄇㄤ) on the keyboard"
+  }
+]
+    content: "Practice typing: 'dang'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄉㄤ",
+    pronunciation: "dang",
+    examples: "Type 'dang' (ㄉㄤ) on the keyboard"
   },
   {
-    order: 182,
+    order: 139,
     level: 2,
-    title: "Keyboard Practice: ren",
-    content: "Practice typing: 'ren'",
+    title: "Keyboard Practice: tang",
+    content: "Practice typing: 'tang'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄖㄣ",
-    pronunciation: "ren",
-    examples: "Type 'ren' (ㄖㄣ) on the keyboard"
+    bpmf_symbol: "ㄊㄤ",
+    pronunciation: "tang",
+    examples: "Type 'tang' (ㄊㄤ) on the keyboard"
   },
   {
-    order: 183,
+    order: 140,
     level: 2,
-    title: "Keyboard Practice: zen",
-    content: "Practice typing: 'zen'",
+    title: "Keyboard Practice: nang",
+    content: "Practice typing: 'nang'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄗㄣ",
-    pronunciation: "zen",
-    examples: "Type 'zen' (ㄗㄣ) on the keyboard"
+    bpmf_symbol: "ㄋㄤ",
+    pronunciation: "nang",
+    examples: "Type 'nang' (ㄋㄤ) on the keyboard"
   },
   {
-    order: 184,
+    order: 141,
     level: 2,
-    title: "Keyboard Practice: cen",
-    content: "Practice typing: 'cen'",
+    title: "Keyboard Practice: lang",
+    content: "Practice typing: 'lang'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄘㄣ",
-    pronunciation: "cen",
-    examples: "Type 'cen' (ㄘㄣ) on the keyboard"
+    bpmf_symbol: "ㄌㄤ",
+    pronunciation: "lang",
+    examples: "Type 'lang' (ㄌㄤ) on the keyboard"
   },
   {
-    order: 185,
+    order: 142,
     level: 2,
-    title: "Keyboard Practice: sen",
-    content: "Practice typing: 'sen'",
+    title: "Keyboard Practice: gang",
+    content: "Practice typing: 'gang'",
     lesson_type: "keyboard",
-    bpmf_symbol: "ㄙㄣ",
-    pronunciation: "sen",
-    examples: "Type 'sen' (ㄙㄣ) on the keyboard"
+    bpmf_symbol: "ㄍㄤ",
+    pronunciation: "gang",
+    examples: "Type 'gang' (ㄍㄤ) on the keyboard"
   },
   {
-    order: 186,
+    order: 143,
+    level: 2,
+    title: "Keyboard Practice: kang",
+    content: "Practice typing: 'kang'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄎㄤ",
+    pronunciation: "kang",
+    examples: "Type 'kang' (ㄎㄤ) on the keyboard"
+  },
+  {
+    order: 144,
+    level: 2,
+    title: "Keyboard Practice: hang",
+    content: "Practice typing: 'hang'",
+    lesson_type: "keyboard",
+    bpmf_symbol: "ㄏㄤ",
+    pronunciation: "hang",
+    examples: "Type 'hang' (ㄏㄤ) on the keyboard"
+  },
+  {
+    order: 145,
     level: 2,
     title: "Keyboard Practice: beng",
     content: "Practice typing: 'beng'",
@@ -1728,7 +1309,7 @@ level_2_lessons = [
     examples: "Type 'beng' (ㄅㄥ) on the keyboard"
   },
   {
-    order: 187,
+    order: 146,
     level: 2,
     title: "Keyboard Practice: peng",
     content: "Practice typing: 'peng'",
@@ -1738,7 +1319,7 @@ level_2_lessons = [
     examples: "Type 'peng' (ㄆㄥ) on the keyboard"
   },
   {
-    order: 188,
+    order: 147,
     level: 2,
     title: "Keyboard Practice: meng",
     content: "Practice typing: 'meng'",
@@ -1748,7 +1329,7 @@ level_2_lessons = [
     examples: "Type 'meng' (ㄇㄥ) on the keyboard"
   },
   {
-    order: 189,
+    order: 148,
     level: 2,
     title: "Keyboard Practice: feng",
     content: "Practice typing: 'feng'",
@@ -1758,7 +1339,7 @@ level_2_lessons = [
     examples: "Type 'feng' (ㄈㄥ) on the keyboard"
   },
   {
-    order: 190,
+    order: 149,
     level: 2,
     title: "Keyboard Practice: deng",
     content: "Practice typing: 'deng'",
@@ -1768,7 +1349,7 @@ level_2_lessons = [
     examples: "Type 'deng' (ㄉㄥ) on the keyboard"
   },
   {
-    order: 191,
+    order: 150,
     level: 2,
     title: "Keyboard Practice: teng",
     content: "Practice typing: 'teng'",
@@ -1778,7 +1359,7 @@ level_2_lessons = [
     examples: "Type 'teng' (ㄊㄥ) on the keyboard"
   },
   {
-    order: 192,
+    order: 151,
     level: 2,
     title: "Keyboard Practice: neng",
     content: "Practice typing: 'neng'",
@@ -1788,7 +1369,7 @@ level_2_lessons = [
     examples: "Type 'neng' (ㄋㄥ) on the keyboard"
   },
   {
-    order: 193,
+    order: 152,
     level: 2,
     title: "Keyboard Practice: leng",
     content: "Practice typing: 'leng'",
@@ -1798,7 +1379,7 @@ level_2_lessons = [
     examples: "Type 'leng' (ㄌㄥ) on the keyboard"
   },
   {
-    order: 194,
+    order: 153,
     level: 2,
     title: "Keyboard Practice: geng",
     content: "Practice typing: 'geng'",
@@ -1808,7 +1389,7 @@ level_2_lessons = [
     examples: "Type 'geng' (ㄍㄥ) on the keyboard"
   },
   {
-    order: 195,
+    order: 154,
     level: 2,
     title: "Keyboard Practice: keng",
     content: "Practice typing: 'keng'",
@@ -1818,7 +1399,7 @@ level_2_lessons = [
     examples: "Type 'keng' (ㄎㄥ) on the keyboard"
   },
   {
-    order: 196,
+    order: 155,
     level: 2,
     title: "Keyboard Practice: heng",
     content: "Practice typing: 'heng'",
@@ -1826,356 +1407,6 @@ level_2_lessons = [
     bpmf_symbol: "ㄏㄥ",
     pronunciation: "heng",
     examples: "Type 'heng' (ㄏㄥ) on the keyboard"
-  },
-  {
-    order: 197,
-    level: 2,
-    title: "Keyboard Practice: zheng",
-    content: "Practice typing: 'zheng'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄓㄥ",
-    pronunciation: "zheng",
-    examples: "Type 'zheng' (ㄓㄥ) on the keyboard"
-  },
-  {
-    order: 198,
-    level: 2,
-    title: "Keyboard Practice: cheng",
-    content: "Practice typing: 'cheng'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄔㄥ",
-    pronunciation: "cheng",
-    examples: "Type 'cheng' (ㄔㄥ) on the keyboard"
-  },
-  {
-    order: 199,
-    level: 2,
-    title: "Keyboard Practice: sheng",
-    content: "Practice typing: 'sheng'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄕㄥ",
-    pronunciation: "sheng",
-    examples: "Type 'sheng' (ㄕㄥ) on the keyboard"
-  },
-  {
-    order: 200,
-    level: 2,
-    title: "Keyboard Practice: reng",
-    content: "Practice typing: 'reng'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄖㄥ",
-    pronunciation: "reng",
-    examples: "Type 'reng' (ㄖㄥ) on the keyboard"
-  },
-  {
-    order: 201,
-    level: 2,
-    title: "Keyboard Practice: zeng",
-    content: "Practice typing: 'zeng'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄗㄥ",
-    pronunciation: "zeng",
-    examples: "Type 'zeng' (ㄗㄥ) on the keyboard"
-  },
-  {
-    order: 202,
-    level: 2,
-    title: "Keyboard Practice: ceng",
-    content: "Practice typing: 'ceng'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄘㄥ",
-    pronunciation: "ceng",
-    examples: "Type 'ceng' (ㄘㄥ) on the keyboard"
-  },
-  {
-    order: 203,
-    level: 2,
-    title: "Keyboard Practice: seng",
-    content: "Practice typing: 'seng'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄙㄥ",
-    pronunciation: "seng",
-    examples: "Type 'seng' (ㄙㄥ) on the keyboard"
-  },
-  {
-    order: 204,
-    level: 2,
-    title: "Keyboard Practice: bi",
-    content: "Practice typing: 'bi'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄅㄧ",
-    pronunciation: "bi",
-    examples: "Type 'bi' (ㄅㄧ) on the keyboard"
-  },
-  {
-    order: 205,
-    level: 2,
-    title: "Keyboard Practice: pi",
-    content: "Practice typing: 'pi'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄆㄧ",
-    pronunciation: "pi",
-    examples: "Type 'pi' (ㄆㄧ) on the keyboard"
-  },
-  {
-    order: 206,
-    level: 2,
-    title: "Keyboard Practice: mi",
-    content: "Practice typing: 'mi'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄇㄧ",
-    pronunciation: "mi",
-    examples: "Type 'mi' (ㄇㄧ) on the keyboard"
-  },
-  {
-    order: 207,
-    level: 2,
-    title: "Keyboard Practice: di",
-    content: "Practice typing: 'di'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄉㄧ",
-    pronunciation: "di",
-    examples: "Type 'di' (ㄉㄧ) on the keyboard"
-  },
-  {
-    order: 208,
-    level: 2,
-    title: "Keyboard Practice: ti",
-    content: "Practice typing: 'ti'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄊㄧ",
-    pronunciation: "ti",
-    examples: "Type 'ti' (ㄊㄧ) on the keyboard"
-  },
-  {
-    order: 209,
-    level: 2,
-    title: "Keyboard Practice: ni",
-    content: "Practice typing: 'ni'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄋㄧ",
-    pronunciation: "ni",
-    examples: "Type 'ni' (ㄋㄧ) on the keyboard"
-  },
-  {
-    order: 210,
-    level: 2,
-    title: "Keyboard Practice: li",
-    content: "Practice typing: 'li'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄌㄧ",
-    pronunciation: "li",
-    examples: "Type 'li' (ㄌㄧ) on the keyboard"
-  },
-  {
-    order: 211,
-    level: 2,
-    title: "Keyboard Practice: bu",
-    content: "Practice typing: 'bu'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄅㄨ",
-    pronunciation: "bu",
-    examples: "Type 'bu' (ㄅㄨ) on the keyboard"
-  },
-  {
-    order: 212,
-    level: 2,
-    title: "Keyboard Practice: pu",
-    content: "Practice typing: 'pu'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄆㄨ",
-    pronunciation: "pu",
-    examples: "Type 'pu' (ㄆㄨ) on the keyboard"
-  },
-  {
-    order: 213,
-    level: 2,
-    title: "Keyboard Practice: mu",
-    content: "Practice typing: 'mu'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄇㄨ",
-    pronunciation: "mu",
-    examples: "Type 'mu' (ㄇㄨ) on the keyboard"
-  },
-  {
-    order: 214,
-    level: 2,
-    title: "Keyboard Practice: fu",
-    content: "Practice typing: 'fu'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄈㄨ",
-    pronunciation: "fu",
-    examples: "Type 'fu' (ㄈㄨ) on the keyboard"
-  },
-  {
-    order: 215,
-    level: 2,
-    title: "Keyboard Practice: du",
-    content: "Practice typing: 'du'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄉㄨ",
-    pronunciation: "du",
-    examples: "Type 'du' (ㄉㄨ) on the keyboard"
-  },
-  {
-    order: 216,
-    level: 2,
-    title: "Keyboard Practice: tu",
-    content: "Practice typing: 'tu'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄊㄨ",
-    pronunciation: "tu",
-    examples: "Type 'tu' (ㄊㄨ) on the keyboard"
-  },
-  {
-    order: 217,
-    level: 2,
-    title: "Keyboard Practice: nu",
-    content: "Practice typing: 'nu'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄋㄨ",
-    pronunciation: "nu",
-    examples: "Type 'nu' (ㄋㄨ) on the keyboard"
-  },
-  {
-    order: 218,
-    level: 2,
-    title: "Keyboard Practice: lu",
-    content: "Practice typing: 'lu'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄌㄨ",
-    pronunciation: "lu",
-    examples: "Type 'lu' (ㄌㄨ) on the keyboard"
-  },
-  {
-    order: 219,
-    level: 2,
-    title: "Keyboard Practice: gu",
-    content: "Practice typing: 'gu'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄍㄨ",
-    pronunciation: "gu",
-    examples: "Type 'gu' (ㄍㄨ) on the keyboard"
-  },
-  {
-    order: 220,
-    level: 2,
-    title: "Keyboard Practice: ku",
-    content: "Practice typing: 'ku'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄎㄨ",
-    pronunciation: "ku",
-    examples: "Type 'ku' (ㄎㄨ) on the keyboard"
-  },
-  {
-    order: 221,
-    level: 2,
-    title: "Keyboard Practice: hu",
-    content: "Practice typing: 'hu'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄏㄨ",
-    pronunciation: "hu",
-    examples: "Type 'hu' (ㄏㄨ) on the keyboard"
-  },
-  {
-    order: 222,
-    level: 2,
-    title: "Keyboard Practice: zhu",
-    content: "Practice typing: 'zhu'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄓㄨ",
-    pronunciation: "zhu",
-    examples: "Type 'zhu' (ㄓㄨ) on the keyboard"
-  },
-  {
-    order: 223,
-    level: 2,
-    title: "Keyboard Practice: chu",
-    content: "Practice typing: 'chu'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄔㄨ",
-    pronunciation: "chu",
-    examples: "Type 'chu' (ㄔㄨ) on the keyboard"
-  },
-  {
-    order: 224,
-    level: 2,
-    title: "Keyboard Practice: shu",
-    content: "Practice typing: 'shu'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄕㄨ",
-    pronunciation: "shu",
-    examples: "Type 'shu' (ㄕㄨ) on the keyboard"
-  },
-  {
-    order: 225,
-    level: 2,
-    title: "Keyboard Practice: ru",
-    content: "Practice typing: 'ru'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄖㄨ",
-    pronunciation: "ru",
-    examples: "Type 'ru' (ㄖㄨ) on the keyboard"
-  },
-  {
-    order: 226,
-    level: 2,
-    title: "Keyboard Practice: zu",
-    content: "Practice typing: 'zu'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄗㄨ",
-    pronunciation: "zu",
-    examples: "Type 'zu' (ㄗㄨ) on the keyboard"
-  },
-  {
-    order: 227,
-    level: 2,
-    title: "Keyboard Practice: cu",
-    content: "Practice typing: 'cu'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄘㄨ",
-    pronunciation: "cu",
-    examples: "Type 'cu' (ㄘㄨ) on the keyboard"
-  },
-  {
-    order: 228,
-    level: 2,
-    title: "Keyboard Practice: su",
-    content: "Practice typing: 'su'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄙㄨ",
-    pronunciation: "su",
-    examples: "Type 'su' (ㄙㄨ) on the keyboard"
-  },
-  {
-    order: 229,
-    level: 2,
-    title: "Keyboard Practice: ju",
-    content: "Practice typing: 'ju'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄐㄩ",
-    pronunciation: "ju",
-    examples: "Type 'ju' (ㄐㄩ) on the keyboard"
-  },
-  {
-    order: 230,
-    level: 2,
-    title: "Keyboard Practice: qu",
-    content: "Practice typing: 'qu'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄑㄩ",
-    pronunciation: "qu",
-    examples: "Type 'qu' (ㄑㄩ) on the keyboard"
-  },
-  {
-    order: 231,
-    level: 2,
-    title: "Keyboard Practice: xu",
-    content: "Practice typing: 'xu'",
-    lesson_type: "keyboard",
-    bpmf_symbol: "ㄒㄩ",
-    pronunciation: "xu",
-    examples: "Type 'xu' (ㄒㄩ) on the keyboard"
   }
 ]
 

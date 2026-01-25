@@ -12,6 +12,10 @@ class LevelsController < ApplicationController
       progress = calculate_level_progress(@user, lessons)
       level[:progress] = progress
       level[:unlocked] = progress[:unlocked]
+      
+      # Find first uncompleted lesson
+      first_uncompleted = lessons.find { |lesson| !@user.lesson_progresses.find_by(lesson: lesson)&.completed? }
+      level[:first_uncompleted_lesson] = first_uncompleted
     end
   end
   

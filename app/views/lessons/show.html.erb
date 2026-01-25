@@ -1,8 +1,8 @@
 <div class="card">
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
     <div>
-      <h2>Level <%= @lesson.level %> - Lesson <%= @lesson.order %>: <%= @lesson.title %></h2>
-      <p style="font-size: 20px; color: #4ade80; margin-top: 5px;">
+      <h2 style="margin-bottom: 5px; font-size: 28px;">Level <%= @lesson.level %> - Lesson <%= @lesson.order %>: <%= @lesson.title %></h2>
+      <p style="font-size: 16px; color: #4ade80; margin: 0;">
         <% if @lesson.level == 1 %>
           Learning BPMF Symbols
         <% elsif @lesson.level == 2 %>
@@ -13,54 +13,54 @@
       </p>
     </div>
     <% if @progress.completed? %>
-      <span class="badge" style="background: #00ff88; color: #000; padding: 8px 16px; border-radius: 20px; box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);">Completed!</span>
+      <span class="badge" style="background: #00ff88; color: #000; padding: 6px 12px; border-radius: 20px; box-shadow: 0 0 10px rgba(0, 255, 136, 0.5); font-size: 14px;">Completed!</span>
     <% end %>
   </div>
   
   <% if @lesson.bpmf_symbol %>
     <% if @lesson.bpmf_symbol == 'ㄧ' %>
-      <div style="text-align: center;">
-        <div class="bpmf-symbol" style="transform: rotate(90deg); transform-origin: center center; display: inline-block;"><%= @lesson.bpmf_symbol %></div>
+      <div style="text-align: center; margin: 10px 0;">
+        <div class="bpmf-symbol" style="transform: rotate(90deg); transform-origin: center center; display: inline-block; font-size: 120px; margin: 0;"><%= @lesson.bpmf_symbol %></div>
       </div>
     <% else %>
-      <div class="bpmf-symbol"><%= @lesson.bpmf_symbol %></div>
+      <div class="bpmf-symbol" style="font-size: 120px; margin: 10px 0;"><%= @lesson.bpmf_symbol %></div>
     <% end %>
   <% end %>
   
   <% if @lesson.content %>
-    <div class="examples">
-      <strong>Pronunciation:</strong>
-      <div class="lesson-content" style="margin-top: 10px;">
+    <div class="examples" style="padding: 12px; margin: 8px 0;">
+      <strong style="font-size: 16px;">Pronunciation:</strong>
+      <div class="lesson-content" style="margin-top: 5px; font-size: 16px;">
         <%= simple_format(@lesson.content) %>
       </div>
     </div>
   <% end %>
   
   <% if @lesson.pronunciation %>
-    <div class="examples">
-      <strong>Pinyin Equivalent:</strong> <%= @lesson.pronunciation %>
+    <div class="examples" style="padding: 12px; margin: 8px 0;">
+      <strong style="font-size: 16px;">Pinyin Equivalent:</strong> <span style="font-size: 18px;"><%= @lesson.pronunciation %></span>
     </div>
   <% end %>
   
   <% if @lesson.examples %>
-    <div class="examples">
+    <div class="examples" style="padding: 12px; margin: 8px 0; font-size: 14px;">
       <strong>Examples:</strong> <%= @lesson.examples %>
     </div>
   <% end %>
   
   <% if @lesson.lesson_type == "keyboard" && @lesson.level == 2 %>
     <% unless @progress.completed? %>
-      <div id="keyboard-practice" style="margin-top: 30px;">
-        <h3 style="margin-bottom: 20px;">Type the BPMF symbols for: <strong style="color: #00ff88; font-size: 32px;"><%= @lesson.pronunciation %></strong></h3>
-        <div id="bpmf-keyboard" style="margin: 30px 0;"></div>
-        <div id="keyboard-input" style="font-size: 48px; text-align: center; min-height: 60px; padding: 20px; background: rgba(0, 0, 0, 0.5); border: 2px solid #00ff88; border-radius: 12px; margin: 20px 0; color: #00ff88; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);"></div>
-        <div id="ready-indicator-keyboard" style="display: none; text-align: center; margin: 20px 0; padding: 15px; background: rgba(0, 255, 136, 0.2); border: 2px solid #00ff88; border-radius: 10px;">
-          <span style="color: #00ff88; font-size: 24px; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);">✓ Answer correct! Press Enter to continue →</span>
+      <div id="keyboard-practice" style="margin-top: 15px;">
+        <h3 style="margin-bottom: 8px; font-size: 18px;">Type the BPMF symbols for: <strong style="color: #00ff88; font-size: 24px;"><%= @lesson.pronunciation %></strong></h3>
+        <div id="bpmf-keyboard" style="margin: 12px 0;"></div>
+        <div id="keyboard-input" style="font-size: 36px; text-align: center; min-height: 45px; padding: 12px; background: rgba(0, 0, 0, 0.5); border: 2px solid #00ff88; border-radius: 8px; margin: 12px 0; color: #00ff88; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);"></div>
+        <div id="ready-indicator-keyboard" style="display: none; text-align: center; margin: 10px 0; padding: 8px; background: rgba(0, 255, 136, 0.2); border: 2px solid #00ff88; border-radius: 8px;">
+          <span style="color: #00ff88; font-size: 16px; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);">✓ Answer correct! Press Enter to continue →</span>
         </div>
-        <div id="keyboard-feedback" style="display: none;"></div>
+        <div id="keyboard-feedback" style="display: none; margin-top: 8px;"></div>
       </div>
     <% else %>
-      <div class="feedback correct" style="margin-top: 20px;">
+      <div class="feedback correct" style="margin-top: 10px; padding: 12px;">
         <strong>Great job!</strong> You've completed this lesson and earned <%= @progress.points_earned %> points!
       </div>
       <% if @next_lesson %>
@@ -70,7 +70,7 @@
           }, 1500);
         </script>
       <% else %>
-        <p style="color: #00ff88; font-size: 18px; font-weight: 600; margin-top: 20px;">🎉 Congratulations! You've completed all lessons!</p>
+        <p style="color: #00ff88; font-size: 16px; font-weight: 600; margin-top: 10px;">🎉 Congratulations! You've completed all lessons!</p>
       <% end %>
     <% end %>
   <% elsif (@lesson.lesson_type == "tone" || @lesson.lesson_type == "word") && @lesson.level == 3 %>
@@ -93,69 +93,69 @@
         </div>
       </div>
     <% else %>
-      <div class="feedback correct" style="margin-top: 20px;">
+      <div class="feedback correct" style="margin-top: 10px; padding: 12px;">
         <strong>Great job!</strong> You've completed this lesson and earned <%= @progress.points_earned %> points!
       </div>
       
-      <div style="margin-top: 30px; text-align: center;">
+      <div style="margin-top: 15px; text-align: center;">
         <% if @next_lesson %>
-          <%= link_to "Next Lesson →", lesson_path(@next_lesson.order), class: "btn btn-success", style: "font-size: 18px; padding: 15px 30px;" %>
+          <%= link_to "Next Lesson →", lesson_path(@next_lesson.order), class: "btn btn-success", style: "font-size: 16px; padding: 12px 24px;" %>
         <% else %>
-          <p style="color: #00ff88; font-size: 18px; font-weight: 600;">🎉 Congratulations! You've completed all lessons!</p>
+          <p style="color: #00ff88; font-size: 16px; font-weight: 600;">🎉 Congratulations! You've completed all lessons!</p>
         <% end %>
       </div>
     <% end %>
   <% elsif @lesson.lesson_type == "introduction" || @lesson.lesson_type == "practice" %>
     <% unless @progress.completed? %>
-      <div style="margin-top: 30px; text-align: center;">
+      <div style="margin-top: 15px; text-align: center;">
         <% if @next_lesson %>
-          <%= link_to "Continue to Next Lesson →", lesson_path(@next_lesson.order), class: "btn btn-success", style: "font-size: 18px; padding: 15px 30px;" %>
+          <%= link_to "Continue to Next Lesson →", lesson_path(@next_lesson.order), class: "btn btn-success", style: "font-size: 16px; padding: 12px 24px;" %>
         <% end %>
       </div>
     <% else %>
-      <div class="feedback correct" style="margin-top: 20px;">
+      <div class="feedback correct" style="margin-top: 10px; padding: 12px;">
         <strong>Great job!</strong> You've completed this lesson and earned <%= @progress.points_earned %> points!
       </div>
       
-      <div style="margin-top: 30px; text-align: center;">
+      <div style="margin-top: 15px; text-align: center;">
         <% if @next_lesson %>
-          <%= link_to "Next Lesson →", lesson_path(@next_lesson.order), class: "btn btn-success", style: "font-size: 18px; padding: 15px 30px;" %>
+          <%= link_to "Next Lesson →", lesson_path(@next_lesson.order), class: "btn btn-success", style: "font-size: 16px; padding: 12px 24px;" %>
         <% else %>
-          <p style="color: #00ff88; font-size: 18px; font-weight: 600;">🎉 Congratulations! You've completed all lessons!</p>
+          <p style="color: #00ff88; font-size: 16px; font-weight: 600;">🎉 Congratulations! You've completed all lessons!</p>
         <% end %>
       </div>
     <% end %>
   <% elsif @lesson.bpmf_symbol || @lesson.pronunciation %>
     <% if @lesson.level == 1 %>
       <% unless @progress.completed? %>
-        <div id="practice-section" style="margin-top: 30px;">
-          <h3 style="margin-bottom: 15px; color: #667eea;">Practice Time!</h3>
-          <p style="margin-bottom: 20px;">Enter the pinyin equivalent and select the BPMF character. Press Enter when both are correct:</p>
+        <div id="practice-section" style="margin-top: 15px;">
+          <h3 style="margin-bottom: 8px; color: #667eea; font-size: 20px;">Practice Time!</h3>
+          <p style="margin-bottom: 12px; font-size: 14px;">Enter the pinyin equivalent and select the BPMF character. Press Enter when both are correct:</p>
           
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
             <div>
-              <label style="display: block; margin-bottom: 10px; font-size: 18px; color: #667eea;">Pinyin Equivalent:</label>
+              <label style="display: block; margin-bottom: 5px; font-size: 14px; color: #667eea;">Pinyin Equivalent:</label>
               <input type="text" 
                      id="answer-input" 
                      class="answer-input" 
                      placeholder="Enter pinyin..."
                      autocomplete="off"
                      autofocus
-                     style="margin: 0;">
+                     style="margin: 0; padding: 12px; font-size: 20px;">
             </div>
             <div>
-              <label style="display: block; margin-bottom: 10px; font-size: 18px; color: #667eea;">BPMF Character:</label>
-              <div id="bpmf-selected" style="width: 100%; padding: 20px; font-size: 72px; text-align: center; min-height: 68px; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.3); border: 2px dashed #4ade80; border-radius: 12px; color: #00ff88; text-shadow: 0 0 15px rgba(0, 255, 136, 0.8);"><span id="bpmf-placeholder" style="color: #4ade80; opacity: 0.5; font-size: 18px;">Click a character below</span></div>
+              <label style="display: block; margin-bottom: 5px; font-size: 14px; color: #667eea;">BPMF Character:</label>
+              <div id="bpmf-selected" style="width: 100%; padding: 12px; font-size: 48px; text-align: center; min-height: 50px; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.3); border: 2px dashed #4ade80; border-radius: 8px; color: #00ff88; text-shadow: 0 0 15px rgba(0, 255, 136, 0.8);"><span id="bpmf-placeholder" style="color: #4ade80; opacity: 0.5; font-size: 14px;">Click a character below</span></div>
             </div>
           </div>
           
-          <div id="ready-indicator" style="display: none; text-align: center; margin: 20px 0; padding: 15px; background: rgba(0, 255, 136, 0.2); border: 2px solid #00ff88; border-radius: 10px;">
-            <span style="color: #00ff88; font-size: 24px; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);">✓ Both answers correct! Press Enter to continue →</span>
+          <div id="ready-indicator" style="display: none; text-align: center; margin: 10px 0; padding: 8px; background: rgba(0, 255, 136, 0.2); border: 2px solid #00ff88; border-radius: 8px;">
+            <span style="color: #00ff88; font-size: 16px; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);">✓ Both answers correct! Press Enter to continue →</span>
           </div>
           
-          <div id="bpmf-keyboard" style="margin: 30px 0;"></div>
+          <div id="bpmf-keyboard" style="margin: 15px 0;"></div>
           
-          <div id="feedback" style="display: none; margin-top: 20px;"></div>
+          <div id="feedback" style="display: none; margin-top: 10px;"></div>
         </div>
       <% else %>
         <div class="feedback correct" style="margin-top: 20px;">
@@ -240,12 +240,12 @@
   function renderBpmfKeyboard() {
     const keyboardEl = document.getElementById('bpmf-keyboard');
     keyboardEl.innerHTML = '';
-    keyboardEl.style.cssText = 'display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin: 30px 0;';
+    keyboardEl.style.cssText = 'display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 12px 0;';
     
     const numColumns = bpmfKeyboard[0].length;
     for (let col = 0; col < numColumns; col++) {
       const colDiv = document.createElement('div');
-      colDiv.style.cssText = 'display: flex; flex-direction: column; gap: 10px;';
+      colDiv.style.cssText = 'display: flex; flex-direction: column; gap: 6px;';
       
       bpmfKeyboard.forEach((row, rowIndex) => {
         const symbol = row[col];
@@ -255,7 +255,7 @@
           const isSelected = selectedBpmf === symbol;
           const isYi = symbol === 'ㄧ';
           const baseTransform = isYi ? 'rotate(90deg)' : 'none';
-          btn.style.cssText = `font-size: 36px; padding: 18px 24px; min-width: 70px; background: ${isSelected ? 'rgba(0, 255, 136, 0.6)' : 'rgba(0, 255, 136, 0.2)'}; border: 2px solid #00ff88; border-radius: 10px; color: #00ff88; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8); display: inline-block; transform: ${baseTransform};`;
+          btn.style.cssText = `font-size: 28px; padding: 10px 16px; min-width: 55px; background: ${isSelected ? 'rgba(0, 255, 136, 0.6)' : 'rgba(0, 255, 136, 0.2)'}; border: 2px solid #00ff88; border-radius: 8px; color: #00ff88; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8); display: inline-block; transform: ${baseTransform};`;
           btn.onmouseover = function() { 
             if (!isSelected) {
               this.style.background = 'rgba(0, 255, 136, 0.4)'; 
@@ -498,7 +498,7 @@
   function renderKeyboard() {
     const keyboardEl = document.getElementById('bpmf-keyboard');
     keyboardEl.innerHTML = '';
-    keyboardEl.style.cssText = 'display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin: 30px 0;';
+    keyboardEl.style.cssText = 'display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 12px 0;';
     
     // Tone marks mapping: column index => tone mark
     const toneMarks = {
@@ -515,13 +515,13 @@
     const numColumns = bpmfKeyboard[0].length;
     for (let col = 0; col < numColumns; col++) {
       const colDiv = document.createElement('div');
-      colDiv.style.cssText = 'display: flex; flex-direction: column; gap: 10px;';
+      colDiv.style.cssText = 'display: flex; flex-direction: column; gap: 6px;';
       
       // Add tone mark above column if specified
       if (toneMarks[col]) {
         const toneBtn = document.createElement('button');
         toneBtn.textContent = toneMarks[col];
-        toneBtn.style.cssText = 'font-size: 28px; padding: 12px 24px; min-width: 70px; background: rgba(74, 222, 128, 0.3); border: 2px solid #4ade80; border-radius: 10px; color: #4ade80; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px rgba(74, 222, 128, 0.8); display: block; margin-bottom: 5px;';
+        toneBtn.style.cssText = 'font-size: 22px; padding: 8px 16px; min-width: 55px; background: rgba(74, 222, 128, 0.3); border: 2px solid #4ade80; border-radius: 8px; color: #4ade80; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px rgba(74, 222, 128, 0.8); display: block; margin-bottom: 3px;';
         toneBtn.onmouseover = function() { 
           this.style.background = 'rgba(74, 222, 128, 0.5)'; 
           this.style.boxShadow = '0 0 20px rgba(74, 222, 128, 0.6)'; 
@@ -547,7 +547,7 @@
           btn.textContent = symbol;
           const isYi = symbol === 'ㄧ';
           const baseTransform = isYi ? 'rotate(90deg)' : 'none';
-          btn.style.cssText = `font-size: 36px; padding: 18px 24px; min-width: 70px; background: rgba(0, 255, 136, 0.2); border: 2px solid #00ff88; border-radius: 10px; color: #00ff88; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8); display: inline-block; transform: ${baseTransform};`;
+          btn.style.cssText = `font-size: 28px; padding: 10px 16px; min-width: 55px; background: rgba(0, 255, 136, 0.2); border: 2px solid #00ff88; border-radius: 8px; color: #00ff88; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px rgba(0, 255, 136, 0.8); display: inline-block; transform: ${baseTransform};`;
           btn.onmouseover = function() { 
             this.style.background = 'rgba(0, 255, 136, 0.4)'; 
             this.style.boxShadow = '0 0 20px rgba(0, 255, 136, 0.6)'; 

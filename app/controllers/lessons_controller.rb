@@ -16,25 +16,50 @@ class LessonsController < ApplicationController
   def complete
     progress = @current_user.lesson_progresses.find_or_initialize_by(lesson: @lesson)
     
-      unless progress.completed?
-        points = 10
-        progress.complete!(points: points)
-        
+    unless progress.completed?
+      points = 10
+      progress.complete!(points: points)
+      
+      if request.format.json?
+        render json: { 
+          success: true,
+          message: "Great job! You earned #{points} points!",
+          points: points,
+          completed: true
+        }
+      else
         redirect_to lesson_path(@lesson.order), notice: "Great job! You earned #{points} points!"
+      end
     else
-      redirect_to lesson_path(@lesson.order)
+      if request.format.json?
+        render json: { 
+          success: true,
+          message: "Already completed!",
+          completed: true
+        }
+      else
+        redirect_to lesson_path(@lesson.order)
+      end
     end
   end
   
   def submit_answer
     answer = params[:answer]
-    correct_answer = @lesson.pronunciation || @lesson.bpmf_symbol
+    
+    # For Level 2 keyboard practice, compare against BPMF symbol
+    # For other lessons, compare against pronunciation or BPMF symbol
+    if @lesson.level == 2 && @lesson.lesson_type == "keyboard"
+      correct_answer = @lesson.bpmf_symbol
+      # BPMF symbols don't have case, so compare directly
+      is_correct = answer&.strip == correct_answer&.strip
+    else
+      correct_answer = @lesson.pronunciation || @lesson.bpmf_symbol
+      is_correct = answer&.downcase&.strip == correct_answer&.downcase&.strip
+    end
     
     progress = @current_user.lesson_progresses.find_or_initialize_by(lesson: @lesson)
     progress.attempts += 1
     progress.save!
-    
-    is_correct = answer&.downcase&.strip == correct_answer&.downcase&.strip
     
     if is_correct
       unless progress.completed?

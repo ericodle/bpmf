@@ -6,6 +6,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="csrf-token" content="<%= form_authenticity_token %>">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     
     <style>
       * {
@@ -51,14 +53,14 @@
       
       .navbar {
         background: rgba(0, 0, 0, 0.8);
-        padding: 25px 30px;
-        border-radius: 15px;
-        margin-bottom: 30px;
+        padding: 12px 20px;
+        border-radius: 10px;
+        margin-bottom: 15px;
         border: 2px solid #00ff88;
         box-shadow: 
-          0 0 20px rgba(0, 255, 136, 0.5),
-          0 0 40px rgba(0, 255, 136, 0.3),
-          inset 0 0 20px rgba(0, 255, 136, 0.1);
+          0 0 15px rgba(0, 255, 136, 0.4),
+          0 0 30px rgba(0, 255, 136, 0.2),
+          inset 0 0 15px rgba(0, 255, 136, 0.1);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -67,12 +69,12 @@
       
       .navbar h1 {
         color: #00ff88;
-        font-size: 36px;
+        font-size: 22px;
         font-weight: bold;
         text-shadow: 
-          0 0 10px rgba(0, 255, 136, 0.8),
-          0 0 20px rgba(0, 255, 136, 0.6),
-          0 0 30px rgba(0, 255, 136, 0.4);
+          0 0 8px rgba(0, 255, 136, 0.8),
+          0 0 15px rgba(0, 255, 136, 0.6),
+          0 0 25px rgba(0, 255, 136, 0.4);
         animation: pulse-glow 2s ease-in-out infinite;
         cursor: pointer;
         transition: all 0.3s;
@@ -107,16 +109,16 @@
       
       .navbar-links {
         display: flex;
-        gap: 25px;
+        gap: 15px;
       }
       
       .navbar-links a {
         text-decoration: none;
         color: #00ff88;
         font-weight: 600;
-        font-size: 22px;
-        padding: 12px 20px;
-        border-radius: 8px;
+        font-size: 16px;
+        padding: 8px 15px;
+        border-radius: 6px;
         transition: all 0.3s;
         border: 1px solid transparent;
         text-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
@@ -305,10 +307,10 @@
       }
       
       .bpmf-symbol {
-        font-size: 180px;
+        font-size: 120px;
         text-align: center;
         color: #00ff88;
-        margin: 30px 0;
+        margin: 10px 0;
         font-weight: bold;
         text-shadow: 
           0 0 20px rgba(0, 255, 136, 1),
@@ -590,9 +592,9 @@
   <body>
     <div class="container">
       <nav class="navbar">
-        <h1><%= link_to "Eric's BPMF Game", root_path, style: "text-decoration: none; color: inherit;" %></h1>
+        <h1><%= link_to "Eric's BPMF Game", game_path, style: "text-decoration: none; color: inherit;" %></h1>
         <div class="navbar-links">
-          <%= link_to "Levels", levels_path %>
+          <%= link_to "Game", game_path %>
           <%= link_to "History", history_path %>
           <%= link_to "About", about_path %>
         </div>
