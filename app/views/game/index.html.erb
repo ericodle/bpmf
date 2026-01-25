@@ -80,8 +80,8 @@
   let selectedBpmf = '';
   let combatUI = null;
   let lifeIcons = []; // Array of life icon graphics
-  let playerHits = 3; // 3 hits and you're dead
-  let playerMaxHits = 3;
+  let playerHits = 4; // 4 lives (B, P, M, F)
+  let playerMaxHits = 4;
   let playerLevel = <%= @current_level %>;
   const currentGameLevel = <%= @current_level %>;
   const level1Completed = <%= @level_1_completed ? 'true' : 'false' %>;
@@ -190,8 +190,13 @@
         const y = Phaser.Math.Between(200, gameHeight - 200);
         const enemy = this.physics.add.sprite(x, y, 'enemy');
         enemy.setScale(1.5);
+        enemy.setCollideWorldBounds(true);
         enemy.setData('health', 50);
         enemy.setData('bpmf', lesson);
+        // Random movement data
+        enemy.setData('moveTimer', Phaser.Math.Between(1000, 3000));
+        enemy.setData('moveDirection', { x: Phaser.Math.Between(-1, 1), y: Phaser.Math.Between(-1, 1) });
+        enemy.setData('moveSpeed', Phaser.Math.Between(30, 60));
         enemies.push(enemy);
       }
     } else {
@@ -217,41 +222,69 @@
   }
 
   function createUI(scene) {
-    // Life icons (Chinese-style circular coins)
-    lifeIcons = [];
-    for (let i = 0; i < playerMaxHits; i++) {
-      const x = 15 + (i * 35);
-      const y = 15;
+    // Life icons (Chinese-style circular coins) - positioned outside game zone
+    // Create a container div outside the game canvas for life icons
+    const gameContainer = document.getElementById('game-container');
+    if (gameContainer) {
+      // Remove any existing life container
+      const existingLifeContainer = document.getElementById('life-icons-container');
+      if (existingLifeContainer) existingLifeContainer.remove();
       
-      // Create Chinese coin-style life icon
-      const icon = scene.add.graphics();
-      icon.fillStyle(0x00ff88);
-      icon.fillCircle(0, 0, 12);
-      icon.lineStyle(2, 0x4ade80);
-      icon.strokeCircle(0, 0, 12);
-      // Add inner square (traditional Chinese coin style)
-      icon.fillStyle(0x0a1f0a);
-      icon.fillRect(-4, -4, 8, 8);
-      icon.setPosition(x, y);
+      const lifeContainer = document.createElement('div');
+      lifeContainer.id = 'life-icons-container';
+      lifeContainer.style.cssText = `
+        position: absolute;
+        left: -50px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 100;
+      `;
       
-      lifeIcons.push(icon);
+      lifeIcons = [];
+      const bpmfLetters = ['B', 'P', 'M', 'F'];
+      for (let i = 0; i < playerMaxHits; i++) {
+        const iconDiv = document.createElement('div');
+        iconDiv.textContent = bpmfLetters[i];
+        iconDiv.style.cssText = `
+          width: 32px;
+          height: 32px;
+          border-radius: 6px;
+          background: #0a1f0a;
+          border: 2px solid #00ff88;
+          color: #00ff88;
+          font-size: 20px;
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          box-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+          text-shadow: 0 0 8px rgba(0, 255, 136, 0.8);
+        `;
+        lifeContainer.appendChild(iconDiv);
+        lifeIcons.push(iconDiv);
+      }
+      
+      // Insert life container in the same parent container as game container
+      const parentContainer = gameContainer.parentElement;
+      if (parentContainer) {
+        parentContainer.style.position = 'relative';
+        parentContainer.appendChild(lifeContainer);
+      } else {
+        gameContainer.parentNode.insertBefore(lifeContainer, gameContainer.nextSibling);
+      }
     }
-    
-    // Level display
-    const levelName = currentGameLevel === 1 ? 'Learning BPMF' : currentGameLevel === 2 ? 'Keyboard Practice' : 'Tone Marks';
-    scene.add.text(10, 40, `Level ${currentGameLevel}: ${levelName}`, { fontSize: '16px', fill: '#00ff88' });
     
     // Show level progression status
     if (currentGameLevel === 1 && level1Completed) {
-      scene.add.text(10, 60, 'Level 1 Complete! Refresh to advance.', { fontSize: '14px', fill: '#4ade80' });
+      scene.add.text(10, 40, 'Level 1 Complete! Refresh to advance.', { fontSize: '14px', fill: '#4ade80' });
     } else if (currentGameLevel === 2 && level2Completed) {
-      scene.add.text(10, 60, 'Level 2 Complete! Refresh to advance.', { fontSize: '14px', fill: '#4ade80' });
+      scene.add.text(10, 40, 'Level 2 Complete! Refresh to advance.', { fontSize: '14px', fill: '#4ade80' });
     }
 
-    // Instructions
-    const gameHeight = scene.scale.height;
-    scene.add.text(10, gameHeight - 60, 'Arrow keys to move', { fontSize: '14px', fill: '#00ff88' });
-    scene.add.text(10, gameHeight - 40, 'Touch enemies to battle!', { fontSize: '14px', fill: '#00ff88' });
   }
 
   function showDeathScreen() {
@@ -357,6 +390,46 @@
     } else if (cursors.down.isDown) {
       player.setVelocityY(200);
     }
+    
+    // Enemy random movement
+    enemies.forEach(enemy => {
+      if (!enemy.active) return;
+      
+      let moveTimer = enemy.getData('moveTimer');
+      let moveDirection = enemy.getData('moveDirection');
+      let moveSpeed = enemy.getData('moveSpeed');
+      
+      // Initialize if not set
+      if (moveTimer === undefined) {
+        moveTimer = Phaser.Math.Between(1000, 3000);
+        moveDirection = { x: Phaser.Math.Between(-1, 1), y: Phaser.Math.Between(-1, 1) };
+        moveSpeed = Phaser.Math.Between(30, 60);
+        enemy.setData('moveTimer', moveTimer);
+        enemy.setData('moveDirection', moveDirection);
+        enemy.setData('moveSpeed', moveSpeed);
+      }
+      
+      // Update timer (assuming ~60fps, so ~16ms per frame)
+      moveTimer -= 16;
+      
+      if (moveTimer <= 0) {
+        // Change direction randomly
+        moveDirection = {
+          x: Phaser.Math.Between(-1, 1),
+          y: Phaser.Math.Between(-1, 1)
+        };
+        moveTimer = Phaser.Math.Between(1000, 3000);
+        moveSpeed = Phaser.Math.Between(30, 60);
+        enemy.setData('moveTimer', moveTimer);
+        enemy.setData('moveDirection', moveDirection);
+        enemy.setData('moveSpeed', moveSpeed);
+      } else {
+        enemy.setData('moveTimer', moveTimer);
+      }
+      
+      // Apply movement
+      enemy.setVelocity(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+    });
   }
 
   function handleKeyDown(event) {
@@ -681,7 +754,8 @@
       
       // Remove one life icon
       if (lifeIcons.length > playerHits && lifeIcons[playerHits]) {
-        lifeIcons[playerHits].destroy();
+        lifeIcons[playerHits].style.display = 'none';
+        lifeIcons[playerHits].remove();
         lifeIcons.splice(playerHits, 1);
       }
       
