@@ -79,11 +79,10 @@
   let pinyinInput = '';
   let selectedBpmf = '';
   let combatUI = null;
-  let playerHealth = 100;
-  let playerMaxHealth = 100;
+  let lifeIcons = []; // Array of life icon graphics
+  let playerHits = 3; // 3 hits and you're dead
+  let playerMaxHits = 3;
   let playerLevel = <%= @current_level %>;
-  let playerExp = 0;
-  let expToNext = 100;
   const currentGameLevel = <%= @current_level %>;
   const level1Completed = <%= @level_1_completed ? 'true' : 'false' %>;
   const level2Completed = <%= @level_2_completed ? 'true' : 'false' %>;
@@ -166,16 +165,33 @@
     player.setCollideWorldBounds(true);
     player.setScale(1.5);
 
-    // Create enemies
+    // Create enemies - ensure no duplicate characters
     if (bpmfLessons && bpmfLessons.length > 0) {
-      for (let i = 0; i < 5; i++) {
+      // Shuffle and take unique lessons
+      const shuffledLessons = [...bpmfLessons].sort(() => Math.random() - 0.5);
+      const numEnemies = Math.min(5, shuffledLessons.length);
+      const usedLessons = new Set();
+      
+      for (let i = 0; i < numEnemies; i++) {
+        // Find a lesson that hasn't been used yet
+        let lesson;
+        for (const l of shuffledLessons) {
+          if (!usedLessons.has(l.bpmf)) {
+            lesson = l;
+            usedLessons.add(l.bpmf);
+            break;
+          }
+        }
+        
+        // If we've used all unique lessons, break
+        if (!lesson) break;
+        
         const x = Phaser.Math.Between(200, gameWidth - 200);
         const y = Phaser.Math.Between(200, gameHeight - 200);
         const enemy = this.physics.add.sprite(x, y, 'enemy');
         enemy.setScale(1.5);
         enemy.setData('health', 50);
-        const randomLesson = bpmfLessons[Math.floor(Math.random() * bpmfLessons.length)];
-        enemy.setData('bpmf', randomLesson);
+        enemy.setData('bpmf', lesson);
         enemies.push(enemy);
       }
     } else {
@@ -201,24 +217,35 @@
   }
 
   function createUI(scene) {
-    // Health bar
-    const healthBarBg = scene.add.rectangle(50, 30, 200, 20, 0x333333);
-    const healthBar = scene.add.rectangle(50, 30, 200, 20, 0xff4444);
-    healthBar.setData('maxWidth', 200);
-    healthBar.setData('value', playerHealth);
-    healthBar.setData('max', playerMaxHealth);
-    scene.add.text(10, 10, 'HP:', { fontSize: '16px', fill: '#00ff88' });
+    // Life icons (Chinese-style circular coins)
+    lifeIcons = [];
+    for (let i = 0; i < playerMaxHits; i++) {
+      const x = 15 + (i * 35);
+      const y = 15;
+      
+      // Create Chinese coin-style life icon
+      const icon = scene.add.graphics();
+      icon.fillStyle(0x00ff88);
+      icon.fillCircle(0, 0, 12);
+      icon.lineStyle(2, 0x4ade80);
+      icon.strokeCircle(0, 0, 12);
+      // Add inner square (traditional Chinese coin style)
+      icon.fillStyle(0x0a1f0a);
+      icon.fillRect(-4, -4, 8, 8);
+      icon.setPosition(x, y);
+      
+      lifeIcons.push(icon);
+    }
     
-    // Level/Exp
+    // Level display
     const levelName = currentGameLevel === 1 ? 'Learning BPMF' : currentGameLevel === 2 ? 'Keyboard Practice' : 'Tone Marks';
-    scene.add.text(10, 50, `Level ${currentGameLevel}: ${levelName}`, { fontSize: '16px', fill: '#00ff88' });
-    scene.add.text(10, 70, `Exp: ${playerExp}/${expToNext}`, { fontSize: '16px', fill: '#4ade80' });
+    scene.add.text(10, 40, `Level ${currentGameLevel}: ${levelName}`, { fontSize: '16px', fill: '#00ff88' });
     
     // Show level progression status
     if (currentGameLevel === 1 && level1Completed) {
-      scene.add.text(10, 90, 'Level 1 Complete! Refresh to advance.', { fontSize: '14px', fill: '#4ade80' });
+      scene.add.text(10, 60, 'Level 1 Complete! Refresh to advance.', { fontSize: '14px', fill: '#4ade80' });
     } else if (currentGameLevel === 2 && level2Completed) {
-      scene.add.text(10, 90, 'Level 2 Complete! Refresh to advance.', { fontSize: '14px', fill: '#4ade80' });
+      scene.add.text(10, 60, 'Level 2 Complete! Refresh to advance.', { fontSize: '14px', fill: '#4ade80' });
     }
 
     // Instructions
@@ -547,10 +574,16 @@
       combatUI.feedback.setText(errorMsg);
       combatUI.feedback.setColor('#ff4444');
       
-      // Player takes damage
-      playerHealth = Math.max(0, playerHealth - 10);
+      // Player takes a hit
+      playerHits = Math.max(0, playerHits - 1);
       
-      if (playerHealth <= 0) {
+      // Remove one life icon
+      if (lifeIcons.length > playerHits && lifeIcons[playerHits]) {
+        lifeIcons[playerHits].destroy();
+        lifeIcons.splice(playerHits, 1);
+      }
+      
+      if (playerHits <= 0) {
         setTimeout(() => {
           endCombat(false);
         }, 1000);
@@ -592,28 +625,28 @@
       currentEnemy.destroy();
       enemies = enemies.filter(e => e !== currentEnemy);
       
-      // Gain experience (for display only - actual progression is based on lesson completion)
-      playerExp += 20;
-      if (playerExp >= expToNext) {
-        playerExp = 0;
-        expToNext = Math.floor(expToNext * 1.5);
-        playerMaxHealth += 20;
-        playerHealth = playerMaxHealth;
+      // Check if all enemies are defeated
+      if (enemies.length === 0) {
+        // All enemies defeated - check if level is complete
+        const levelName = currentGameLevel === 1 ? 'Level 1' : currentGameLevel === 2 ? 'Level 2' : 'Level 3';
+        const levelCompleteText = scene.add.text(gameWidth / 2, gameHeight / 2 - 50, `${levelName} Complete!`, {
+          fontSize: '36px',
+          fill: '#00ff88',
+          fontStyle: 'bold'
+        }).setOrigin(0.5);
+        
+        const nextLevelText = scene.add.text(gameWidth / 2, gameHeight / 2, 'Progressing to next level...', {
+          fontSize: '24px',
+          fill: '#4ade80'
+        }).setOrigin(0.5);
+        
+        // Reload page after 2 seconds to progress to next level
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       }
       
-      // Check if level is complete and show message
-      // Note: Level progression happens when page refreshes after completing all lessons
-      
-      // Show victory message
-      const victoryText = scene.add.text(gameWidth / 2, gameHeight / 2, 'Victory! +20 EXP', {
-        fontSize: '32px',
-        fill: '#00ff88',
-        fontStyle: 'bold'
-      }).setOrigin(0.5);
-      
-      setTimeout(() => {
-        victoryText.destroy();
-      }, 2000);
+      // Victory - no message needed, just end combat
     } else {
       // Game over
       const gameOverText = scene.add.text(gameWidth / 2, gameHeight / 2, 'Game Over!', {
@@ -625,9 +658,28 @@
       setTimeout(() => {
         gameOverText.destroy();
         // Reset player
-        playerHealth = playerMaxHealth;
-        playerExp = 0;
+        playerHits = playerMaxHits;
         playerLevel = 1;
+        
+        // Recreate life icons
+        lifeIcons.forEach(icon => icon.destroy());
+        lifeIcons = [];
+        const scene = player.scene;
+        for (let i = 0; i < playerMaxHits; i++) {
+          const x = 15 + (i * 35);
+          const y = 15;
+          
+          const icon = scene.add.graphics();
+          icon.fillStyle(0x00ff88);
+          icon.fillCircle(0, 0, 12);
+          icon.lineStyle(2, 0x4ade80);
+          icon.strokeCircle(0, 0, 12);
+          icon.fillStyle(0x0a1f0a);
+          icon.fillRect(-4, -4, 8, 8);
+          icon.setPosition(x, y);
+          
+          lifeIcons.push(icon);
+        }
       }, 3000);
     }
     
