@@ -34,38 +34,65 @@ function preload() {
   playerGraphics.generateTexture('player', 32, 32);
   playerGraphics.destroy();
   
-  // Create pork pig enemy (cute but menacing)
+  // Create pork pig enemy (cute and bigger!)
   const enemyGraphics = this.add.graphics();
-  // Body (pink circle)
+  // Body (large pink circle - main body)
   enemyGraphics.fillStyle(0xFFB6C1);
-  enemyGraphics.fillCircle(16, 16, 14);
-  // Snout (lighter pink)
+  enemyGraphics.fillCircle(32, 32, 28);
+  // Belly (lighter pink circle)
   enemyGraphics.fillStyle(0xFFC0CB);
-  enemyGraphics.fillEllipse(16, 20, 8, 6);
-  // Nostrils (dark pink)
+  enemyGraphics.fillCircle(32, 36, 20);
+  // Snout (lighter pink, bigger)
+  enemyGraphics.fillStyle(0xFFE4E1);
+  enemyGraphics.fillEllipse(32, 42, 18, 14);
+  // Nostrils (dark pink, bigger)
   enemyGraphics.fillStyle(0xFF69B4);
-  enemyGraphics.fillCircle(14, 20, 1.5);
-  enemyGraphics.fillCircle(18, 20, 1.5);
-  // Ears (pink triangles)
+  enemyGraphics.fillCircle(26, 42, 3);
+  enemyGraphics.fillCircle(38, 42, 3);
+  // Nose bridge (small line between nostrils)
   enemyGraphics.fillStyle(0xFFB6C1);
-  enemyGraphics.fillTriangle(8, 8, 12, 4, 16, 8);
-  enemyGraphics.fillTriangle(16, 8, 20, 4, 24, 8);
-  // Eyes (black with white highlight)
+  enemyGraphics.fillRect(30, 40, 4, 2);
+  // Ears (pink triangles, bigger and floppier)
+  enemyGraphics.fillStyle(0xFFB6C1);
+  enemyGraphics.fillTriangle(16, 16, 20, 8, 28, 16);
+  enemyGraphics.fillTriangle(36, 16, 44, 8, 48, 16);
+  // Inner ear (darker pink)
+  enemyGraphics.fillStyle(0xFF91A4);
+  enemyGraphics.fillTriangle(18, 14, 22, 10, 26, 14);
+  enemyGraphics.fillTriangle(38, 14, 42, 10, 46, 14);
+  // Eyes (bigger, cute with highlights)
   enemyGraphics.fillStyle(0x0a1f0a);
-  enemyGraphics.fillCircle(12, 14, 2.5);
-  enemyGraphics.fillCircle(20, 14, 2.5);
+  enemyGraphics.fillCircle(24, 28, 5);
+  enemyGraphics.fillCircle(40, 28, 5);
+  // Eye highlights (white)
   enemyGraphics.fillStyle(0xFFFFFF);
-  enemyGraphics.fillCircle(13, 13, 1);
-  enemyGraphics.fillCircle(21, 13, 1);
-  // Tail (curly pink - using arcs)
-  enemyGraphics.lineStyle(3, 0xFFB6C1);
+  enemyGraphics.fillCircle(26, 26, 2);
+  enemyGraphics.fillCircle(42, 26, 2);
+  // Cheeks (rosy pink circles)
+  enemyGraphics.fillStyle(0xFF91A4);
+  enemyGraphics.fillCircle(18, 36, 6);
+  enemyGraphics.fillCircle(46, 36, 6);
+  // Mouth (cute smile)
+  enemyGraphics.lineStyle(3, 0x0a1f0a);
   enemyGraphics.beginPath();
-  enemyGraphics.arc(28, 14, 4, 0, Math.PI, false);
+  enemyGraphics.arc(32, 48, 8, 0, Math.PI);
+  enemyGraphics.strokePath();
+  // Tail (curly pink - bigger and more prominent)
+  enemyGraphics.lineStyle(5, 0xFFB6C1);
+  enemyGraphics.beginPath();
+  enemyGraphics.arc(56, 28, 8, 0, Math.PI, false);
   enemyGraphics.strokePath();
   enemyGraphics.beginPath();
-  enemyGraphics.arc(26, 10, 3, 0, Math.PI, true);
+  enemyGraphics.arc(52, 20, 6, 0, Math.PI, true);
   enemyGraphics.strokePath();
-  enemyGraphics.generateTexture('enemy', 32, 32);
+  enemyGraphics.beginPath();
+  enemyGraphics.arc(58, 12, 4, 0, Math.PI, false);
+  enemyGraphics.strokePath();
+  // Legs (small circles at bottom)
+  enemyGraphics.fillStyle(0xFFB6C1);
+  enemyGraphics.fillCircle(22, 58, 4);
+  enemyGraphics.fillCircle(42, 58, 4);
+  enemyGraphics.generateTexture('enemy', 64, 64);
   enemyGraphics.destroy();
   
   // Wall texture (dark gray with border)
@@ -84,4 +111,48 @@ function preload() {
     .lineStyle(1, 0x1a3a1a)
     .strokeRect(0, 0, 32, 32)
     .generateTexture('tile', 32, 32);
+  
+  // Door (locked) - red/brown with lock icon
+  const doorLockedGraphics = this.add.graphics();
+  doorLockedGraphics.fillStyle(0x8B4513);
+  doorLockedGraphics.fillRect(0, 0, 48, 64);
+  doorLockedGraphics.lineStyle(3, 0x654321);
+  doorLockedGraphics.strokeRect(0, 0, 48, 64);
+  // Door frame
+  doorLockedGraphics.fillStyle(0x654321);
+  doorLockedGraphics.fillRect(0, 0, 48, 8);
+  doorLockedGraphics.fillRect(0, 56, 48, 8);
+  doorLockedGraphics.fillRect(0, 0, 8, 64);
+  doorLockedGraphics.fillRect(40, 0, 8, 64);
+  // Lock icon (red)
+  doorLockedGraphics.fillStyle(0xff4444);
+  doorLockedGraphics.fillCircle(24, 32, 8);
+  doorLockedGraphics.fillStyle(0x0a1f0a);
+  doorLockedGraphics.fillRect(20, 28, 8, 8);
+  doorLockedGraphics.generateTexture('door_locked', 48, 64);
+  doorLockedGraphics.destroy();
+  
+  // Door (unlocked) - green with open indicator
+  const doorUnlockedGraphics = this.add.graphics();
+  doorUnlockedGraphics.fillStyle(0x8B4513);
+  doorUnlockedGraphics.fillRect(0, 0, 48, 64);
+  doorUnlockedGraphics.lineStyle(3, 0x00ff88);
+  doorUnlockedGraphics.strokeRect(0, 0, 48, 64);
+  // Door frame
+  doorUnlockedGraphics.fillStyle(0x654321);
+  doorUnlockedGraphics.fillRect(0, 0, 48, 8);
+  doorUnlockedGraphics.fillRect(0, 56, 48, 8);
+  doorUnlockedGraphics.fillRect(0, 0, 8, 64);
+  doorUnlockedGraphics.fillRect(40, 0, 8, 64);
+  // Unlock indicator (green checkmark)
+  doorUnlockedGraphics.fillStyle(0x00ff88);
+  doorUnlockedGraphics.fillCircle(24, 32, 8);
+  doorUnlockedGraphics.lineStyle(3, 0x0a1f0a);
+  doorUnlockedGraphics.beginPath();
+  doorUnlockedGraphics.moveTo(20, 32);
+  doorUnlockedGraphics.lineTo(23, 35);
+  doorUnlockedGraphics.lineTo(28, 28);
+  doorUnlockedGraphics.strokePath();
+  doorUnlockedGraphics.generateTexture('door_unlocked', 48, 64);
+  doorUnlockedGraphics.destroy();
 }

@@ -237,23 +237,8 @@ function endCombat(victory) {
     
     // Check if all enemies are defeated
     if (GameState.enemies.length === 0) {
-      // All enemies defeated - check if level is complete
-      const levelName = GameState.currentGameLevel === 1 ? 'Level 1' : GameState.currentGameLevel === 2 ? 'Level 2' : 'Level 3';
-      const levelCompleteText = scene.add.text(gameWidth / 2, gameHeight / 2 - 50, `${levelName} Complete!`, {
-        fontSize: '36px',
-        fill: '#00ff88',
-        fontStyle: 'bold'
-      }).setOrigin(0.5);
-      
-      const nextLevelText = scene.add.text(gameWidth / 2, gameHeight / 2, 'Progressing to next level...', {
-        fontSize: '24px',
-        fill: '#4ade80'
-      }).setOrigin(0.5);
-      
-      // Reload page after 2 seconds to progress to next level
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      // All enemies defeated - unlock the door
+      unlockDoor();
     }
   }
   

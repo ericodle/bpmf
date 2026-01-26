@@ -30,9 +30,9 @@ function createEnemies(scene, gameWidth, gameHeight) {
       const y = spawnRow * TILE_SIZE + TILE_SIZE / 2;
       
       const enemy = scene.physics.add.sprite(x, y, 'enemy');
-      enemy.setScale(1.5);
+      enemy.setScale(1.5); // Already 3x bigger sprite (64x64 instead of 32x32), so 1.5x scale = 4.5x original
       enemy.setCollideWorldBounds(true);
-      enemy.body.setSize(24, 24); // Smaller collision box
+      enemy.body.setSize(48, 48); // Larger collision box to match bigger sprite
       enemy.setData('health', 50);
       enemy.setData('bpmf', lesson);
       enemies.push(enemy);

@@ -43,14 +43,86 @@ function create() {
     gameContainer.setAttribute('tabindex', '0');
   }
 
+  // Create door on the right side (initially locked)
+  const doorX = gameWidth - 50;
+  const doorY = gameHeight / 2;
+  GameState.door = this.physics.add.sprite(doorX, doorY, 'door_locked');
+  GameState.door.setScale(1);
+  GameState.door.setImmovable(true);
+  GameState.door.body.setSize(48, 64);
+  GameState.door.setData('triggered', false);
+  GameState.doorUnlocked = false;
+  
+  // Add collider for locked door (blocks player) - store reference to remove later
+  GameState.doorCollider = this.physics.add.collider(GameState.player, GameState.door);
+
   // Collision detection
   // Wall collisions disabled for now
   // this.physics.add.collider(GameState.player, GameState.walls);
   // this.physics.add.collider(GameState.enemies, GameState.walls);
   this.physics.add.overlap(GameState.player, GameState.enemies, startCombat, null, this);
+  this.physics.add.overlap(GameState.player, GameState.door, checkDoorCollision, null, this);
 
   // UI
   createUI(this);
+}
+
+function unlockDoor() {
+  if (GameState.door && !GameState.doorUnlocked) {
+    GameState.doorUnlocked = true;
+    GameState.door.setTexture('door_unlocked');
+    
+    // Make door passable - remove collider so player can walk through
+    if (GameState.doorCollider) {
+      GameState.doorCollider.destroy();
+      GameState.doorCollider = null;
+    }
+    
+    // Show message that door is unlocked
+    const scene = GameState.scene;
+    const gameWidth = scene.scale.width;
+    const unlockText = scene.add.text(gameWidth / 2, 50, 'Door Unlocked! Go to the door on the right.', {
+      fontSize: '24px',
+      fill: '#00ff88',
+      fontStyle: 'bold'
+    }).setOrigin(0.5);
+    
+    // Remove message after 3 seconds
+    setTimeout(() => {
+      unlockText.destroy();
+    }, 3000);
+  }
+}
+
+function checkDoorCollision(player, door) {
+  // Only allow passage if door is unlocked
+  if (GameState.doorUnlocked && GameState.door) {
+    // Prevent multiple triggers
+    if (GameState.door.getData('triggered')) return;
+    GameState.door.setData('triggered', true);
+    
+    // Progress to next level
+    const levelName = GameState.currentGameLevel === 1 ? 'Level 1' : GameState.currentGameLevel === 2 ? 'Level 2' : 'Level 3';
+    const scene = GameState.scene;
+    const gameWidth = scene.scale.width;
+    const gameHeight = scene.scale.height;
+    
+    const levelCompleteText = scene.add.text(gameWidth / 2, gameHeight / 2 - 50, `${levelName} Complete!`, {
+      fontSize: '36px',
+      fill: '#00ff88',
+      fontStyle: 'bold'
+    }).setOrigin(0.5);
+    
+    const nextLevelText = scene.add.text(gameWidth / 2, gameHeight / 2, 'Progressing to next level...', {
+      fontSize: '24px',
+      fill: '#4ade80'
+    }).setOrigin(0.5);
+    
+    // Reload page after 2 seconds to progress to next level
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+  }
 }
 
 function update() {
