@@ -187,6 +187,11 @@ function submitCombatAnswer() {
     // Player takes a hit
     GameState.playerHits = Math.max(0, GameState.playerHits - 1);
     
+    // Play damage sound
+    if (typeof playDamageSound === 'function') {
+      playDamageSound();
+    }
+    
     // Remove one life icon
     if (GameState.lifeIcons.length > GameState.playerHits && GameState.lifeIcons[GameState.playerHits]) {
       GameState.lifeIcons[GameState.playerHits].style.display = 'none';
@@ -195,7 +200,10 @@ function submitCombatAnswer() {
     }
     
     if (GameState.playerHits <= 0) {
-      // Player died - show death screen
+      // Player died - play death sound and show death screen
+      if (typeof playDeathSound === 'function') {
+        playDeathSound();
+      }
       showDeathScreen();
     } else {
       // Reset inputs

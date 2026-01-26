@@ -63,6 +63,11 @@ function showDeathScreen() {
   const gameWidth = scene.scale.width;
   const gameHeight = scene.scale.height;
   
+  // Play death sound
+  if (typeof playDeathSound === 'function') {
+    playDeathSound();
+  }
+  
   // Stop combat immediately
   GameState.combatActive = false;
   

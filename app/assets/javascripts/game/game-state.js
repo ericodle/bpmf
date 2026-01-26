@@ -8,6 +8,7 @@ const GameState = {
   door: null,
   doorCollider: null,
   doorUnlocked: false,
+  backgroundElements: null,
   scene: null,
   combatActive: false,
   currentEnemy: null,

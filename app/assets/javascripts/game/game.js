@@ -3,16 +3,106 @@ function create() {
   const gameWidth = this.scale.width;
   const gameHeight = this.scale.height;
   
-  // Create grid-based tilemap background
+  // Create Taiwanese-themed background
   const cols = Math.floor(gameWidth / TILE_SIZE);
   const rows = Math.floor(gameHeight / TILE_SIZE);
   
-  // Create floor tiles
+  // Create floor tiles with pattern
   for (let x = 0; x < gameWidth; x += TILE_SIZE) {
     for (let y = 0; y < gameHeight; y += TILE_SIZE) {
-      this.add.image(x + TILE_SIZE/2, y + TILE_SIZE/2, 'tile').setAlpha(0.4);
+      const tile = this.add.image(x + TILE_SIZE/2, y + TILE_SIZE/2, 'tile');
+      tile.setAlpha(0.6);
+      tile.setDepth(-100); // Behind everything
     }
   }
+  
+  // Add decorative lanterns in corners (animated)
+  const lanterns = [];
+  const lanternPositions = [
+    { x: 40, y: 40 },
+    { x: gameWidth - 40, y: 40 },
+    { x: 40, y: gameHeight - 40 },
+    { x: gameWidth - 40, y: gameHeight - 40 }
+  ];
+  
+  lanternPositions.forEach(pos => {
+    const lantern = this.add.image(pos.x, pos.y, 'lantern');
+    lantern.setAlpha(0.3);
+    lantern.setDepth(-99);
+    lantern.setScale(0.8);
+    // Gentle floating animation
+    this.tweens.add({
+      targets: lantern,
+      y: pos.y - 5,
+      duration: 2000 + Math.random() * 1000,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut'
+    });
+    lanterns.push(lantern);
+  });
+  
+  // Add floating particles (like dust motes or light particles)
+  const particles = this.add.particles(0, 0, 'particle', {
+    x: { min: 0, max: gameWidth },
+    y: { min: 0, max: gameHeight },
+    speed: { min: 10, max: 30 },
+    scale: { start: 0.3, end: 0 },
+    lifespan: 3000,
+    frequency: 200,
+    alpha: { start: 0.4, end: 0 },
+    blendMode: 'ADD'
+  });
+  particles.setDepth(-98);
+  
+  // Add cute Taiwanese NPCs (non-interactive, just decorative)
+  const npcs = [];
+  const npcTypes = ['bubble_tea_npc', 'pineapple_cake_npc', 'stinky_tofu_npc', 'oyster_omelette_npc'];
+  const npcCount = 6; // Add a few NPCs around the map
+  
+  for (let i = 0; i < npcCount; i++) {
+    const npcType = npcTypes[Math.floor(Math.random() * npcTypes.length)];
+    // Place NPCs in safe areas (not too close to edges or spawn points)
+    const x = Phaser.Math.Between(80, gameWidth - 80);
+    const y = Phaser.Math.Between(80, gameHeight - 80);
+    
+    const npc = this.add.sprite(x, y, npcType);
+    npc.setScale(0.8);
+    npc.setDepth(-50); // Behind player and enemies but above background
+    npc.setAlpha(0.7);
+    
+    // Enable physics for collision detection
+    this.physics.add.existing(npc);
+    npc.body.setSize(24, 24); // Collision box
+    npc.body.setImmovable(true);
+    
+    // Gentle bobbing animation
+    this.tweens.add({
+      targets: npc,
+      y: y - 3,
+      duration: 1500 + Math.random() * 500,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut',
+      delay: Math.random() * 1000
+    });
+    
+    // Gentle rotation (very subtle)
+    this.tweens.add({
+      targets: npc,
+      angle: 2,
+      duration: 2000 + Math.random() * 1000,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut',
+      delay: Math.random() * 1000
+    });
+    
+    npcs.push(npc);
+  }
+  
+  // Store for cleanup if needed
+  GameState.backgroundElements = { lanterns, particles, npcs };
   
   // Walls disabled for now - can be re-enabled later
   GameState.walls = this.physics.add.staticGroup();
@@ -62,6 +152,13 @@ function create() {
   // this.physics.add.collider(GameState.enemies, GameState.walls);
   this.physics.add.overlap(GameState.player, GameState.enemies, startCombat, null, this);
   this.physics.add.overlap(GameState.player, GameState.door, checkDoorCollision, null, this);
+  
+  // NPC interaction - player can eat NPCs
+  if (GameState.backgroundElements && GameState.backgroundElements.npcs) {
+    GameState.backgroundElements.npcs.forEach(npc => {
+      this.physics.add.overlap(GameState.player, npc, eatNPC, null, this);
+    });
+  }
 
   // UI
   createUI(this);
@@ -91,6 +188,124 @@ function unlockDoor() {
     setTimeout(() => {
       unlockText.destroy();
     }, 3000);
+  }
+}
+
+function eatNPC(player, npc) {
+  if (!npc.active) return; // Already eaten
+  
+  // Play munch sound effect (using Web Audio API for simple sound)
+  playMunchSound();
+  
+  // Add visual feedback - make NPC disappear with a scale animation
+  const scene = GameState.scene;
+  scene.tweens.add({
+    targets: npc,
+    scale: 0,
+    alpha: 0,
+    duration: 200,
+    ease: 'Power2',
+    onComplete: () => {
+      npc.destroy();
+    }
+  });
+  
+  // Mark as inactive to prevent multiple triggers
+  npc.active = false;
+  
+  // Remove from NPCs array
+  if (GameState.backgroundElements && GameState.backgroundElements.npcs) {
+    const index = GameState.backgroundElements.npcs.indexOf(npc);
+    if (index > -1) {
+      GameState.backgroundElements.npcs.splice(index, 1);
+    }
+  }
+}
+
+function playMunchSound() {
+  // Create a simple "munch munch" sound using Web Audio API
+  try {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    // Create two quick munch sounds
+    const playMunch = (delay = 0) => {
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      // Munch sound: quick, low-frequency noise-like sound
+      oscillator.type = 'sawtooth';
+      oscillator.frequency.setValueAtTime(150, audioContext.currentTime + delay);
+      oscillator.frequency.exponentialRampToValueAtTime(80, audioContext.currentTime + delay + 0.1);
+      
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime + delay);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + delay + 0.1);
+      
+      oscillator.start(audioContext.currentTime + delay);
+      oscillator.stop(audioContext.currentTime + delay + 0.1);
+    };
+    
+    // Play two munch sounds in quick succession
+    playMunch(0);
+    playMunch(0.1);
+  } catch (e) {
+    // Fallback: just log if audio context fails
+    console.log('Munch munch!');
+  }
+}
+
+function playDamageSound() {
+  // Create a damage/hurt sound effect
+  try {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    // Damage sound: sharp, descending tone
+    oscillator.type = 'sawtooth';
+    oscillator.frequency.setValueAtTime(300, audioContext.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.15);
+    
+    gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.15);
+  } catch (e) {
+    console.log('Ouch!');
+  }
+}
+
+function playDeathSound() {
+  // Create a dramatic death sound effect
+  try {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    // Long descending tone for death
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    // Death sound: long, dramatic descending tone
+    oscillator.type = 'sawtooth';
+    oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(50, audioContext.currentTime + 0.8);
+    
+    gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.8);
+  } catch (e) {
+    console.log('Game Over!');
   }
 }
 
@@ -172,7 +387,7 @@ function initGame() {
     width: containerWidth,
     height: containerHeight,
     parent: 'game-container',
-    backgroundColor: '#0a1f0a',
+    backgroundColor: '#C4B5A0', // Darker warm beige/cream Taiwanese tile color
     physics: {
       default: 'arcade',
       arcade: {
