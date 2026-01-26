@@ -1,26 +1,56 @@
 // Asset loading and sprite creation
 function preload() {
-  // Create sweet potato player (cute orange/brown potato)
+  // Create purple yam player (cute purple sweet potato - irregular shape)
   const playerGraphics = this.add.graphics();
-  // Main body (orange/brown sweet potato shape - elongated oval)
-  playerGraphics.fillStyle(0xD2691E); // Orange-brown
-  playerGraphics.fillEllipse(16, 16, 20, 24);
-  // Highlights (lighter orange)
-  playerGraphics.fillStyle(0xE67E22);
-  playerGraphics.fillEllipse(16, 14, 16, 20);
-  // Texture/details (small dots for potato skin)
-  playerGraphics.fillStyle(0xB8860B);
-  playerGraphics.fillCircle(12, 12, 1.5);
-  playerGraphics.fillCircle(20, 10, 1);
-  playerGraphics.fillCircle(18, 18, 1.2);
-  playerGraphics.fillCircle(14, 22, 1);
-  playerGraphics.fillCircle(22, 20, 1.3);
+  // Main body (irregular purple yam shape - using path for organic look)
+  playerGraphics.fillStyle(0x8B4C89); // Deep purple
+  playerGraphics.beginPath();
+  // Create irregular, lumpy shape
+  playerGraphics.moveTo(8, 10);
+  playerGraphics.lineTo(6, 14);
+  playerGraphics.lineTo(8, 18);
+  playerGraphics.lineTo(10, 22);
+  playerGraphics.lineTo(12, 26);
+  playerGraphics.lineTo(14, 28);
+  playerGraphics.lineTo(16, 30);
+  playerGraphics.lineTo(18, 28);
+  playerGraphics.lineTo(20, 26);
+  playerGraphics.lineTo(22, 24);
+  playerGraphics.lineTo(24, 20);
+  playerGraphics.lineTo(26, 16);
+  playerGraphics.lineTo(24, 12);
+  playerGraphics.lineTo(22, 10);
+  playerGraphics.lineTo(20, 8);
+  playerGraphics.lineTo(18, 6);
+  playerGraphics.lineTo(16, 5);
+  playerGraphics.lineTo(14, 6);
+  playerGraphics.lineTo(12, 8);
+  playerGraphics.lineTo(10, 9);
+  playerGraphics.closePath();
+  playerGraphics.fillPath();
+  
+  // Highlights (lighter purple - irregular patches)
+  playerGraphics.fillStyle(0xA569A5);
+  playerGraphics.fillEllipse(14, 12, 8, 10);
+  playerGraphics.fillEllipse(18, 20, 6, 8);
+  playerGraphics.fillEllipse(10, 22, 5, 6);
+  
+  // Texture/details (small dots for yam skin - darker purple)
+  playerGraphics.fillStyle(0x6B2C69);
+  playerGraphics.fillCircle(11, 11, 1.2);
+  playerGraphics.fillCircle(21, 9, 1);
+  playerGraphics.fillCircle(17, 17, 1.1);
+  playerGraphics.fillCircle(13, 23, 1);
+  playerGraphics.fillCircle(23, 21, 1.2);
+  playerGraphics.fillCircle(9, 19, 0.8);
+  playerGraphics.fillCircle(19, 25, 0.9);
+  
   // Cute face (two dots for eyes, smile)
-  playerGraphics.fillStyle(0x0a1f0a);
+  playerGraphics.fillStyle(0xFFFFFF);
   playerGraphics.fillCircle(13, 16, 1.5);
   playerGraphics.fillCircle(19, 16, 1.5);
   // Smile
-  playerGraphics.lineStyle(2, 0x0a1f0a);
+  playerGraphics.lineStyle(2, 0xFFFFFF);
   playerGraphics.beginPath();
   playerGraphics.arc(16, 20, 3, 0, Math.PI);
   playerGraphics.strokePath();
