@@ -193,7 +193,56 @@ function eatNPC(player, npc) {
     if (index > -1) {
       GameState.backgroundElements.npcs.splice(index, 1);
     }
+    
+    // Check if all NPCs are consumed
+    if (GameState.backgroundElements.npcs.length === 0) {
+      showLevelReward();
+    }
   }
+}
+
+function showLevelReward() {
+  const scene = GameState.scene;
+  const gameWidth = scene.scale.width;
+  const gameHeight = scene.scale.height;
+  const currentLevel = GameState.currentGameLevel || 1;
+  
+  // Get the appropriate reward texture for this level
+  const rewardTexture = `reward_level_${currentLevel}`;
+  
+  // Create reward sprite in center of screen
+  const reward = scene.add.sprite(gameWidth / 2, gameHeight / 2, rewardTexture);
+  reward.setScale(3); // Make it bigger
+  reward.setDepth(10000); // Above everything
+  reward.setAlpha(0); // Start invisible
+  
+  // Add background overlay
+  const overlay = scene.add.rectangle(gameWidth / 2, gameHeight / 2, gameWidth * 2, gameHeight * 2, 0x000000, 0.7);
+  overlay.setDepth(9999);
+  overlay.setAlpha(0);
+  
+  // Flash animation: fade in, hold, fade out
+  scene.tweens.add({
+    targets: [reward, overlay],
+    alpha: 1,
+    duration: 300,
+    ease: 'Power2',
+    onComplete: () => {
+      // Hold for 2 seconds
+      scene.time.delayedCall(2000, () => {
+        scene.tweens.add({
+          targets: [reward, overlay],
+          alpha: 0,
+          duration: 300,
+          ease: 'Power2',
+          onComplete: () => {
+            reward.destroy();
+            overlay.destroy();
+          }
+        });
+      });
+    }
+  });
 }
 
 function playMunchSound() {

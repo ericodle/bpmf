@@ -281,6 +281,9 @@ function preload() {
   oysterOmeletteGraphics.generateTexture('oyster_omelette_npc', 32, 32);
   oysterOmeletteGraphics.destroy();
   
+  // Pixel art rewards for each level (Taiwanese-themed)
+  createLevelRewards(this);
+  
   // Asian cauldron (locked/cold) - empty traditional cauldron
   const doorLockedGraphics = this.add.graphics();
   // Cauldron base (wide, dark bronze/copper)
@@ -383,4 +386,627 @@ function preload() {
   doorUnlockedGraphics.fillCircle(36, 6, 2);
   doorUnlockedGraphics.generateTexture('door_unlocked', 48, 64);
   doorUnlockedGraphics.destroy();
+}
+
+function createLevelRewards(scene) {
+  // Level 1: Night Market Stall (intricate)
+  const reward1 = scene.add.graphics();
+  // Sky background
+  reward1.fillStyle(0x1a1a2e);
+  reward1.fillRect(0, 0, 64, 52);
+  // Stars
+  reward1.fillStyle(0xFFFFFF);
+  reward1.fillRect(8, 4, 1, 1);
+  reward1.fillRect(24, 2, 1, 1);
+  reward1.fillRect(40, 5, 1, 1);
+  reward1.fillRect(56, 3, 1, 1);
+  // Orange roof with tiles
+  reward1.fillStyle(0xFF6B35);
+  reward1.fillRect(0, 0, 64, 14);
+  reward1.fillStyle(0xFF4500); // Darker tiles
+  for (let i = 0; i < 8; i++) {
+    reward1.fillRect(i * 8, 0, 4, 14);
+  }
+  // Roof edge detail
+  reward1.fillStyle(0xFF4500);
+  reward1.fillRect(0, 12, 64, 2);
+  // Stall structure
+  reward1.fillStyle(0x8B4513); // Brown stall
+  reward1.fillRect(4, 14, 56, 38);
+  reward1.fillStyle(0x654321); // Darker brown frame
+  reward1.fillRect(4, 14, 56, 4);
+  reward1.fillRect(4, 48, 56, 4);
+  reward1.fillRect(4, 14, 4, 38);
+  reward1.fillRect(56, 14, 4, 38);
+  // Gold sign with Chinese characters pattern
+  reward1.fillStyle(0xFFD700);
+  reward1.fillRect(18, 18, 28, 10);
+  reward1.fillStyle(0xFFA500); // Sign border
+  reward1.fillRect(18, 18, 28, 2);
+  reward1.fillRect(18, 26, 28, 2);
+  reward1.fillRect(18, 18, 2, 10);
+  reward1.fillRect(44, 18, 2, 10);
+  // Red lanterns with details
+  reward1.fillStyle(0xFF0000);
+  reward1.fillCircle(10, 30, 5);
+  reward1.fillCircle(54, 30, 5);
+  reward1.fillStyle(0xFFD700); // Gold trim
+  reward1.lineStyle(1, 0xFFD700);
+  reward1.strokeCircle(10, 30, 5);
+  reward1.strokeCircle(54, 30, 5);
+  // Lantern tassels
+  reward1.fillStyle(0xFFD700);
+  reward1.fillRect(9, 35, 2, 8);
+  reward1.fillRect(53, 35, 2, 8);
+  // Food items on counter
+  reward1.fillStyle(0xFFE135); // Yellow food
+  reward1.fillRect(12, 32, 6, 4);
+  reward1.fillRect(46, 32, 6, 4);
+  reward1.fillStyle(0xFF6B35); // Orange food
+  reward1.fillRect(20, 34, 5, 3);
+  reward1.fillRect(39, 34, 5, 3);
+  // Counter detail
+  reward1.fillStyle(0x654321);
+  reward1.fillRect(8, 38, 48, 2);
+  reward1.generateTexture('reward_level_1', 64, 52);
+  reward1.destroy();
+  
+  // Level 2: Bubble Tea Shop (intricate)
+  const reward2 = scene.add.graphics();
+  // Sky gradient
+  reward2.fillStyle(0x87CEEB); // Light blue
+  reward2.fillRect(0, 0, 64, 30);
+  reward2.fillStyle(0x4682B4); // Medium blue
+  reward2.fillRect(0, 30, 64, 22);
+  // Clouds
+  reward2.fillStyle(0xFFFFFF);
+  reward2.fillCircle(16, 8, 4);
+  reward2.fillCircle(20, 8, 4);
+  reward2.fillCircle(48, 12, 3);
+  reward2.fillCircle(51, 12, 3);
+  // Shop building
+  reward2.fillStyle(0xFFFFFF); // White shop front
+  reward2.fillRect(6, 18, 52, 34);
+  reward2.fillStyle(0xE0E0E0); // Light gray frame
+  reward2.fillRect(6, 18, 52, 3);
+  reward2.fillRect(6, 49, 52, 3);
+  reward2.fillRect(6, 18, 3, 34);
+  reward2.fillRect(55, 18, 3, 34);
+  // Window
+  reward2.fillStyle(0xADD8E6);
+  reward2.fillRect(12, 24, 20, 16);
+  reward2.fillStyle(0x000000); // Window frame
+  reward2.fillRect(12, 24, 20, 2);
+  reward2.fillRect(12, 38, 20, 2);
+  reward2.fillRect(12, 24, 2, 16);
+  reward2.fillRect(30, 24, 2, 16);
+  reward2.fillRect(21, 24, 2, 16); // Vertical divider
+  // Bubble tea display (multiple cups)
+  reward2.fillStyle(0xFF69B4); // Pink tea
+  reward2.fillRect(36, 22, 12, 18);
+  reward2.fillRect(50, 22, 8, 18);
+  reward2.fillStyle(0xFFFFFF); // Bubbles
+  reward2.fillCircle(39, 26, 2);
+  reward2.fillCircle(43, 30, 2);
+  reward2.fillCircle(41, 34, 1.5);
+  reward2.fillCircle(52, 26, 1.5);
+  reward2.fillCircle(55, 30, 1.5);
+  // Straws
+  reward2.fillStyle(0xFF1493);
+  reward2.fillRect(41, 18, 2, 6);
+  reward2.fillRect(53, 18, 2, 6);
+  // Gold sign with text pattern
+  reward2.fillStyle(0xFFD700);
+  reward2.fillRect(14, 42, 36, 8);
+  reward2.fillStyle(0xFFA500); // Border
+  reward2.fillRect(14, 42, 36, 2);
+  reward2.fillRect(14, 48, 36, 2);
+  reward2.fillRect(14, 42, 2, 8);
+  reward2.fillRect(48, 42, 2, 8);
+  // Decorative pattern on sign
+  reward2.fillStyle(0xFFA500);
+  reward2.fillRect(20, 44, 2, 4);
+  reward2.fillRect(26, 44, 2, 4);
+  reward2.fillRect(32, 44, 2, 4);
+  reward2.fillRect(38, 44, 2, 4);
+  reward2.fillRect(44, 44, 2, 4);
+  reward2.generateTexture('reward_level_2', 64, 52);
+  reward2.destroy();
+  
+  // Level 3: Traditional Temple (intricate)
+  const reward3 = scene.add.graphics();
+  // Sky
+  reward3.fillStyle(0x87CEEB);
+  reward3.fillRect(0, 0, 64, 52);
+  // Red curved roof with tiles
+  reward3.fillStyle(0xDC143C);
+  reward3.fillTriangle(32, 0, 0, 18, 64, 18);
+  // Roof tiles detail
+  reward3.fillStyle(0xB22222);
+  for (let i = 0; i < 16; i++) {
+    const x = i * 4;
+    const y = 2 + Math.abs(x - 32) * 0.1;
+    reward3.fillRect(x, y, 2, 2);
+  }
+  // Gold roof edge
+  reward3.fillStyle(0xFFD700);
+  reward3.fillRect(0, 16, 64, 2);
+  // Temple body
+  reward3.fillStyle(0xFFD700); // Gold/yellow walls
+  reward3.fillRect(4, 18, 56, 34);
+  // Wall pattern
+  reward3.fillStyle(0xFFA500);
+  for (let i = 0; i < 7; i++) {
+    reward3.fillRect(8 + i * 8, 20, 4, 2);
+    reward3.fillRect(8 + i * 8, 48, 4, 2);
+  }
+  // Red columns with details
+  reward3.fillStyle(0x8B4513); // Brown base
+  reward3.fillRect(10, 22, 10, 30);
+  reward3.fillRect(44, 22, 10, 30);
+  reward3.fillStyle(0xDC143C); // Red column
+  reward3.fillRect(12, 24, 6, 26);
+  reward3.fillRect(46, 24, 6, 26);
+  // Column decorations
+  reward3.fillStyle(0xFFD700);
+  reward3.fillRect(12, 24, 6, 3);
+  reward3.fillRect(46, 24, 6, 3);
+  reward3.fillRect(12, 47, 6, 3);
+  reward3.fillRect(46, 47, 6, 3);
+  // Red door with details
+  reward3.fillStyle(0x8B0000);
+  reward3.fillRect(24, 30, 16, 22);
+  reward3.fillStyle(0xFF0000); // Lighter red
+  reward3.fillRect(26, 32, 12, 18);
+  // Door decorations
+  reward3.fillStyle(0xFFD700);
+  reward3.fillRect(28, 34, 8, 2);
+  reward3.fillRect(28, 38, 8, 2);
+  reward3.fillRect(28, 42, 8, 2);
+  reward3.fillRect(28, 46, 8, 2);
+  // Door handles
+  reward3.fillStyle(0xFFD700);
+  reward3.fillCircle(30, 40, 1.5);
+  reward3.fillCircle(34, 40, 1.5);
+  // Steps
+  reward3.fillStyle(0x696969);
+  reward3.fillRect(20, 50, 24, 2);
+  reward3.fillRect(22, 52, 20, 2);
+  reward3.generateTexture('reward_level_3', 64, 52);
+  reward3.destroy();
+  
+  // Level 4: Pineapple Cake Box
+  const reward4 = scene.add.graphics();
+  reward4.fillStyle(0xFFD700); // Gold box
+  reward4.fillRect(8, 8, 48, 36);
+  reward4.fillStyle(0xFFA500); // Orange pattern
+  reward4.fillRect(12, 12, 40, 28);
+  reward4.fillStyle(0xFFD700); // Grid lines
+  reward4.lineStyle(1, 0xFFD700);
+  reward4.strokeRect(12, 12, 40, 28);
+  reward4.beginPath();
+  reward4.moveTo(32, 12);
+  reward4.lineTo(32, 40);
+  reward4.strokePath();
+  reward4.beginPath();
+  reward4.moveTo(12, 26);
+  reward4.lineTo(52, 26);
+  reward4.strokePath();
+  reward4.fillStyle(0xFF0000); // Red ribbon
+  reward4.fillRect(20, 4, 24, 4);
+  reward4.generateTexture('reward_level_4', 64, 52);
+  reward4.destroy();
+  
+  // Level 5: Stinky Tofu Cart (intricate)
+  const reward5 = scene.add.graphics();
+  // Background
+  reward5.fillStyle(0x2F4F4F);
+  reward5.fillRect(0, 0, 64, 52);
+  // Cart base
+  reward5.fillStyle(0x8B4513); // Brown cart
+  reward5.fillRect(4, 28, 56, 24);
+  // Cart wheels
+  reward5.fillStyle(0x000000);
+  reward5.fillCircle(12, 50, 4);
+  reward5.fillCircle(52, 50, 4);
+  reward5.fillStyle(0x696969); // Wheel rims
+  reward5.fillCircle(12, 50, 2.5);
+  reward5.fillCircle(52, 50, 2.5);
+  // Cart structure
+  reward5.fillStyle(0x654321); // Darker brown
+  reward5.fillRect(6, 26, 52, 2);
+  reward5.fillRect(6, 28, 2, 24);
+  reward5.fillRect(58, 28, 2, 24);
+  // Cooking surface
+  reward5.fillStyle(0x708090);
+  reward5.fillRect(8, 20, 48, 8);
+  // Tofu blocks with detail
+  reward5.fillStyle(0xF5F5DC); // Beige tofu
+  reward5.fillRect(12, 14, 10, 10);
+  reward5.fillRect(28, 14, 10, 10);
+  reward5.fillRect(44, 14, 10, 10);
+  // Tofu texture
+  reward5.fillStyle(0xE6E6D3);
+  reward5.fillRect(13, 15, 8, 8);
+  reward5.fillRect(29, 15, 8, 8);
+  reward5.fillRect(45, 15, 8, 8);
+  // Tofu grid pattern
+  reward5.fillStyle(0xD3D3C3);
+  reward5.fillRect(14, 16, 2, 2);
+  reward5.fillRect(17, 16, 2, 2);
+  reward5.fillRect(20, 16, 2, 2);
+  reward5.fillRect(14, 19, 2, 2);
+  reward5.fillRect(17, 19, 2, 2);
+  reward5.fillRect(20, 19, 2, 2);
+  // Repeat for other blocks
+  reward5.fillRect(30, 16, 2, 2);
+  reward5.fillRect(33, 16, 2, 2);
+  reward5.fillRect(36, 16, 2, 2);
+  reward5.fillRect(30, 19, 2, 2);
+  reward5.fillRect(33, 19, 2, 2);
+  reward5.fillRect(36, 19, 2, 2);
+  reward5.fillRect(46, 16, 2, 2);
+  reward5.fillRect(49, 16, 2, 2);
+  reward5.fillRect(52, 16, 2, 2);
+  reward5.fillRect(46, 19, 2, 2);
+  reward5.fillRect(49, 19, 2, 2);
+  reward5.fillRect(52, 19, 2, 2);
+  // Steam (more detailed)
+  reward5.fillStyle(0xCCCCCC);
+  reward5.fillCircle(17, 10, 2);
+  reward5.fillCircle(20, 8, 2);
+  reward5.fillCircle(33, 8, 2);
+  reward5.fillCircle(36, 6, 2);
+  reward5.fillCircle(49, 10, 2);
+  reward5.fillCircle(52, 8, 2);
+  // Lighter steam
+  reward5.fillStyle(0xE0E0E0);
+  reward5.fillCircle(18, 9, 1.5);
+  reward5.fillCircle(34, 7, 1.5);
+  reward5.fillCircle(50, 9, 1.5);
+  // Red sign with details
+  reward5.fillStyle(0xFF0000);
+  reward5.fillRect(14, 4, 36, 10);
+  reward5.fillStyle(0x8B0000); // Border
+  reward5.fillRect(14, 4, 36, 2);
+  reward5.fillRect(14, 12, 36, 2);
+  reward5.fillRect(14, 4, 2, 10);
+  reward5.fillRect(48, 4, 2, 10);
+  // Sign text pattern
+  reward5.fillStyle(0xFFD700);
+  reward5.fillRect(18, 6, 4, 2);
+  reward5.fillRect(24, 6, 4, 2);
+  reward5.fillRect(30, 6, 4, 2);
+  reward5.fillRect(36, 6, 4, 2);
+  reward5.fillRect(42, 6, 4, 2);
+  reward5.fillRect(20, 9, 2, 2);
+  reward5.fillRect(26, 9, 2, 2);
+  reward5.fillRect(32, 9, 2, 2);
+  reward5.fillRect(38, 9, 2, 2);
+  reward5.fillRect(44, 9, 2, 2);
+  reward5.generateTexture('reward_level_5', 64, 52);
+  reward5.destroy();
+  
+  // Level 6: Sun Moon Lake (intricate)
+  const reward6 = scene.add.graphics();
+  // Sky gradient
+  reward6.fillStyle(0x87CEEB); // Light blue
+  reward6.fillRect(0, 0, 64, 20);
+  reward6.fillStyle(0x4682B4); // Medium blue
+  reward6.fillRect(0, 20, 64, 8);
+  // Clouds
+  reward6.fillStyle(0xFFFFFF);
+  reward6.fillCircle(8, 6, 3);
+  reward6.fillCircle(11, 6, 3);
+  reward6.fillCircle(9, 4, 2);
+  reward6.fillCircle(40, 8, 2.5);
+  reward6.fillCircle(42, 8, 2.5);
+  // Mountains with layers
+  reward6.fillStyle(0x2F4F2F); // Dark green (far mountains)
+  reward6.fillTriangle(0, 28, 16, 20, 32, 28);
+  reward6.fillTriangle(32, 28, 48, 20, 64, 28);
+  reward6.fillStyle(0x228B22); // Medium green (middle mountains)
+  reward6.fillTriangle(0, 28, 20, 16, 40, 28);
+  reward6.fillTriangle(24, 28, 44, 16, 64, 28);
+  reward6.fillStyle(0x32CD32); // Light green (near mountains)
+  reward6.fillTriangle(4, 28, 22, 14, 38, 28);
+  reward6.fillTriangle(26, 28, 46, 14, 62, 28);
+  // Mountain details (trees)
+  reward6.fillStyle(0x1a4a1a);
+  reward6.fillRect(8, 24, 2, 4);
+  reward6.fillRect(18, 20, 2, 4);
+  reward6.fillRect(28, 24, 2, 4);
+  reward6.fillRect(36, 20, 2, 4);
+  reward6.fillRect(46, 24, 2, 4);
+  reward6.fillRect(56, 20, 2, 4);
+  // Water with waves
+  reward6.fillStyle(0x4169E1); // Deep blue
+  reward6.fillRect(0, 28, 64, 24);
+  reward6.fillStyle(0x5B9BD5); // Lighter blue waves
+  for (let i = 0; i < 8; i++) {
+    reward6.fillRect(i * 8, 32, 4, 2);
+    reward6.fillRect(i * 8 + 4, 36, 4, 2);
+    reward6.fillRect(i * 8, 40, 4, 2);
+    reward6.fillRect(i * 8 + 4, 44, 4, 2);
+  }
+  // Sun with rays
+  reward6.fillStyle(0xFFD700); // Gold sun
+  reward6.fillCircle(50, 12, 6);
+  reward6.fillStyle(0xFFA500); // Orange center
+  reward6.fillCircle(50, 12, 4);
+  // Sun rays
+  reward6.fillStyle(0xFFD700);
+  reward6.fillRect(50, 4, 2, 4);
+  reward6.fillRect(50, 18, 2, 4);
+  reward6.fillRect(44, 12, 4, 2);
+  reward6.fillRect(56, 12, 4, 2);
+  reward6.fillRect(46, 6, 2, 2);
+  reward6.fillRect(54, 6, 2, 2);
+  reward6.fillRect(46, 18, 2, 2);
+  reward6.fillRect(54, 18, 2, 2);
+  // Moon with craters
+  reward6.fillStyle(0xFFFFFF); // White moon
+  reward6.fillCircle(12, 10, 4);
+  reward6.fillStyle(0xE0E0E0); // Light gray craters
+  reward6.fillCircle(11, 9, 1);
+  reward6.fillCircle(13, 11, 1);
+  reward6.fillCircle(12, 10, 0.5);
+  // Reflection in water
+  reward6.fillStyle(0xFFD700);
+  reward6.fillEllipse(50, 42, 12, 4);
+  reward6.fillStyle(0xFFFFFF);
+  reward6.fillEllipse(12, 40, 8, 3);
+  reward6.generateTexture('reward_level_6', 64, 52);
+  reward6.destroy();
+  
+  // Level 7: Taipei 101 (intricate)
+  const reward7 = scene.add.graphics();
+  // Sky gradient
+  reward7.fillStyle(0x87CEEB); // Light blue
+  reward7.fillRect(0, 0, 64, 52);
+  reward7.fillStyle(0x4682B4); // Medium blue
+  reward7.fillRect(0, 0, 64, 30);
+  // Clouds
+  reward7.fillStyle(0xFFFFFF);
+  reward7.fillCircle(8, 6, 3);
+  reward7.fillCircle(11, 6, 3);
+  reward7.fillCircle(48, 8, 2.5);
+  reward7.fillCircle(50, 8, 2.5);
+  // Building base
+  reward7.fillStyle(0x1C1C1C); // Very dark gray
+  reward7.fillRect(22, 50, 20, 2);
+  // Main building structure
+  reward7.fillStyle(0x2F4F4F); // Dark gray building
+  reward7.fillRect(24, 8, 16, 42);
+  // Building sides (3D effect)
+  reward7.fillStyle(0x1C1C1C); // Darker side
+  reward7.fillRect(24, 8, 2, 42);
+  reward7.fillStyle(0x3F5F5F); // Lighter side
+  reward7.fillRect(38, 8, 2, 42);
+  // Windows with detail
+  reward7.fillStyle(0x708090); // Gray windows
+  for (let i = 0; i < 10; i++) {
+    reward7.fillRect(26, 10 + i * 4, 12, 2);
+  }
+  // Window reflections
+  reward7.fillStyle(0x87CEEB);
+  for (let i = 0; i < 5; i++) {
+    reward7.fillRect(28, 11 + i * 8, 2, 1);
+    reward7.fillRect(34, 11 + i * 8, 2, 1);
+  }
+  // Building segments (Taipei 101 has 8 segments)
+  reward7.fillStyle(0x1C1C1C);
+  for (let i = 1; i < 8; i++) {
+    reward7.fillRect(24, 8 + i * 6, 16, 1);
+  }
+  // Top section with details
+  reward7.fillStyle(0xFFD700); // Gold top
+  reward7.fillRect(22, 4, 20, 6);
+  reward7.fillStyle(0xFFA500); // Orange accent
+  reward7.fillRect(24, 6, 16, 2);
+  // Top decorative elements
+  reward7.fillStyle(0xFFD700);
+  reward7.fillRect(26, 2, 4, 2);
+  reward7.fillRect(34, 2, 4, 2);
+  reward7.fillStyle(0xFF0000); // Red accents
+  reward7.fillRect(28, 2, 8, 2);
+  reward7.fillRect(30, 0, 4, 2);
+  // Antenna/spire
+  reward7.fillStyle(0x1C1C1C);
+  reward7.fillRect(30, 0, 4, 4);
+  reward7.fillStyle(0xFFD700);
+  reward7.fillRect(31, 0, 2, 2);
+  reward7.generateTexture('reward_level_7', 64, 52);
+  reward7.destroy();
+  
+  // Level 8: Oyster Omelette Stand (intricate)
+  const reward8 = scene.add.graphics();
+  // Background
+  reward8.fillStyle(0x2F4F4F);
+  reward8.fillRect(0, 0, 64, 52);
+  // Stand structure
+  reward8.fillStyle(0x8B4513); // Brown stand
+  reward8.fillRect(8, 28, 48, 24);
+  reward8.fillStyle(0x654321); // Darker brown frame
+  reward8.fillRect(8, 28, 48, 2);
+  reward8.fillRect(8, 50, 48, 2);
+  reward8.fillRect(8, 28, 2, 24);
+  reward8.fillRect(54, 28, 2, 24);
+  // Cooking surface
+  reward8.fillStyle(0x708090);
+  reward8.fillRect(10, 24, 44, 4);
+  reward8.fillStyle(0x5F6F7F);
+  reward8.fillRect(10, 24, 44, 1);
+  // Omelette with detail
+  reward8.fillStyle(0xFFE135); // Yellow omelette base
+  reward8.fillEllipse(32, 20, 32, 16);
+  reward8.fillStyle(0xFFD700); // Lighter yellow center
+  reward8.fillEllipse(32, 20, 24, 12);
+  // Omelette texture (egg pattern)
+  reward8.fillStyle(0xFFF8DC);
+  for (let i = 0; i < 6; i++) {
+    reward8.fillRect(18 + i * 4, 18, 2, 1);
+    reward8.fillRect(18 + i * 4, 22, 2, 1);
+  }
+  // Oysters with detail
+  reward8.fillStyle(0x808080); // Gray oysters
+  reward8.fillCircle(20, 18, 3);
+  reward8.fillCircle(28, 19, 3);
+  reward8.fillCircle(36, 20, 3);
+  reward8.fillCircle(44, 18, 3);
+  // Oyster highlights
+  reward8.fillStyle(0xA0A0A0);
+  reward8.fillCircle(20, 17, 1.5);
+  reward8.fillCircle(28, 18, 1.5);
+  reward8.fillCircle(36, 19, 1.5);
+  reward8.fillCircle(44, 17, 1.5);
+  // Oyster texture
+  reward8.fillStyle(0x606060);
+  reward8.fillCircle(20, 18, 1);
+  reward8.fillCircle(28, 19, 1);
+  reward8.fillCircle(36, 20, 1);
+  reward8.fillCircle(44, 18, 1);
+  // Red sauce with detail
+  reward8.fillStyle(0xFF0000); // Red sauce
+  reward8.fillRect(16, 24, 32, 4);
+  reward8.fillStyle(0x8B0000); // Darker red
+  reward8.fillRect(18, 25, 28, 2);
+  // Sauce texture
+  reward8.fillStyle(0xFF4500);
+  reward8.fillRect(20, 24, 2, 1);
+  reward8.fillRect(26, 24, 2, 1);
+  reward8.fillRect(32, 24, 2, 1);
+  reward8.fillRect(38, 24, 2, 1);
+  reward8.fillRect(44, 24, 2, 1);
+  // Green vegetables
+  reward8.fillStyle(0x228B22);
+  reward8.fillRect(22, 22, 3, 2);
+  reward8.fillRect(30, 22, 3, 2);
+  reward8.fillRect(38, 22, 3, 2);
+  // Gold sign with details
+  reward8.fillStyle(0xFFD700);
+  reward8.fillRect(12, 4, 40, 10);
+  reward8.fillStyle(0xFFA500); // Border
+  reward8.fillRect(12, 4, 40, 2);
+  reward8.fillRect(12, 12, 40, 2);
+  reward8.fillRect(12, 4, 2, 10);
+  reward8.fillRect(50, 4, 2, 10);
+  // Sign text pattern
+  reward8.fillStyle(0xFF0000);
+  reward8.fillRect(16, 6, 4, 2);
+  reward8.fillRect(22, 6, 4, 2);
+  reward8.fillRect(28, 6, 4, 2);
+  reward8.fillRect(34, 6, 4, 2);
+  reward8.fillRect(40, 6, 4, 2);
+  reward8.fillRect(46, 6, 4, 2);
+  reward8.fillRect(18, 9, 2, 2);
+  reward8.fillRect(24, 9, 2, 2);
+  reward8.fillRect(30, 9, 2, 2);
+  reward8.fillRect(36, 9, 2, 2);
+  reward8.fillRect(42, 9, 2, 2);
+  reward8.fillRect(48, 9, 2, 2);
+  reward8.generateTexture('reward_level_8', 64, 52);
+  reward8.destroy();
+  
+  // Level 9: Traditional Lantern Festival (intricate)
+  const reward9 = scene.add.graphics();
+  // Night sky with stars
+  reward9.fillStyle(0x000000); // Black sky
+  reward9.fillRect(0, 0, 64, 52);
+  // Stars
+  reward9.fillStyle(0xFFFFFF);
+  reward9.fillRect(4, 6, 1, 1);
+  reward9.fillRect(12, 4, 1, 1);
+  reward9.fillRect(20, 8, 1, 1);
+  reward9.fillRect(28, 6, 1, 1);
+  reward9.fillRect(36, 4, 1, 1);
+  reward9.fillRect(44, 8, 1, 1);
+  reward9.fillRect(52, 6, 1, 1);
+  reward9.fillRect(60, 4, 1, 1);
+  reward9.fillRect(8, 20, 1, 1);
+  reward9.fillRect(24, 22, 1, 1);
+  reward9.fillRect(40, 20, 1, 1);
+  reward9.fillRect(56, 22, 1, 1);
+  // Moon
+  reward9.fillStyle(0xFFFFE0);
+  reward9.fillCircle(8, 10, 3);
+  reward9.fillStyle(0xE0E0E0);
+  reward9.fillCircle(7, 9, 1);
+  reward9.fillCircle(9, 11, 1);
+  // Red lanterns with intricate details
+  reward9.fillStyle(0xFF0000); // Red lanterns
+  reward9.fillCircle(16, 18, 8);
+  reward9.fillCircle(32, 14, 8);
+  reward9.fillCircle(48, 18, 8);
+  // Lantern gold trim
+  reward9.fillStyle(0xFFD700);
+  reward9.lineStyle(2, 0xFFD700);
+  reward9.strokeCircle(16, 18, 8);
+  reward9.strokeCircle(32, 14, 8);
+  reward9.strokeCircle(48, 18, 8);
+  // Lantern vertical lines
+  reward9.lineStyle(1, 0xFFD700);
+  reward9.beginPath();
+  reward9.moveTo(16, 10);
+  reward9.lineTo(16, 26);
+  reward9.strokePath();
+  reward9.beginPath();
+  reward9.moveTo(32, 6);
+  reward9.lineTo(32, 22);
+  reward9.strokePath();
+  reward9.beginPath();
+  reward9.moveTo(48, 10);
+  reward9.lineTo(48, 26);
+  reward9.strokePath();
+  // Lantern horizontal lines
+  reward9.beginPath();
+  reward9.moveTo(10, 18);
+  reward9.lineTo(22, 18);
+  reward9.strokePath();
+  reward9.beginPath();
+  reward9.moveTo(26, 14);
+  reward9.lineTo(38, 14);
+  reward9.strokePath();
+  reward9.beginPath();
+  reward9.moveTo(42, 18);
+  reward9.lineTo(54, 18);
+  reward9.strokePath();
+  // Yellow light glow
+  reward9.fillStyle(0xFFFF00);
+  reward9.fillCircle(16, 18, 5);
+  reward9.fillCircle(32, 14, 5);
+  reward9.fillCircle(48, 18, 5);
+  // Inner light
+  reward9.fillStyle(0xFFFFFF);
+  reward9.fillCircle(16, 18, 3);
+  reward9.fillCircle(32, 14, 3);
+  reward9.fillCircle(48, 18, 3);
+  // Lantern tops
+  reward9.fillStyle(0xFFD700);
+  reward9.fillRect(12, 10, 8, 2);
+  reward9.fillRect(28, 6, 8, 2);
+  reward9.fillRect(44, 10, 8, 2);
+  // Lantern tassels
+  reward9.fillStyle(0xFFD700);
+  reward9.fillRect(15, 26, 2, 10);
+  reward9.fillRect(31, 22, 2, 10);
+  reward9.fillRect(47, 26, 2, 10);
+  // Tassel details
+  reward9.fillStyle(0xFFA500);
+  reward9.fillRect(14, 30, 4, 2);
+  reward9.fillRect(30, 26, 4, 2);
+  reward9.fillRect(46, 30, 4, 2);
+  reward9.fillRect(14, 34, 4, 2);
+  reward9.fillRect(30, 30, 4, 2);
+  reward9.fillRect(46, 34, 4, 2);
+  // Light rays from lanterns
+  reward9.fillStyle(0xFFFF00);
+  reward9.fillRect(14, 8, 4, 1);
+  reward9.fillRect(30, 4, 4, 1);
+  reward9.fillRect(46, 8, 4, 1);
+  reward9.fillRect(14, 28, 4, 1);
+  reward9.fillRect(30, 24, 4, 1);
+  reward9.fillRect(46, 28, 4, 1);
+  reward9.generateTexture('reward_level_9', 64, 52);
+  reward9.destroy();
 }
