@@ -3,9 +3,10 @@
   // Initialize game state with server data
   GameState.init({
     currentLevel: window.GAME_DATA.currentLevel,
-    level1Completed: window.GAME_DATA.level1Completed,
-    level2Completed: window.GAME_DATA.level2Completed,
-    bpmfLessons: window.GAME_DATA.bpmfLessons
+    levelName: window.GAME_DATA.levelName,
+    levelCompletions: window.GAME_DATA.levelCompletions || {},
+    bpmfLessons: window.GAME_DATA.bpmfLessons || [],
+    expectedBpmf: window.GAME_DATA.expectedBpmf || []
   });
   
   // Wait for page to be ready, then load Phaser

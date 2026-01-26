@@ -7,9 +7,10 @@
   // Game data from server
   window.GAME_DATA = {
     currentLevel: <%= @current_level %>,
-    level1Completed: <%= @level_1_completed ? 'true' : 'false' %>,
-    level2Completed: <%= @level_2_completed ? 'true' : 'false' %>,
-    bpmfLessons: <%= @bpmf_lessons.map { |l| { order: l.order, bpmf: l.bpmf_symbol, pinyin: l.pronunciation } }.to_json.html_safe %>
+    levelName: '<%= Lesson::BPMF_GROUPS[@current_level]&.dig(:name) || "Level #{@current_level}" %>',
+    levelCompletions: <%= @level_completions.to_json.html_safe %>,
+    bpmfLessons: <%= @bpmf_lessons.map { |l| { order: l.order, bpmf: l.bpmf_symbol, pinyin: l.pronunciation } }.to_json.html_safe %>,
+    expectedBpmf: <%= Lesson::BPMF_GROUPS[@current_level]&.dig(:bpmf_symbols).to_json.html_safe %>
   };
 </script>
 

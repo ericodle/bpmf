@@ -1,35 +1,28 @@
 // Asset loading and sprite creation
 function preload() {
-  // Create bubble tea player (cute drink with straw)
+  // Create sweet potato player (cute orange/brown potato)
   const playerGraphics = this.add.graphics();
-  // Cup/bottle (brown/tan)
-  playerGraphics.fillStyle(0x8B4513);
-  playerGraphics.fillRect(6, 12, 20, 20);
-  // Top of cup (lighter brown)
-  playerGraphics.fillStyle(0xA0522D);
-  playerGraphics.fillRect(6, 10, 20, 4);
-  // Liquid/tea (dark brown)
-  playerGraphics.fillStyle(0x654321);
-  playerGraphics.fillRect(8, 14, 16, 16);
-  // Bubbles (white circles)
-  playerGraphics.fillStyle(0xFFFFFF);
-  playerGraphics.fillCircle(12, 18, 3);
-  playerGraphics.fillCircle(20, 22, 2.5);
-  playerGraphics.fillCircle(16, 26, 2);
-  // Straw (pink)
-  playerGraphics.fillStyle(0xFF69B4);
-  playerGraphics.fillRect(15, 4, 2, 8);
-  // Straw top (darker pink)
-  playerGraphics.fillStyle(0xFF1493);
-  playerGraphics.fillRect(14, 4, 4, 2);
+  // Main body (orange/brown sweet potato shape - elongated oval)
+  playerGraphics.fillStyle(0xD2691E); // Orange-brown
+  playerGraphics.fillEllipse(16, 16, 20, 24);
+  // Highlights (lighter orange)
+  playerGraphics.fillStyle(0xE67E22);
+  playerGraphics.fillEllipse(16, 14, 16, 20);
+  // Texture/details (small dots for potato skin)
+  playerGraphics.fillStyle(0xB8860B);
+  playerGraphics.fillCircle(12, 12, 1.5);
+  playerGraphics.fillCircle(20, 10, 1);
+  playerGraphics.fillCircle(18, 18, 1.2);
+  playerGraphics.fillCircle(14, 22, 1);
+  playerGraphics.fillCircle(22, 20, 1.3);
   // Cute face (two dots for eyes, smile)
   playerGraphics.fillStyle(0x0a1f0a);
-  playerGraphics.fillCircle(12, 20, 1.5);
-  playerGraphics.fillCircle(20, 20, 1.5);
+  playerGraphics.fillCircle(13, 16, 1.5);
+  playerGraphics.fillCircle(19, 16, 1.5);
   // Smile
   playerGraphics.lineStyle(2, 0x0a1f0a);
   playerGraphics.beginPath();
-  playerGraphics.arc(16, 24, 4, 0, Math.PI);
+  playerGraphics.arc(16, 20, 3, 0, Math.PI);
   playerGraphics.strokePath();
   playerGraphics.generateTexture('player', 32, 32);
   playerGraphics.destroy();
@@ -112,47 +105,76 @@ function preload() {
     .strokeRect(0, 0, 32, 32)
     .generateTexture('tile', 32, 32);
   
-  // Door (locked) - red/brown with lock icon
+  // Hot pot (locked/cold) - empty pot, no steam
   const doorLockedGraphics = this.add.graphics();
-  doorLockedGraphics.fillStyle(0x8B4513);
-  doorLockedGraphics.fillRect(0, 0, 48, 64);
-  doorLockedGraphics.lineStyle(3, 0x654321);
-  doorLockedGraphics.strokeRect(0, 0, 48, 64);
-  // Door frame
-  doorLockedGraphics.fillStyle(0x654321);
-  doorLockedGraphics.fillRect(0, 0, 48, 8);
-  doorLockedGraphics.fillRect(0, 56, 48, 8);
-  doorLockedGraphics.fillRect(0, 0, 8, 64);
-  doorLockedGraphics.fillRect(40, 0, 8, 64);
-  // Lock icon (red)
+  // Pot base (dark gray/black metal)
+  doorLockedGraphics.fillStyle(0x2C2C2C);
+  doorLockedGraphics.fillEllipse(24, 50, 40, 20);
+  // Pot body (dark gray)
+  doorLockedGraphics.fillStyle(0x3C3C3C);
+  doorLockedGraphics.fillEllipse(24, 40, 36, 24);
+  // Pot rim (lighter gray)
+  doorLockedGraphics.fillStyle(0x4C4C4C);
+  doorLockedGraphics.fillEllipse(24, 28, 38, 8);
+  // Pot handles (small circles on sides)
+  doorLockedGraphics.fillStyle(0x2C2C2C);
+  doorLockedGraphics.fillCircle(8, 32, 4);
+  doorLockedGraphics.fillCircle(40, 32, 4);
+  // Empty pot indicator (dark inside)
+  doorLockedGraphics.fillStyle(0x1a1a1a);
+  doorLockedGraphics.fillEllipse(24, 40, 30, 18);
+  // Lock icon (red lock on pot)
   doorLockedGraphics.fillStyle(0xff4444);
-  doorLockedGraphics.fillCircle(24, 32, 8);
+  doorLockedGraphics.fillCircle(24, 20, 6);
   doorLockedGraphics.fillStyle(0x0a1f0a);
-  doorLockedGraphics.fillRect(20, 28, 8, 8);
+  doorLockedGraphics.fillRect(21, 17, 6, 6);
   doorLockedGraphics.generateTexture('door_locked', 48, 64);
   doorLockedGraphics.destroy();
   
-  // Door (unlocked) - green with open indicator
+  // Hot pot (unlocked/hot) - steaming pot with bubbles
   const doorUnlockedGraphics = this.add.graphics();
-  doorUnlockedGraphics.fillStyle(0x8B4513);
-  doorUnlockedGraphics.fillRect(0, 0, 48, 64);
-  doorUnlockedGraphics.lineStyle(3, 0x00ff88);
-  doorUnlockedGraphics.strokeRect(0, 0, 48, 64);
-  // Door frame
-  doorUnlockedGraphics.fillStyle(0x654321);
-  doorUnlockedGraphics.fillRect(0, 0, 48, 8);
-  doorUnlockedGraphics.fillRect(0, 56, 48, 8);
-  doorUnlockedGraphics.fillRect(0, 0, 8, 64);
-  doorUnlockedGraphics.fillRect(40, 0, 8, 64);
-  // Unlock indicator (green checkmark)
-  doorUnlockedGraphics.fillStyle(0x00ff88);
-  doorUnlockedGraphics.fillCircle(24, 32, 8);
-  doorUnlockedGraphics.lineStyle(3, 0x0a1f0a);
+  // Pot base (dark gray/black metal)
+  doorUnlockedGraphics.fillStyle(0x2C2C2C);
+  doorUnlockedGraphics.fillEllipse(24, 50, 40, 20);
+  // Pot body (dark gray, slightly glowing)
+  doorUnlockedGraphics.fillStyle(0x4C4C4C);
+  doorUnlockedGraphics.fillEllipse(24, 40, 36, 24);
+  // Pot rim (lighter gray)
+  doorUnlockedGraphics.fillStyle(0x5C5C5C);
+  doorUnlockedGraphics.fillEllipse(24, 28, 38, 8);
+  // Pot handles (small circles on sides)
+  doorUnlockedGraphics.fillStyle(0x2C2C2C);
+  doorUnlockedGraphics.fillCircle(8, 32, 4);
+  doorUnlockedGraphics.fillCircle(40, 32, 4);
+  // Hot liquid inside (orange/red, bubbling)
+  doorUnlockedGraphics.fillStyle(0xFF4500);
+  doorUnlockedGraphics.fillEllipse(24, 40, 30, 18);
+  // Bubbles in the pot
+  doorUnlockedGraphics.fillStyle(0xFF6B35);
+  doorUnlockedGraphics.fillCircle(18, 36, 2);
+  doorUnlockedGraphics.fillCircle(24, 38, 2.5);
+  doorUnlockedGraphics.fillCircle(30, 36, 2);
+  doorUnlockedGraphics.fillCircle(20, 42, 2);
+  doorUnlockedGraphics.fillCircle(28, 42, 2);
+  // Steam (white wispy lines coming out)
+  doorUnlockedGraphics.lineStyle(3, 0xFFFFFF);
   doorUnlockedGraphics.beginPath();
-  doorUnlockedGraphics.moveTo(20, 32);
-  doorUnlockedGraphics.lineTo(23, 35);
-  doorUnlockedGraphics.lineTo(28, 28);
+  doorUnlockedGraphics.moveTo(18, 20);
+  doorUnlockedGraphics.lineTo(16, 8);
   doorUnlockedGraphics.strokePath();
+  doorUnlockedGraphics.beginPath();
+  doorUnlockedGraphics.moveTo(24, 18);
+  doorUnlockedGraphics.lineTo(24, 6);
+  doorUnlockedGraphics.strokePath();
+  doorUnlockedGraphics.beginPath();
+  doorUnlockedGraphics.moveTo(30, 20);
+  doorUnlockedGraphics.lineTo(32, 8);
+  doorUnlockedGraphics.strokePath();
+  // Steam puffs (small circles)
+  doorUnlockedGraphics.fillStyle(0xFFFFFF);
+  doorUnlockedGraphics.fillCircle(16, 6, 2);
+  doorUnlockedGraphics.fillCircle(24, 4, 2.5);
+  doorUnlockedGraphics.fillCircle(32, 6, 2);
   doorUnlockedGraphics.generateTexture('door_unlocked', 48, 64);
   doorUnlockedGraphics.destroy();
 }

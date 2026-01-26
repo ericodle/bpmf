@@ -3,9 +3,22 @@ function createEnemies(scene, gameWidth, gameHeight) {
   const enemies = [];
   
   if (GameState.bpmfLessons && GameState.bpmfLessons.length > 0) {
+    // Additional safety filter: only use lessons that match expected BPMF for this level
+    let validLessons = GameState.bpmfLessons;
+    if (GameState.expectedBpmf && GameState.expectedBpmf.length > 0) {
+      const expectedSet = new Set(GameState.expectedBpmf.map(b => b.trim()));
+      validLessons = GameState.bpmfLessons.filter(lesson => {
+        const bpmf = lesson.bpmf?.trim();
+        return bpmf && expectedSet.has(bpmf);
+      });
+      if (validLessons.length !== GameState.bpmfLessons.length) {
+        console.warn(`Filtered ${GameState.bpmfLessons.length - validLessons.length} invalid lessons. Expected: ${Array.from(expectedSet).join(', ')}`);
+      }
+    }
+    
     // First, filter to get only unique BPMF characters
     const uniqueLessonsMap = new Map();
-    GameState.bpmfLessons.forEach(lesson => {
+    validLessons.forEach(lesson => {
       const bpmfKey = lesson.bpmf?.trim();
       if (bpmfKey && !uniqueLessonsMap.has(bpmfKey)) {
         uniqueLessonsMap.set(bpmfKey, lesson);
@@ -15,7 +28,8 @@ function createEnemies(scene, gameWidth, gameHeight) {
     // Convert to array and shuffle
     const uniqueLessons = Array.from(uniqueLessonsMap.values());
     const shuffledLessons = uniqueLessons.sort(() => Math.random() - 0.5);
-    const numEnemies = Math.min(5, shuffledLessons.length);
+    // Use all available lessons for this level (typically 3-4 enemies)
+    const numEnemies = shuffledLessons.length;
     
     for (let i = 0; i < numEnemies; i++) {
       const lesson = shuffledLessons[i];

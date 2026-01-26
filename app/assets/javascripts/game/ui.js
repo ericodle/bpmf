@@ -55,12 +55,7 @@ function createUI(scene) {
     }
   }
   
-  // Show level progression status
-  if (GameState.currentGameLevel === 1 && GameState.level1Completed) {
-    scene.add.text(10, 40, 'Level 1 Complete! Refresh to advance.', { fontSize: '14px', fill: '#4ade80' });
-  } else if (GameState.currentGameLevel === 2 && GameState.level2Completed) {
-    scene.add.text(10, 40, 'Level 2 Complete! Refresh to advance.', { fontSize: '14px', fill: '#4ade80' });
-  }
+  // Show level progression status (removed - door handles progression now)
 }
 
 function showDeathScreen() {

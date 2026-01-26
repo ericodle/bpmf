@@ -43,7 +43,7 @@ function create() {
     gameContainer.setAttribute('tabindex', '0');
   }
 
-  // Create door on the right side (initially locked)
+  // Create hot pot on the right side (initially locked/cold)
   const doorX = gameWidth - 50;
   const doorY = gameHeight / 2;
   GameState.door = this.physics.add.sprite(doorX, doorY, 'door_locked');
@@ -53,7 +53,7 @@ function create() {
   GameState.door.setData('triggered', false);
   GameState.doorUnlocked = false;
   
-  // Add collider for locked door (blocks player) - store reference to remove later
+  // Add collider for locked hot pot (blocks player) - store reference to remove later
   GameState.doorCollider = this.physics.add.collider(GameState.player, GameState.door);
 
   // Collision detection
@@ -72,16 +72,16 @@ function unlockDoor() {
     GameState.doorUnlocked = true;
     GameState.door.setTexture('door_unlocked');
     
-    // Make door passable - remove collider so player can walk through
+    // Make hot pot passable - remove collider so player can walk through
     if (GameState.doorCollider) {
       GameState.doorCollider.destroy();
       GameState.doorCollider = null;
     }
     
-    // Show message that door is unlocked
+    // Show message that hot pot is ready
     const scene = GameState.scene;
     const gameWidth = scene.scale.width;
-    const unlockText = scene.add.text(gameWidth / 2, 50, 'Door Unlocked! Go to the door on the right.', {
+    const unlockText = scene.add.text(gameWidth / 2, 50, 'Hot Pot Ready! Go to the hot pot on the right.', {
       fontSize: '24px',
       fill: '#00ff88',
       fontStyle: 'bold'
@@ -95,19 +95,18 @@ function unlockDoor() {
 }
 
 function checkDoorCollision(player, door) {
-  // Only allow passage if door is unlocked
+  // Only allow passage if hot pot is unlocked/ready
   if (GameState.doorUnlocked && GameState.door) {
     // Prevent multiple triggers
     if (GameState.door.getData('triggered')) return;
     GameState.door.setData('triggered', true);
     
     // Progress to next level
-    const levelName = GameState.currentGameLevel === 1 ? 'Level 1' : GameState.currentGameLevel === 2 ? 'Level 2' : 'Level 3';
     const scene = GameState.scene;
     const gameWidth = scene.scale.width;
     const gameHeight = scene.scale.height;
     
-    const levelCompleteText = scene.add.text(gameWidth / 2, gameHeight / 2 - 50, `${levelName} Complete!`, {
+    const levelCompleteText = scene.add.text(gameWidth / 2, gameHeight / 2 - 50, `${GameState.levelName} Complete!`, {
       fontSize: '36px',
       fill: '#00ff88',
       fontStyle: 'bold'
