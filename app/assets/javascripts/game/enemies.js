@@ -5,23 +5,22 @@ function createEnemies(scene) {
   const enemies = [];
   
   if (GameState.bpmfLessons && GameState.bpmfLessons.length > 0) {
-    // Shuffle and take unique lessons
-    const shuffledLessons = [...GameState.bpmfLessons].sort(() => Math.random() - 0.5);
+    // First, filter to get only unique BPMF characters
+    const uniqueLessonsMap = new Map();
+    GameState.bpmfLessons.forEach(lesson => {
+      const bpmfKey = lesson.bpmf?.trim();
+      if (bpmfKey && !uniqueLessonsMap.has(bpmfKey)) {
+        uniqueLessonsMap.set(bpmfKey, lesson);
+      }
+    });
+    
+    // Convert to array and shuffle
+    const uniqueLessons = Array.from(uniqueLessonsMap.values());
+    const shuffledLessons = uniqueLessons.sort(() => Math.random() - 0.5);
     const numEnemies = Math.min(5, shuffledLessons.length);
-    const usedLessons = new Set();
     
     for (let i = 0; i < numEnemies; i++) {
-      // Find a lesson that hasn't been used yet
-      let lesson;
-      for (const l of shuffledLessons) {
-        if (!usedLessons.has(l.bpmf)) {
-          lesson = l;
-          usedLessons.add(l.bpmf);
-          break;
-        }
-      }
-      
-      // If we've used all unique lessons, break
+      const lesson = shuffledLessons[i];
       if (!lesson) break;
       
       const x = Phaser.Math.Between(200, gameWidth - 200);

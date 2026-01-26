@@ -1,3 +1,5 @@
+require 'set'
+
 class GameController < ApplicationController
   def index
     # Determine current level based on progress
@@ -15,7 +17,18 @@ class GameController < ApplicationController
       1
     end
     
-    @bpmf_lessons = Lesson.by_level(@current_level).where.not(bpmf_symbol: nil).limit(20)
+    # Get unique BPMF symbols - only one lesson per BPMF character
+    all_lessons = Lesson.by_level(@current_level).where.not(bpmf_symbol: nil)
+    seen_bpmf = Set.new
+    @bpmf_lessons = all_lessons.select do |lesson|
+      bpmf = lesson.bpmf_symbol&.strip
+      if bpmf && !seen_bpmf.include?(bpmf)
+        seen_bpmf.add(bpmf)
+        true
+      else
+        false
+      end
+    end.first(20)
     @level_1_completed = level_1_completed
     @level_2_completed = level_2_completed
   end
