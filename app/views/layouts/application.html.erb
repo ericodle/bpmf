@@ -155,7 +155,7 @@
       <nav class="navbar">
         <h1><%= link_to "The Great BPMF Adventure", game_path, style: "text-decoration: none; color: inherit;" %></h1>
         <div class="navbar-links">
-          <a href="<%= game_path %>" onclick="location.reload(); return false;" style="text-decoration: none; color: #00ff88; font-weight: 600; font-size: 16px; padding: 8px 15px; border-radius: 6px; transition: all 0.3s; border: 1px solid transparent; text-shadow: 0 0 5px rgba(0, 255, 136, 0.5);">Restart</a>
+          <%= link_to "Restart", restart_game_path, style: "text-decoration: none; color: #00ff88; font-weight: 600; font-size: 16px; padding: 8px 15px; border-radius: 6px; transition: all 0.3s; border: 1px solid transparent; text-shadow: 0 0 5px rgba(0, 255, 136, 0.5);" %>
         </div>
       </nav>
       

@@ -16,32 +16,6 @@ function create() {
     }
   }
   
-  // Add decorative lanterns in corners (animated)
-  const lanterns = [];
-  const lanternPositions = [
-    { x: 40, y: 40 },
-    { x: gameWidth - 40, y: 40 },
-    { x: 40, y: gameHeight - 40 },
-    { x: gameWidth - 40, y: gameHeight - 40 }
-  ];
-  
-  lanternPositions.forEach(pos => {
-    const lantern = this.add.image(pos.x, pos.y, 'lantern');
-    lantern.setAlpha(0.3);
-    lantern.setDepth(-99);
-    lantern.setScale(0.8);
-    // Gentle floating animation
-    this.tweens.add({
-      targets: lantern,
-      y: pos.y - 5,
-      duration: 2000 + Math.random() * 1000,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut'
-    });
-    lanterns.push(lantern);
-  });
-  
   // Add floating particles (like dust motes or light particles)
   const particles = this.add.particles(0, 0, 'particle', {
     x: { min: 0, max: gameWidth },
@@ -102,7 +76,7 @@ function create() {
   }
   
   // Store for cleanup if needed
-  GameState.backgroundElements = { lanterns, particles, npcs };
+  GameState.backgroundElements = { particles, npcs };
   
   // Walls disabled for now - can be re-enabled later
   GameState.walls = this.physics.add.staticGroup();

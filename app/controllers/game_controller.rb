@@ -63,6 +63,12 @@ class GameController < ApplicationController
     end
   end
   
+  def restart
+    # Clear all lesson progress for the current user
+    @current_user.lesson_progresses.destroy_all
+    redirect_to game_path
+  end
+  
   private
   
   def check_group_completed(group_number)
