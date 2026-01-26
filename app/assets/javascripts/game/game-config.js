@@ -11,7 +11,11 @@ const BPMF_KEYBOARD = [
 // Game constants
 const PLAYER_MAX_HITS = 4;
 const PLAYER_SPEED = 200;
-const ENEMY_MOVE_SPEED_MIN = 30;
-const ENEMY_MOVE_SPEED_MAX = 60;
+const ENEMY_MOVE_SPEED_MIN = 80;
+const ENEMY_MOVE_SPEED_MAX = 120;
 const ENEMY_MOVE_TIMER_MIN = 1000;
 const ENEMY_MOVE_TIMER_MAX = 3000;
+
+// Grid constants
+const TILE_SIZE = 32;
+const GRID_SPACING = 4; // Every 4 tiles, create a wall line

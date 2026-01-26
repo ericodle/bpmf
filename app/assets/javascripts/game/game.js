@@ -1,21 +1,37 @@
 // Main game logic - Phaser scene functions
 function create() {
-  // Create tilemap background
   const gameWidth = this.scale.width;
   const gameHeight = this.scale.height;
-  for (let x = 0; x < gameWidth; x += 16) {
-    for (let y = 0; y < gameHeight; y += 16) {
-      this.add.image(x, y, 'tile').setAlpha(0.3);
+  
+  // Create grid-based tilemap background
+  const cols = Math.floor(gameWidth / TILE_SIZE);
+  const rows = Math.floor(gameHeight / TILE_SIZE);
+  
+  // Create floor tiles
+  for (let x = 0; x < gameWidth; x += TILE_SIZE) {
+    for (let y = 0; y < gameHeight; y += TILE_SIZE) {
+      this.add.image(x + TILE_SIZE/2, y + TILE_SIZE/2, 'tile').setAlpha(0.4);
     }
   }
+  
+  // Walls disabled for now - can be re-enabled later
+  GameState.walls = this.physics.add.staticGroup();
+  
+  // Wall generation code removed - add back later if needed
 
-  // Create player
-  GameState.player = this.physics.add.sprite(100, 100, 'player');
+  // Create player in safe zone (top-left area)
+  const playerStartX = Phaser.Math.Between(TILE_SIZE * 2, TILE_SIZE * 4);
+  const playerStartY = Phaser.Math.Between(TILE_SIZE * 2, TILE_SIZE * 4);
+  GameState.player = this.physics.add.sprite(playerStartX, playerStartY, 'player');
   GameState.player.setCollideWorldBounds(true);
   GameState.player.setScale(1.5);
+  GameState.player.body.setSize(24, 24); // Smaller collision box
 
-  // Create enemies
-  GameState.enemies = createEnemies(this);
+  // Create enemies in safe zones (away from player)
+  GameState.enemies = createEnemies(this, gameWidth, gameHeight);
+  
+  // Store scene reference for enemy movement
+  GameState.scene = this;
 
   // Input
   GameState.cursors = this.input.keyboard.createCursorKeys();
@@ -28,6 +44,9 @@ function create() {
   }
 
   // Collision detection
+  // Wall collisions disabled for now
+  // this.physics.add.collider(GameState.player, GameState.walls);
+  // this.physics.add.collider(GameState.enemies, GameState.walls);
   this.physics.add.overlap(GameState.player, GameState.enemies, startCombat, null, this);
 
   // UI
@@ -53,7 +72,7 @@ function update() {
   }
   
   // Enemy random movement
-  updateEnemyMovement(this);
+  updateEnemyMovement();
 }
 
 // Initialize game only after Phaser is loaded

@@ -4,6 +4,8 @@ const GameState = {
   player: null,
   cursors: null,
   enemies: [],
+  walls: null,
+  scene: null,
   combatActive: false,
   currentEnemy: null,
   pinyinInput: '',

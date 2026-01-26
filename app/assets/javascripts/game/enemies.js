@@ -1,7 +1,5 @@
 // Enemy creation and movement logic
-function createEnemies(scene) {
-  const gameWidth = scene.scale.width;
-  const gameHeight = scene.scale.height;
+function createEnemies(scene, gameWidth, gameHeight) {
   const enemies = [];
   
   if (GameState.bpmfLessons && GameState.bpmfLessons.length > 0) {
@@ -23,20 +21,20 @@ function createEnemies(scene) {
       const lesson = shuffledLessons[i];
       if (!lesson) break;
       
-      const x = Phaser.Math.Between(200, gameWidth - 200);
-      const y = Phaser.Math.Between(200, gameHeight - 200);
+      // Spawn enemies in safe zones (bottom-right area, away from player)
+      const cols = Math.floor(gameWidth / TILE_SIZE);
+      const rows = Math.floor(gameHeight / TILE_SIZE);
+      const spawnCol = Phaser.Math.Between(cols - 6, cols - 2);
+      const spawnRow = Phaser.Math.Between(rows - 6, rows - 2);
+      const x = spawnCol * TILE_SIZE + TILE_SIZE / 2;
+      const y = spawnRow * TILE_SIZE + TILE_SIZE / 2;
+      
       const enemy = scene.physics.add.sprite(x, y, 'enemy');
       enemy.setScale(1.5);
       enemy.setCollideWorldBounds(true);
+      enemy.body.setSize(24, 24); // Smaller collision box
       enemy.setData('health', 50);
       enemy.setData('bpmf', lesson);
-      // Random movement data
-      enemy.setData('moveTimer', Phaser.Math.Between(ENEMY_MOVE_TIMER_MIN, ENEMY_MOVE_TIMER_MAX));
-      enemy.setData('moveDirection', { 
-        x: Phaser.Math.Between(-1, 1), 
-        y: Phaser.Math.Between(-1, 1) 
-      });
-      enemy.setData('moveSpeed', Phaser.Math.Between(ENEMY_MOVE_SPEED_MIN, ENEMY_MOVE_SPEED_MAX));
       enemies.push(enemy);
     }
   } else {
@@ -46,46 +44,33 @@ function createEnemies(scene) {
   return enemies;
 }
 
-function updateEnemyMovement(scene) {
-  GameState.enemies.forEach(enemy => {
+function updateEnemyMovement() {
+  if (!GameState.player || !GameState.player.active) return;
+  
+  GameState.enemies.forEach((enemy, index) => {
     if (!enemy.active) return;
     
-    let moveTimer = enemy.getData('moveTimer');
-    let moveDirection = enemy.getData('moveDirection');
-    let moveSpeed = enemy.getData('moveSpeed');
+    // Calculate direction to player
+    const dx = GameState.player.x - enemy.x;
+    const dy = GameState.player.y - enemy.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
     
-    // Initialize if not set
-    if (moveTimer === undefined) {
-      moveTimer = Phaser.Math.Between(ENEMY_MOVE_TIMER_MIN, ENEMY_MOVE_TIMER_MAX);
-      moveDirection = { 
-        x: Phaser.Math.Between(-1, 1), 
-        y: Phaser.Math.Between(-1, 1) 
-      };
-      moveSpeed = Phaser.Math.Between(ENEMY_MOVE_SPEED_MIN, ENEMY_MOVE_SPEED_MAX);
-      enemy.setData('moveTimer', moveTimer);
-      enemy.setData('moveDirection', moveDirection);
-      enemy.setData('moveSpeed', moveSpeed);
-    }
-    
-    // Update timer (assuming ~60fps, so ~16ms per frame)
-    moveTimer -= 16;
-    
-    if (moveTimer <= 0) {
-      // Change direction randomly
-      moveDirection = {
-        x: Phaser.Math.Between(-1, 1),
-        y: Phaser.Math.Between(-1, 1)
-      };
-      moveTimer = Phaser.Math.Between(ENEMY_MOVE_TIMER_MIN, ENEMY_MOVE_TIMER_MAX);
-      moveSpeed = Phaser.Math.Between(ENEMY_MOVE_SPEED_MIN, ENEMY_MOVE_SPEED_MAX);
-      enemy.setData('moveTimer', moveTimer);
-      enemy.setData('moveDirection', moveDirection);
-      enemy.setData('moveSpeed', moveSpeed);
+    if (distance > 0) {
+      // Add variation to prevent clustering - each pig approaches from slightly different angle
+      const baseAngle = Math.atan2(dy, dx);
+      // Each pig gets a unique offset based on index (spreads them in a circle around player)
+      const angleOffset = (index * Math.PI * 2 / Math.max(GameState.enemies.length, 1)) * 0.6;
+      // Add some time-based variation for more organic movement
+      const timeVariation = Math.sin(Date.now() / 1200 + index * 2) * 0.3;
+      const finalAngle = baseAngle + angleOffset + timeVariation;
+      
+      const moveSpeed = Phaser.Math.Between(ENEMY_MOVE_SPEED_MIN, ENEMY_MOVE_SPEED_MAX);
+      const velocityX = Math.cos(finalAngle) * moveSpeed;
+      const velocityY = Math.sin(finalAngle) * moveSpeed;
+      
+      enemy.setVelocity(velocityX, velocityY);
     } else {
-      enemy.setData('moveTimer', moveTimer);
+      enemy.setVelocity(0, 0);
     }
-    
-    // Apply movement
-    enemy.setVelocity(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
   });
 }
